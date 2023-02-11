@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViagemManipulacao {
+public class ManipulaViagem {
     private ArrayList<Viagem> listaViagem = new ArrayList();
 
     public void adicionaViagem(Viagem viagem){

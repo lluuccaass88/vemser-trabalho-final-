@@ -3,6 +3,15 @@ public class Caminhao {
     private double capacidade, kmRodados;
     private int gasolina;
 
+    public Caminhao(String placa, String modelo, String marca, double capacidade, double kmRodados, int gasolina) {
+        this.placa = placa;
+        this.modelo = modelo;
+        this.marca = marca;
+        this.capacidade = capacidade;
+        this.kmRodados = kmRodados;
+        this.gasolina = gasolina;
+    }
+
     public String getPlaca() {
         return placa;
     }

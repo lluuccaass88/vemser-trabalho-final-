@@ -3,6 +3,13 @@ public abstract class Usuario {
     private double salario;
     private int idade;
 
+    public Usuario(String nome, String cpf, double salario, int idade) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.salario = salario;
+        this.idade = idade;
+    }
+
     public String getNome() {
         return nome;
     }

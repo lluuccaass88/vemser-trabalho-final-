@@ -65,9 +65,9 @@ public class Viagem {
     @Override
     public String toString() {
         if(this.finalizada){
-            return "Motorista: " + this.motorista.getNome() + "\nCaminhao: " + this.caminhao.getPlaca() + "\n=== Rota === \nPartida: " + this.rota.getPartida() + "\nDestino: " + this.rota.getDestino() + "\nStatus: Finalizada.";
+            return "Motorista: " + this.motorista.getNome() + "\nCaminhao: " + this.caminhao.getPlaca() + "\n=== Rota === \nPartida: " + "\nStatus: Finalizada.";
         }else{
-            return "Motorista: " + this.motorista.getNome() + "\nCaminhao: " + this.caminhao.getPlaca() + "\n=== Rota === \nPartida: " + this.rota.getPartida() + "\nDestino: " + this.rota.getDestino() + "\nStatus: Viagem em andamento.";
+            return "Motorista: " + this.motorista.getNome() + "\nCaminhao: " + this.caminhao.getPlaca() + "\n=== Rota === \nPartida: " + "\nStatus: Viagem em andamento.";
         }
     }
 }
