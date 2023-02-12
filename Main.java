@@ -316,9 +316,8 @@ public class Main {
                 Ver Viagens:      [2]
                 Editar Viagem:    [3]
                 Excluir Viagem:   [4]
-                Abastecer:        [5]
-                Finalizar viagem: [6]
-                Finalizar viagem: [7]
+                Finalizar viagem: [5]
+                Listar viagem fibalizada: [6]
                 Digite sua opção:\s""");
 
         opcViagem = leitorUsuario.nextInt();
@@ -471,7 +470,7 @@ public class Main {
                         opcoesMotorista(manipulaMotorista);
                         break;
                     case  2:
-                        opcoesCaminhao(manipulaCaminhao);
+                        opcoesCaminhao(manipulaCaminhao, manipulaPosto);
                         break;
                     case 3:
                         opcoesPosto(manipulaPosto);
