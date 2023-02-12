@@ -138,9 +138,14 @@ public class Main {
                 System.out.println("\nQuilometros Rodados: ");
                 kmRodados = leitorUsuario.nextDouble();
                 leitorUsuario.nextLine();
-                System.out.println("\nQuantidade de gasolina: ");
+                System.out.println("\nQuantidade de gasolina ( de 0 a 100 ): ");
                 gasolina = leitorUsuario.nextInt();
+                while (gasolina > 100 || gasolina < 0 ){
+                    System.out.println("Porfavor digitar um numero entre 0 e 100: ");
+                    gasolina = leitorUsuario.nextInt();
+                }
                 leitorUsuario.nextLine();
+
 
                 Caminhao caminhaoEditado = new Caminhao(placa, modelo, marca, capacidade, kmRodados, gasolina);
 
@@ -156,11 +161,21 @@ public class Main {
             case 5:
                 System.out.println("===== Abastecimento ======\n");
                 System.out.println("Digite o id do caminhão que deseja abastecer: ");
-                manipulaCaminhao.listarCaminhaoDisponivel();
+                if(manipulaPosto.retornaPosto().size() == 0){
+                    System.out.println("Não há caminhões cadastrados no momento, retornando ao menu principal!");
+                    break;
+                }
+
+                manipulaCaminhao.listarCaminhao();
                 idCaminhao = leitorUsuario.nextInt();
                 leitorUsuario.nextLine();
 
                 System.out.println("Digite o id do posto que deseja abastecer: ");
+                if(manipulaPosto.retornaPosto().size() == 0){
+                    System.out.println("Não há postos cadastrados, retornando ao menu principal!");
+                    break;
+                }
+
                 manipulaPosto.listarPostosCredenciados();
                 idPosto = leitorUsuario.nextInt();
                 leitorUsuario.nextLine();
@@ -431,7 +446,7 @@ public class Main {
                 break;
             case 5:
                 System.out.println("Digite o id da viagem: ");
-                manipulaPosto.listarPostosCredenciados();
+                manipulaViagem.listarViagensEmAndamento();
                 idViagem = leitorUsuario.nextInt();
                 leitorUsuario.nextLine();
 

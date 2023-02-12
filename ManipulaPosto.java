@@ -36,4 +36,5 @@ public class ManipulaPosto {
         return listaPosto.get(index);
     }
 
+
 }

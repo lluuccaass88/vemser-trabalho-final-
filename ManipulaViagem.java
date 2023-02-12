@@ -27,7 +27,7 @@ public class ManipulaViagem {
         System.out.println("========== Viagens ==========");
         if(this.listaViagem.size() >= 1){
             for (int i = 0; i < listaViagem.size(); i++) {
-                System.out.println("Viagem realizada " + i + ": \n " + listaViagem.get(i).toString());
+                System.out.println("Id da viagem " + i + ": \n " + listaViagem.get(i).toString() + "\n");
             }
         }else{
             System.out.println("Não existem viagens cadastradas no momento.");
@@ -47,7 +47,7 @@ public class ManipulaViagem {
 
         if(filtrada.size() >= 1){
             for (int i = 0; i < filtrada.size(); i++) {
-                System.out.println("Viagem realizada " + i + ":\n " + filtrada.get(i).toString());
+                System.out.println("Id da viagem " + i + ":\n " + filtrada.get(i).toString() + "\n");
             }
         }else{
             System.out.println("Não existem viagens realizadas no momento.");
@@ -63,7 +63,7 @@ public class ManipulaViagem {
 
         if(filtrada.size() >= 1){
             for (int i = 0; i < filtrada.size(); i++) {
-                System.out.println("Viagem realizada " + i + ":\n " + filtrada.get(i).toString());
+                System.out.println("Id da viagem " + i + ":\n " + filtrada.get(i).toString() + "\n");
             }
         }else{
             System.out.println("Não existem viagens em andamento no momento.");

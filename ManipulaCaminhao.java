@@ -41,7 +41,7 @@ public class ManipulaCaminhao {
                 System.out.println("Id do caminhão: " + i + ": \n " + filtrada.get(i).getPlaca());
             }
         }else{
-            System.out.println("Não existem motoristas disponiveis no momento.");
+            System.out.println("Não existem caminhoes disponiveis no momento.");
         }
     }
 
@@ -55,6 +55,10 @@ public class ManipulaCaminhao {
 
     public Caminhao buscaCaminhaoPorId(int index){
         return listaCaminhao.get(index);
+    }
+
+    public ArrayList<Caminhao> retornaCaminhao() {
+        return this.listaCaminhao;
     }
 
 }
