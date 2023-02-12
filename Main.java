@@ -155,8 +155,8 @@ public class Main {
                 manipulaCaminhao.removerCaminhaoroPorIndice(idCaminhao);
             case 5:
                 System.out.println("===== Abastecimento ======\n");
-                System.out.println("Digite o id do cminhão que deseja abastecer: ");
-                manipulaPosto.listarPostosCredenciados();
+                System.out.println("Digite o id do caminhão que deseja abastecer: ");
+                manipulaCaminhao.listarCaminhaoDisponivel();
                 idCaminhao = leitorUsuario.nextInt();
                 leitorUsuario.nextLine();
 
@@ -174,7 +174,7 @@ public class Main {
 
 
 
-                viagemBuscada.abastecer(postoBuscado, quantidadeGasolina); //============== TROCAR AQUI A FUNÇÃO ========================
+                caminhaoBuscado.abastecer(postoBuscado, quantidadeGasolina);
             break;
 
         }
@@ -471,7 +471,7 @@ public class Main {
                         opcoesMotorista(manipulaMotorista);
                         break;
                     case  2:
-                        opcoesCaminhao(manipulaCaminhao);
+                        opcoesCaminhao(manipulaCaminhao, manipulaPosto);
                         break;
                     case 3:
                         opcoesPosto(manipulaPosto);
