@@ -296,41 +296,42 @@ public class Main {
             case 1:
                 System.out.println("============== Cadastro de Viagem ==============");
 
-
-
                 System.out.println("\nDigite o id do caminhão disponivel: ");
                 if(manipulaCaminhao.caminhoesLivres().size() > 0) {
                     manipulaCaminhao.listarCaminhaoDisponivel();
+                    idObjeto = leitorUsuario.nextInt();
+                    leitorUsuario.nextLine();
                 }else {
                     System.out.println("Não temos caminhões disponiveis no momento!");
                     break;
                 }
-                idObjeto = leitorUsuario.nextInt();
-                leitorUsuario.nextLine();
+
                 caminhao = manipulaCaminhao.buscaCaminhaoPorId(idObjeto);
 
 
                 System.out.println("\nDigite o id do motorista disponivel: ");
                 if(manipulaCaminhao.caminhoesLivres().size() > 0) {
                     manipulaMotorista.listarMotoristaDisponiveis();
+                    idObjeto = leitorUsuario.nextInt();
+                    leitorUsuario.nextLine();
                 }else {
                     System.out.println("Não temos motoristas disponiveis no momento!");
                     break;
                 }
-                idObjeto = leitorUsuario.nextInt();
-                leitorUsuario.nextLine();
+
                 motorista = manipulaMotorista.buscaMotoristaPorId(idObjeto);
 
 
                 System.out.println("\nDigite o id da rota: ");
                 if(manipulaCaminhao.caminhoesLivres().size() > 0) {
                     manipulaRota.listarRotas();
+                    idObjeto = leitorUsuario.nextInt();
+                    leitorUsuario.nextLine();
                 }else {
                     System.out.println("Não temos rotas cadastradas!");
                     break;
                 }
-                idObjeto = leitorUsuario.nextInt();
-                leitorUsuario.nextLine();
+
                 rota = manipulaRota.buscaRotaoPorId(idObjeto);
 
                 Viagem viagem = new Viagem(caminhao, motorista, rota, manipulaPosto.retornaPosto());
@@ -353,6 +354,7 @@ public class Main {
                 System.out.println("\nDigite o id do caminhão disponivel: ");
                 if(manipulaCaminhao.caminhoesLivres().size() > 0) {
                     manipulaCaminhao.listarCaminhaoDisponivel();
+
                 }else {
                     System.out.println("Não temos caminhões disponiveis no momento!");
                 }
@@ -437,7 +439,6 @@ public class Main {
             ManipulaPosto manipulaPosto = new ManipulaPosto();
             ManipulaRotas manipulaRota = new ManipulaRotas();
             ManipulaViagem manipulaViagem = new ManipulaViagem();
-
 
             int opc = -1;
             Scanner leitorUsuario = new Scanner(System.in);
