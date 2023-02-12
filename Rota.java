@@ -1,11 +1,13 @@
 public class Rota {
     private String nome,descricao, localPartida, destino;
+    boolean emViagem;
 
     public Rota(String nome, String descricao, String localPartida, String destino) {
         this.nome = nome;
         this.descricao = descricao;
         this.localPartida = localPartida;
         this.destino = destino;
+        this.emViagem = false;
     }
 
     //Impressão Rota

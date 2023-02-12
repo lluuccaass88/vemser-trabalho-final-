@@ -28,4 +28,12 @@ public class ManipulaPosto {
         }
     }
 
+    public ArrayList<Posto> retornaPosto() {
+        return listaPosto;
+    }
+
+    public Posto buscaPostosCredenciadosID(int index){
+        return listaPosto.get(index);
+    }
+
 }

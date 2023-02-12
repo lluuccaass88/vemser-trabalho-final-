@@ -2,6 +2,7 @@ public class Caminhao {
     private String placa, modelo, marca;
     private double capacidade, kmRodados;
     private int gasolina;
+    private boolean emViagem;
 
     public Caminhao(String placa, String modelo, String marca, double capacidade, double kmRodados, int gasolina) {
         this.placa = placa;
@@ -10,6 +11,15 @@ public class Caminhao {
         this.capacidade = capacidade;
         this.kmRodados = kmRodados;
         this.gasolina = gasolina;
+        this.emViagem = false;
+    }
+
+    public boolean getEmViagem() {
+        return emViagem;
+    }
+
+    public void setEmViagem(boolean emViagem) {
+        this.emViagem = emViagem;
     }
 
     public String getPlaca() {
@@ -60,8 +70,10 @@ public class Caminhao {
         this.gasolina = gasolina;
     }
 
-    public void abastecer(int quantidade){
+    public boolean abastecer(int quantidade){
+
         gasolina += quantidade;
+        return true;
     }
 
     @Override

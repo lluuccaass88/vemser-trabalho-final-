@@ -155,7 +155,7 @@ public class Main {
     public static void opcoesPosto(ManipulaPosto manipulaPosto) {
         Scanner leitorUsuario = new Scanner(System.in);
         int idPosto, opcCaminhao;
-        String nome, destino, localPartida;
+        String nome;
         double valorCombustível;
 
 
@@ -273,15 +273,20 @@ public class Main {
         }
     }
 
-    public static void opcoesViagem(ManipulaViagem manipulaViagem) {
+    public static void opcoesViagem(ManipulaViagem manipulaViagem, ManipulaMotorista manipulaMotorista, ManipulaCaminhao manipulaCaminhao, ManipulaRotas manipulaRota, ManipulaPosto manipulaPosto) {
         Scanner leitorUsuario = new Scanner(System.in);
-        int idViagem, opcViagem;
+        int idViagem, opcViagem, idObjeto, quantidadeGasolina;
+        Caminhao caminhao;
+        Motorista motorista;
+        Rota rota;
 
         System.out.println("===============Opções Viagens===============\n" +
                 "Cadastrar Viagem: [1]\n" +
                 "Ver Viagens:      [2]\n" +
                 "Editar Viagem:    [3]\n" +
                 "Excluir Viagem:   [4]\n" +
+                "Abastecer:   [5]\n" +
+                "Finalizar viagem:   [6]\n" +
                 "Digite sua opção: ");
 
         opcViagem = leitorUsuario.nextInt();
@@ -291,31 +296,95 @@ public class Main {
             case 1:
                 System.out.println("============== Cadastro de Viagem ==============");
 
-                System.out.println("\nDigite o id do caminhão: ");
-                caminhao = leitorUsuario.nextLine();
-                System.out.println("\nDigite o id do motorista: ");
-                motorista = leitorUsuario.nextLine();
-                System.out.println("\nDigite o id do rota: ");
-                rota = leitorUsuario.nextLine();
 
-                Viagem viagem = new Viagem();
+
+                System.out.println("\nDigite o id do caminhão disponivel: ");
+                if(manipulaCaminhao.caminhoesLivres().size() > 1) {
+                    manipulaCaminhao.listarCaminhaoDisponivel();
+                }else {
+                    System.out.println("Não temos caminhões disponiveis no momento!");
+                }
+                idObjeto = leitorUsuario.nextInt();
+                leitorUsuario.nextLine();
+                caminhao = manipulaCaminhao.buscaCaminhaoPorId(idObjeto);
+
+
+                System.out.println("\nDigite o id do motorista disponivel: ");
+                if(manipulaCaminhao.caminhoesLivres().size() > 1) {
+                    manipulaMotorista.listarMotoristaDisponiveis();
+                }else {
+                    System.out.println("Não temos motoristas disponiveis no momento!");
+                }
+                idObjeto = leitorUsuario.nextInt();
+                leitorUsuario.nextLine();
+                motorista = manipulaMotorista.buscaMotoristaPorId(idObjeto);
+
+
+                System.out.println("\nDigite o id da rota: ");
+                if(manipulaCaminhao.caminhoesLivres().size() > 1) {
+                    manipulaRota.listarRotas();
+                }else {
+                    System.out.println("Não temos rotas cadastradas!");
+                }
+                idObjeto = leitorUsuario.nextInt();
+                leitorUsuario.nextLine();
+                rota = manipulaRota.buscaRotaoPorId(idObjeto);
+
+                Viagem viagem = new Viagem(caminhao, motorista, rota, manipulaPosto.retornaPosto());
+                caminhao.setEmViagem(true);
+                motorista.setEmViagem(true);
                 manipulaViagem.adicionaViagem(viagem);
+
             case 2:
                 manipulaViagem.listarViagens();
                 break;
             case 3:
-                System.out.println("Digite o id da viagem que deseja editar: ");
-                idViagem = leitorUsuario.nextInt();
+
+
+                System.out.println("=========== Editar Viagem ===========");
+
+                System.out.println("Digite o id da viagem que deseja editar (apenas viagens em andamento): ");
+                idViagem = leitorUsuario.nextInt(); //Tem que verificar se a viagem é uma que esta em andamento, se sim ai continua a execuão, se não ele não continua.
                 leitorUsuario.nextLine();
 
-                System.out.println("\nDigite o id do caminhão: ");
-                caminhao = leitorUsuario.nextLine();
-                System.out.println("\nDigite o id do motorista: ");
-                motorista = leitorUsuario.nextLine();
-                System.out.println("\nDigite o id do rota: ");
-                rota = leitorUsuario.nextLine();
+                System.out.println("\nDigite o id do caminhão disponivel: ");
+                if(manipulaCaminhao.caminhoesLivres().size() > 0) {
+                    manipulaCaminhao.listarCaminhaoDisponivel();
+                }else {
+                    System.out.println("Não temos caminhões disponiveis no momento!");
+                }
+                idObjeto = leitorUsuario.nextInt();
+                leitorUsuario.nextLine();
+                caminhao = manipulaCaminhao.buscaCaminhaoPorId(idObjeto);
 
-                Viagem viagemEditada = new Viagem()
+
+                System.out.println("\nDigite o id do motorista disponivel: ");
+                if(manipulaCaminhao.caminhoesLivres().size() > 0) {
+                    manipulaMotorista.listarMotoristaDisponiveis();
+                }else {
+                    System.out.println("Não temos motoristas disponiveis no momento!");
+                }
+                idObjeto = leitorUsuario.nextInt();
+                leitorUsuario.nextLine();
+                motorista = manipulaMotorista.buscaMotoristaPorId(idObjeto);
+
+
+                System.out.println("\nDigite o id da rota: ");
+                if(manipulaCaminhao.caminhoesLivres().size() > 0) {
+                    manipulaRota.listarRotas();
+                }else {
+                    System.out.println("Não temos rotas cadastradas!");
+                }
+                idObjeto = leitorUsuario.nextInt();
+                leitorUsuario.nextLine();
+                rota = manipulaRota.buscaRotaoPorId(idObjeto);
+
+
+                Viagem viagemEditada = new Viagem(caminhao, motorista, rota, manipulaPosto.retornaPosto());
+                caminhao.setEmViagem(true);
+                motorista.setEmViagem(true);
+
+                manipulaViagem.editarViagem(idViagem, viagemEditada);
                 break;
             case 4:
                 System.out.println("Digite o id da viagem que deseja excluir");
@@ -324,11 +393,39 @@ public class Main {
 
                 manipulaViagem.removerViagemPorIndice(idViagem);
                 break;
+            case 5:
+                System.out.println("Digite o id da viagem: ");
+                manipulaPosto.listarPostosCredenciados();
+                idViagem = leitorUsuario.nextInt();
+                leitorUsuario.nextLine();
 
+                System.out.println("Digite o id do posto que deseja abastecer: ");
+                manipulaPosto.listarPostosCredenciados();
+                idObjeto = leitorUsuario.nextInt();
+                leitorUsuario.nextLine();
+
+                System.out.println("Digita a quantidade que deseja abastecer (1 a 100): ");
+                quantidadeGasolina = leitorUsuario.nextInt();
+                leitorUsuario.nextLine();
+
+                Viagem viagemBuscada = manipulaViagem.BuscaViagensId(idViagem);
+                Posto postoBuscado = manipulaPosto.buscaPostosCredenciadosID(idObjeto);
+
+                viagemBuscada.abastecer(postoBuscado, quantidadeGasolina);
+
+                break;
+            case 6:
+                System.out.println("Digite o id da viagem: ");
+                manipulaPosto.listarPostosCredenciados();
+                idViagem = leitorUsuario.nextInt();
+                leitorUsuario.nextLine();
+
+                Viagem viagemBuscada2 = manipulaViagem.BuscaViagensId(idViagem);
+                viagemBuscada2.finalizarViagem();
 
         }
     }
-    }
+
 
         public static void main (String[]args){
             ManipulaMotorista manipulaMotorista = new ManipulaMotorista();
@@ -364,8 +461,7 @@ public class Main {
                         opcoesRota(manipulaRota);
                         break;
                     case 5:
-                        opcoesViagem(manipulaViagem);
-                        //opcoesViagem(manipulaViagem, manipulaMotorista, manipulaCaminhao, manipulaPosto, manipulaRota);
+                        opcoesViagem(manipulaViagem, manipulaMotorista, manipulaCaminhao, manipulaRota, manipulaPosto);
                 }
 
             }

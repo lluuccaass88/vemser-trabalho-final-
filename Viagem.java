@@ -6,13 +6,15 @@ public class Viagem {
     private Motorista motorista;
     private Rota rota;
     private boolean finalizada;
+    private ArrayList<Posto> postosCredenciados = new ArrayList();
 
 
-    public Viagem(Caminhao caminhao, Motorista motorista, Rota rota) {
+    public Viagem(Caminhao caminhao, Motorista motorista, Rota rota, ArrayList<Posto> postosCredenciados) {
         this.caminhao = caminhao;
         this.motorista = motorista;
         this.rota = rota;
         this.finalizada = false;
+        this.postosCredenciados = postosCredenciados;
     }
 
     public Viagem() {
@@ -55,11 +57,16 @@ public class Viagem {
 
     public void finalizarViagem(){ //OK
         this.finalizada = true;
+        caminhao.setEmViagem(false);
+        motorista.setEmViagem(false);
     }
 
-    public boolean abastecer(){ //Teria que chamar a função abastecer do caminhão, então preciso da classe caminhão
-
-        return true;
+    public boolean abastecer(Posto posto, int quantidade){ //Teria que chamar a função abastecer do caminhão, então preciso da classe caminhão
+        if(this.caminhao.abastecer(quantidade)){
+            System.out.println("Abastecido no posto " + posto.getNome() + ".");
+            return true;
+        }
+        return false;
     }
 
     @Override

@@ -14,6 +14,10 @@ public class ManipulaViagem {
 
     public void editarViagem(Integer index, Viagem viagem) {
         Viagem viagemProcurada = listaViagem.get(index);
+
+        viagemProcurada.getCaminhao().setEmViagem(false);
+        viagemProcurada.getMotorista().setEmViagem(false);
+
         viagemProcurada.setMotorista(viagem.getMotorista());
         viagemProcurada.setCaminhao(viagem.getCaminhao());
         viagemProcurada.setRota(viagem.getRota());
@@ -29,6 +33,10 @@ public class ManipulaViagem {
             System.out.println("Não existem viagens cadastradas no momento.");
         }
 
+    }
+
+    public Viagem BuscaViagensId(int index) {
+        return listaViagem.get(index);
     }
 
     public void listarViagensRealizadas() {

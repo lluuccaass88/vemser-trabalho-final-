@@ -31,4 +31,7 @@ public class ManipulaRotas {
         }
     }
 
+    public Rota buscaRotaoPorId(int index){
+        return listaRota.get(index);
+    }
 }

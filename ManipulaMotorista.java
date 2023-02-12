@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class ManipulaMotorista {
     private ArrayList<Motorista> listaMotorista = new ArrayList();
@@ -36,5 +37,34 @@ public class ManipulaMotorista {
             System.out.println("Não existem motoristas cadastrados.");
         }
     }
+
+
+    public void listarMotoristaDisponiveis() {
+        List<Motorista> filtrada = listaMotorista.stream()
+                .filter(elemento -> elemento.getViagem() == false)
+                .toList();
+
+        System.out.println("========== Motoristas Disponiveis ==========");
+        if(filtrada.size() >= 1){
+            for (int i = 0; i < filtrada.size(); i++) {
+                System.out.println("Id do caminhão: " + i + ": \n " + filtrada.get(i).getNome());
+            }
+        }else{
+            System.out.println("Não existem motoristas disponiveis no momento.");
+        }
+    }
+
+    public List<Motorista>  motoristasLivres(){
+        List<Motorista> motoristaDisponivel = listaMotorista.stream()
+                .filter(elemento -> elemento.getViagem() == false)
+                .toList();
+
+        return motoristaDisponivel;
+    }
+
+    public Motorista buscaMotoristaPorId(int index){
+        return listaMotorista.get(index);
+    }
+
 }
 
