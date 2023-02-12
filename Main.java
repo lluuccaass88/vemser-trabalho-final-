@@ -308,7 +308,6 @@ public class Main {
 
                 caminhao = manipulaCaminhao.buscaCaminhaoPorId(idObjeto);
 
-
                 System.out.println("\nDigite o id do motorista disponivel: ");
                 if(manipulaCaminhao.caminhoesLivres().size() > 0) {
                     manipulaMotorista.listarMotoristaDisponiveis();
@@ -327,6 +326,7 @@ public class Main {
                     manipulaRota.listarRotas();
                     idObjeto = leitorUsuario.nextInt();
                     leitorUsuario.nextLine();
+
                 }else {
                     System.out.println("Não temos rotas cadastradas!");
                     break;
