@@ -1,11 +1,7 @@
 import java.util.Scanner;
 import java.io.IOException;
 
-
-
 public class Main {
-
-
 
     public static void opcoesMotorista(ManipulaMotorista manipulaMotorista){
         String nome, cpf, cnh;
@@ -281,7 +277,6 @@ public class Main {
         Scanner leitorUsuario = new Scanner(System.in);
         int idViagem, opcViagem;
 
-
         System.out.println("===============Opções Viagens===============\n" +
                 "Cadastrar Viagem: [1]\n" +
                 "Ver Viagens:      [2]\n" +
@@ -296,15 +291,44 @@ public class Main {
             case 1:
                 System.out.println("============== Cadastro de Viagem ==============");
 
+                System.out.println("\nDigite o id do caminhão: ");
+                caminhao = leitorUsuario.nextLine();
+                System.out.println("\nDigite o id do motorista: ");
+                motorista = leitorUsuario.nextLine();
+                System.out.println("\nDigite o id do rota: ");
+                rota = leitorUsuario.nextLine();
+
+                Viagem viagem = new Viagem();
+                manipulaViagem.adicionaViagem(viagem);
+            case 2:
+                manipulaViagem.listarViagens();
+                break;
+            case 3:
+                System.out.println("Digite o id da viagem que deseja editar: ");
+                idViagem = leitorUsuario.nextInt();
+                leitorUsuario.nextLine();
+
+                System.out.println("\nDigite o id do caminhão: ");
+                caminhao = leitorUsuario.nextLine();
+                System.out.println("\nDigite o id do motorista: ");
+                motorista = leitorUsuario.nextLine();
+                System.out.println("\nDigite o id do rota: ");
+                rota = leitorUsuario.nextLine();
+
+                Viagem viagemEditada = new Viagem()
+                break;
+            case 4:
+                System.out.println("Digite o id da viagem que deseja excluir");
+                idViagem = leitorUsuario.nextInt();
+                leitorUsuario.nextLine();
+
+                manipulaViagem.removerViagemPorIndice(idViagem);
+                break;
 
 
         }
     }
-
-
-
-
-
+    }
 
         public static void main (String[]args){
             ManipulaMotorista manipulaMotorista = new ManipulaMotorista();
