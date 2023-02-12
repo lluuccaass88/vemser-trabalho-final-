@@ -73,9 +73,9 @@ public class Main {
         }
     }
 
-    public static void opcoesCaminhao(ManipulaCaminhao manipulaCaminhao) {
+    public static void opcoesCaminhao(ManipulaCaminhao manipulaCaminhao, ManipulaPosto manipulaPosto) {
         Scanner leitorUsuario = new Scanner(System.in);
-        int opcCaminhao, gasolina, idCaminhao;
+        int opcCaminhao, gasolina, idCaminhao, idPosto, quantidadeGasolina;
         String placa, modelo, marca;
         double capacidade, kmRodados;
 
@@ -85,6 +85,7 @@ public class Main {
                 Ver Caminhão:       [2]
                 Editar Caminhão:    [3]
                 Excluir Caminhão:   [4]
+                Abastecer           [5]
                 Digite sua opção:\s""");
 
         opcCaminhao = leitorUsuario.nextInt();
@@ -152,6 +153,30 @@ public class Main {
                 leitorUsuario.nextLine();
 
                 manipulaCaminhao.removerCaminhaoroPorIndice(idCaminhao);
+            case 5:
+                System.out.println("===== Abastecimento ======\n");
+                System.out.println("Digite o id do cminhão que deseja abastecer: ");
+                manipulaPosto.listarPostosCredenciados();
+                idCaminhao = leitorUsuario.nextInt();
+                leitorUsuario.nextLine();
+
+                System.out.println("Digite o id do posto que deseja abastecer: ");
+                manipulaPosto.listarPostosCredenciados();
+                idPosto = leitorUsuario.nextInt();
+                leitorUsuario.nextLine();
+
+                System.out.println("Digita a quantidade que deseja abastecer (1 a 100): ");
+                quantidadeGasolina = leitorUsuario.nextInt();
+                leitorUsuario.nextLine();
+
+                Posto postoBuscado = manipulaPosto.buscaPostosCredenciadosID(idPosto);
+                Caminhao caminhaoBuscado = manipulaCaminhao.buscaCaminhaoPorId(idCaminhao);
+
+
+
+                viagemBuscada.abastecer(postoBuscado, quantidadeGasolina); //============== TROCAR AQUI A FUNÇÃO ========================
+            break;
+
         }
     }
 
@@ -411,30 +436,10 @@ public class Main {
                 idViagem = leitorUsuario.nextInt();
                 leitorUsuario.nextLine();
 
-                System.out.println("Digite o id do posto que deseja abastecer: ");
-                manipulaPosto.listarPostosCredenciados();
-                idObjeto = leitorUsuario.nextInt();
-                leitorUsuario.nextLine();
-
-                System.out.println("Digita a quantidade que deseja abastecer (1 a 100): ");
-                quantidadeGasolina = leitorUsuario.nextInt();
-                leitorUsuario.nextLine();
-
-                Viagem viagemBuscada = manipulaViagem.BuscaViagensId(idViagem);
-                Posto postoBuscado = manipulaPosto.buscaPostosCredenciadosID(idObjeto);
-
-                viagemBuscada.abastecer(postoBuscado, quantidadeGasolina);
-                break;
-            case 6:
-                System.out.println("Digite o id da viagem: ");
-                manipulaPosto.listarPostosCredenciados();
-                idViagem = leitorUsuario.nextInt();
-                leitorUsuario.nextLine();
-
                 Viagem viagemBuscada2 = manipulaViagem.BuscaViagensId(idViagem);
                 viagemBuscada2.finalizarViagem();
                 break;
-            case 7:
+            case 6:
                 manipulaViagem.listarViagensRealizadas();
                 break;
         }
