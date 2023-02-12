@@ -1,9 +1,12 @@
+import java.util.Scanner;
+
 public class Caminhao {
     private String placa, modelo, marca;
     private double capacidade, kmRodados;
     private int gasolina;
     private boolean emViagem;
 
+    Scanner inputUsuario = new Scanner(System.in);
     public Caminhao(String placa, String modelo, String marca, double capacidade, double kmRodados, int gasolina) {
         this.placa = placa;
         this.modelo = modelo;
@@ -70,10 +73,17 @@ public class Caminhao {
         this.gasolina = gasolina;
     }
 
-    public boolean abastecer(int quantidade){
-
-        gasolina += quantidade;
-        return true;
+    public boolean abastecer(Posto posto, int quantidade){ //Teria que chamar a função abastecer do caminhão, então preciso da classe caminhão
+        if (getGasolina() == 100) {
+            System.out.println("O tanque do caminhão já está cheio.");
+        } else {
+            while (quantidade + getGasolina() > 100) {
+                System.out.println("Você não pode abastecer esta quantidade pois passaria da capacidade do tanque");
+                quantidade = inputUsuario.nextInt();
+            }
+            setGasolina(getGasolina() + quantidade);
+        }
+        return false;
     }
 
     @Override

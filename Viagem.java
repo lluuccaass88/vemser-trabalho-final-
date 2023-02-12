@@ -61,14 +61,6 @@ public class Viagem {
         motorista.setEmViagem(false);
     }
 
-    public boolean abastecer(Posto posto, int quantidade){ //Teria que chamar a função abastecer do caminhão, então preciso da classe caminhão
-        if(this.caminhao.abastecer(quantidade)){
-            System.out.println("Abastecido no posto " + posto.getNome() + ".");
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public String toString() {
         if(this.finalizada){
