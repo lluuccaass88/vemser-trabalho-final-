@@ -1,6 +1,4 @@
 import java.util.Scanner;
-import java.io.IOException;
-
 public class Main {
 
     public static void opcoesMotorista(ManipulaMotorista manipulaMotorista){
@@ -11,12 +9,13 @@ public class Main {
         Scanner leitorUsuario = new Scanner(System.in);
 
 
-        System.out.println("===============Opções Motorista===============\n" +
-                "Cadastrar Motorista: [1]\n" +
-                "Ver Motoristas:      [2]\n" +
-                "Editar Motorista:    [3]\n" +
-                "Excluir Motorista:   [4]\n" +
-                "Digite sua opção: ");
+        System.out.println("""
+                ===============Opções Motorista===============
+                Cadastrar Motorista: [1]
+                Ver Motoristas:      [2]
+                Editar Motorista:    [3]
+                Excluir Motorista:   [4]
+                Digite sua opção:\s""");
 
         opcMotorista = leitorUsuario.nextInt();
         leitorUsuario.nextLine();
@@ -80,12 +79,13 @@ public class Main {
         String placa, modelo, marca;
         double capacidade, kmRodados;
 
-        System.out.println("===============Opções Caminhões===============\n" +
-                "Cadastrar Caminhão: [1]\n" +
-                "Ver Caminhão:      [2]\n" +
-                "Editar Caminhão:    [3]\n" +
-                "Excluir Caminhão:   [4]\n" +
-                "Digite sua opção: ");
+        System.out.println("""
+                ===============Opções Caminhões===============
+                Cadastrar Caminhão: [1]
+                Ver Caminhão:      [2]
+                Editar Caminhão:    [3]
+                Excluir Caminhão:   [4]
+                Digite sua opção:\s""");
 
         opcCaminhao = leitorUsuario.nextInt();
         leitorUsuario.nextLine();
@@ -105,8 +105,12 @@ public class Main {
                 System.out.println("\nQuilometros Rodados: ");
                 kmRodados = leitorUsuario.nextDouble();
                 leitorUsuario.nextLine();
-                System.out.println("\nQuantidade de gasolina: ");
+                System.out.println("\nQuantidade de gasolina ( de 0 a 100 ): ");
                 gasolina = leitorUsuario.nextInt();
+                while (gasolina > 100 || gasolina < 0 ){
+                    System.out.println("Porfavor digitar um numero entre 0 e 100: ");
+                    gasolina = leitorUsuario.nextInt();
+                }
                 leitorUsuario.nextLine();
 
                 Caminhao caminhao = new Caminhao(placa, modelo, marca, capacidade, kmRodados, gasolina);
@@ -155,15 +159,16 @@ public class Main {
         Scanner leitorUsuario = new Scanner(System.in);
         int idPosto, opcPosto;
         String nome;
-        double valorCombustível;
+        double valorCombustivel;
 
 
-        System.out.println("===============Opções Posto===============\n" +
-                "Cadastrar Posto: [1]\n" +
-                "Ver Postos:      [2]\n" +
-                "Editar Posto:    [3]\n" +
-                "Excluir Posto:   [4]\n" +
-                "Digite sua opção: ");
+        System.out.println("""
+                ===============Opções Posto===============
+                Cadastrar Posto: [1]
+                Ver Postos:      [2]
+                Editar Posto:    [3]
+                Excluir Posto:   [4]
+                Digite sua opção:\s""");
 
         opcPosto = leitorUsuario.nextInt();
         leitorUsuario.nextLine();
@@ -174,10 +179,10 @@ public class Main {
                 System.out.println("\nNome: ");
                 nome = leitorUsuario.nextLine();
                 System.out.println("\nValor do Combustivel: ");
-                valorCombustível = leitorUsuario.nextDouble();
+                valorCombustivel = leitorUsuario.nextDouble();
                 leitorUsuario.nextLine();
 
-                Posto posto = new Posto(nome, valorCombustível);
+                Posto posto = new Posto(nome, valorCombustivel);
                 manipulaPosto.adicionaPosto(posto);
 
                 break;
@@ -192,10 +197,10 @@ public class Main {
                 System.out.println("\nNome: ");
                 nome = leitorUsuario.nextLine();
                 System.out.println("\nValor do Combustivel: ");
-                valorCombustível = leitorUsuario.nextDouble();
+                valorCombustivel = leitorUsuario.nextDouble();
                 leitorUsuario.nextLine();
 
-                Posto postoEditado = new Posto(nome, valorCombustível);
+                Posto postoEditado = new Posto(nome, valorCombustivel);
 
                 manipulaPosto.editarPosto(idPosto, postoEditado);
 
@@ -216,12 +221,13 @@ public class Main {
         String nome,descricao, localPartida, destino;
 
 
-        System.out.println("===============Opções Rotas===============\n" +
-                "Cadastrar Rotas: [1]\n" +
-                "Ver Rotas:      [2]\n" +
-                "Editar Rota:    [3]\n" +
-                "Excluir Rota:   [4]\n" +
-                "Digite sua opção: ");
+        System.out.println("""
+                ===============Opções Rotas===============
+                Cadastrar Rotas: [1]
+                Ver Rotas:      [2]
+                Editar Rota:    [3]
+                Excluir Rota:   [4]
+                Digite sua opção:\s""");
 
         opcRota = leitorUsuario.nextInt();
         leitorUsuario.nextLine();
@@ -279,15 +285,16 @@ public class Main {
         Motorista motorista;
         Rota rota;
 
-        System.out.println("===============Opções Viagens===============\n" +
-                "Cadastrar Viagem: [1]\n" +
-                "Ver Viagens:      [2]\n" +
-                "Editar Viagem:    [3]\n" +
-                "Excluir Viagem:   [4]\n" +
-                "Abastecer:        [5]\n" +
-                "Finalizar viagem: [6]\n" +
-                "Finalizar viagem: [7]\n" +
-                "Digite sua opção: ");
+        System.out.println("""
+                ===============Opções Viagens===============
+                Cadastrar Viagem: [1]
+                Ver Viagens:      [2]
+                Editar Viagem:    [3]
+                Excluir Viagem:   [4]
+                Abastecer:        [5]
+                Finalizar viagem: [6]
+                Finalizar viagem: [7]
+                Digite sua opção:\s""");
 
         opcViagem = leitorUsuario.nextInt();
         leitorUsuario.nextLine();
@@ -295,9 +302,6 @@ public class Main {
         switch (opcViagem) {
             case 1:
                 System.out.println("============== Cadastro de Viagem ==============");
-
-
-
                 System.out.println("\nDigite o id do caminhão disponivel: ");
                 if(manipulaCaminhao.caminhoesLivres().size() > 0) {
                     manipulaCaminhao.listarCaminhaoDisponivel();
