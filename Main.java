@@ -452,20 +452,26 @@ public class Main {
                 System.out.println("[2] Opções do caminhão");
                 System.out.println("[3] Opções de Posto de gasolina");
                 System.out.println("[4] Opções de rotas");
+                System.out.println("[5] Opções de viagem");
 
                 opc = leitorUsuario.nextInt();
                 leitorUsuario.nextLine();
 
                 switch (opc) {
                     case 1:
+                        System.out.println("Entrou no Motorista");
                         opcoesMotorista(manipulaMotorista);
                         break;
                     case  2:
+                        System.out.println("Entrou no Caminhao");
                         opcoesCaminhao(manipulaCaminhao);
                         break;
                     case 3:
+                        System.out.println("Entrou no Posto");
                         opcoesPosto(manipulaPosto);
+                        break;
                     case 4:
+                        System.out.println("Entrou no Rota");
                         opcoesRota(manipulaRota);
                         break;
                     case 5:
