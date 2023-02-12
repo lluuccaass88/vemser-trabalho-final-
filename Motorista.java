@@ -26,6 +26,6 @@ public class Motorista extends Usuario implements Imprimir{
 
     @Override
     public void imprimir() {
-        System.out.printf("Nome: %s , CPF: %s , Salario: %f , Idade: %d, RG: %s", getNome(),getCpf(),getSalario(),getIdade(),getCnh());
+        System.out.printf("Nome: %s , CPF: %s , Salario: %.2f , Idade: %d, RG: %s", getNome(),getCpf(),getSalario(),getIdade(),getCnh());
     }
 }

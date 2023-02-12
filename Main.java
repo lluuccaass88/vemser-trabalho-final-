@@ -82,7 +82,7 @@ public class Main {
         System.out.println("""
                 ===============Opções Caminhões===============
                 Cadastrar Caminhão: [1]
-                Ver Caminhão:      [2]
+                Ver Caminhão:       [2]
                 Editar Caminhão:    [3]
                 Excluir Caminhão:   [4]
                 Digite sua opção:\s""");
@@ -175,7 +175,7 @@ public class Main {
 
         switch (opcPosto) {
             case 1:
-                System.out.println("============== Cadastro de caminhão ==============");
+                System.out.println("============== Cadastro de Posto ==============");
                 System.out.println("\nNome: ");
                 nome = leitorUsuario.nextLine();
                 System.out.println("\nValor do Combustivel: ");
@@ -459,23 +459,20 @@ public class Main {
 
                 switch (opc) {
                     case 1:
-                        System.out.println("Entrou no Motorista");
                         opcoesMotorista(manipulaMotorista);
                         break;
                     case  2:
-                        System.out.println("Entrou no Caminhao");
                         opcoesCaminhao(manipulaCaminhao);
                         break;
                     case 3:
-                        System.out.println("Entrou no Posto");
                         opcoesPosto(manipulaPosto);
                         break;
                     case 4:
-                        System.out.println("Entrou no Rota");
                         opcoesRota(manipulaRota);
                         break;
                     case 5:
                         opcoesViagem(manipulaViagem, manipulaMotorista, manipulaCaminhao, manipulaRota, manipulaPosto);
+                        break;
                 }
 
             }
