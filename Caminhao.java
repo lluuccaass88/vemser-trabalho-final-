@@ -78,13 +78,11 @@ public class Caminhao {
 
     @Override
     public String toString() {
-        return "Caminhao{" +
-                "placa='" + placa + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", marca='" + marca + '\'' +
-                ", capacidade=" + capacidade +
-                ", kmRodados=" + kmRodados +
-                ", gasolina=" + gasolina +
-                '}';
+        return  "placa: " + placa + '\'' +
+                ", modelo: " + modelo + '\'' +
+                ", marca: " + marca + '\'' +
+                ", capacidade: " + capacidade +
+                ", Quilometros rodados: " + kmRodados +
+                ", gasolina: " + gasolina;
     }
 }

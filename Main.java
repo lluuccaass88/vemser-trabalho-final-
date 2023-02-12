@@ -37,9 +37,8 @@ public class Main {
                 salario = leitorUsuario.nextDouble();
                 leitorUsuario.nextLine();
 
-                Motorista motorista = new Motorista(nome, cpf, salario, idade, cnh); //Instancia objeto
+                Motorista motorista = new Motorista(nome, cpf, salario, idade, cnh);
                 manipulaMotorista.adicionaMotorista(motorista);
-
                 break;
             case 2:
                 manipulaMotorista.listarMotoristas();
@@ -154,7 +153,7 @@ public class Main {
 
     public static void opcoesPosto(ManipulaPosto manipulaPosto) {
         Scanner leitorUsuario = new Scanner(System.in);
-        int idPosto, opcCaminhao;
+        int idPosto, opcPosto;
         String nome;
         double valorCombustível;
 
@@ -166,10 +165,10 @@ public class Main {
                 "Excluir Posto:   [4]\n" +
                 "Digite sua opção: ");
 
-        opcCaminhao = leitorUsuario.nextInt();
+        opcPosto = leitorUsuario.nextInt();
         leitorUsuario.nextLine();
 
-        switch (opcCaminhao) {
+        switch (opcPosto) {
             case 1:
                 System.out.println("============== Cadastro de caminhão ==============");
                 System.out.println("\nNome: ");
@@ -285,8 +284,9 @@ public class Main {
                 "Ver Viagens:      [2]\n" +
                 "Editar Viagem:    [3]\n" +
                 "Excluir Viagem:   [4]\n" +
-                "Abastecer:   [5]\n" +
-                "Finalizar viagem:   [6]\n" +
+                "Abastecer:        [5]\n" +
+                "Finalizar viagem: [6]\n" +
+                "Finalizar viagem: [7]\n" +
                 "Digite sua opção: ");
 
         opcViagem = leitorUsuario.nextInt();
@@ -299,10 +299,11 @@ public class Main {
 
 
                 System.out.println("\nDigite o id do caminhão disponivel: ");
-                if(manipulaCaminhao.caminhoesLivres().size() > 1) {
+                if(manipulaCaminhao.caminhoesLivres().size() > 0) {
                     manipulaCaminhao.listarCaminhaoDisponivel();
                 }else {
                     System.out.println("Não temos caminhões disponiveis no momento!");
+                    break;
                 }
                 idObjeto = leitorUsuario.nextInt();
                 leitorUsuario.nextLine();
@@ -310,10 +311,11 @@ public class Main {
 
 
                 System.out.println("\nDigite o id do motorista disponivel: ");
-                if(manipulaCaminhao.caminhoesLivres().size() > 1) {
+                if(manipulaCaminhao.caminhoesLivres().size() > 0) {
                     manipulaMotorista.listarMotoristaDisponiveis();
                 }else {
                     System.out.println("Não temos motoristas disponiveis no momento!");
+                    break;
                 }
                 idObjeto = leitorUsuario.nextInt();
                 leitorUsuario.nextLine();
@@ -321,10 +323,11 @@ public class Main {
 
 
                 System.out.println("\nDigite o id da rota: ");
-                if(manipulaCaminhao.caminhoesLivres().size() > 1) {
+                if(manipulaCaminhao.caminhoesLivres().size() > 0) {
                     manipulaRota.listarRotas();
                 }else {
                     System.out.println("Não temos rotas cadastradas!");
+                    break;
                 }
                 idObjeto = leitorUsuario.nextInt();
                 leitorUsuario.nextLine();
@@ -340,10 +343,10 @@ public class Main {
                 break;
             case 3:
 
-
                 System.out.println("=========== Editar Viagem ===========");
 
                 System.out.println("Digite o id da viagem que deseja editar (apenas viagens em andamento): ");
+                manipulaViagem.listarViagensEmAndamento();
                 idViagem = leitorUsuario.nextInt(); //Tem que verificar se a viagem é uma que esta em andamento, se sim ai continua a execuão, se não ele não continua.
                 leitorUsuario.nextLine();
 
@@ -412,7 +415,6 @@ public class Main {
                 Posto postoBuscado = manipulaPosto.buscaPostosCredenciadosID(idObjeto);
 
                 viagemBuscada.abastecer(postoBuscado, quantidadeGasolina);
-
                 break;
             case 6:
                 System.out.println("Digite o id da viagem: ");
@@ -422,10 +424,12 @@ public class Main {
 
                 Viagem viagemBuscada2 = manipulaViagem.BuscaViagensId(idViagem);
                 viagemBuscada2.finalizarViagem();
-
+                break;
+            case 7:
+                manipulaViagem.listarViagensRealizadas();
+                break;
         }
     }
-
 
         public static void main (String[]args){
             ManipulaMotorista manipulaMotorista = new ManipulaMotorista();
