@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
 
@@ -89,7 +90,6 @@ public class Main {
                 Ver Caminhão:       [2]
                 Editar Caminhão:    [3]
                 Excluir Caminhão:   [4]
-                Abastecer           [5]
                 Digite sua opção:\s""");
 
         opcCaminhao = leitorUsuario.nextInt();
@@ -162,38 +162,6 @@ public class Main {
                 leitorUsuario.nextLine();
 
                 manipulaCaminhao.removerCaminhaoroPorIndice(idCaminhao);
-            case 5:
-                System.out.println("===== Abastecimento ======\n");
-                System.out.println("Digite o id do caminhão que deseja abastecer: ");
-                if(manipulaPosto.retornaPosto().size() == 0){
-                    System.out.println("Não há caminhões cadastrados no momento, retornando ao menu principal!");
-                    break;
-                }
-
-                manipulaCaminhao.listarCaminhao();
-                idCaminhao = leitorUsuario.nextInt();
-                leitorUsuario.nextLine();
-
-                System.out.println("Digite o id do posto que deseja abastecer: ");
-                if(manipulaPosto.retornaPosto().size() == 0){
-                    System.out.println("Não há postos cadastrados, retornando ao menu principal!");
-                    break;
-                }
-
-                manipulaPosto.listarPostosCredenciados();
-                idPosto = leitorUsuario.nextInt();
-                leitorUsuario.nextLine();
-
-                System.out.println("Digita a quantidade que deseja abastecer (1 a 100): ");
-                quantidadeGasolina = leitorUsuario.nextInt();
-                leitorUsuario.nextLine();
-
-                Posto postoBuscado = manipulaPosto.buscaPostosCredenciadosID(idPosto);
-                Caminhao caminhaoBuscado = manipulaCaminhao.buscaCaminhaoPorId(idCaminhao);
-
-
-
-                caminhaoBuscado.abastecer(postoBuscado, quantidadeGasolina);
             break;
 
         }
@@ -259,10 +227,11 @@ public class Main {
         }
     }
 
-    public static void opcoesRota(ManipulaRotas manipulaRotas) {
+    public static void opcoesRota(ManipulaRotas manipulaRotas, ManipulaPosto manipulaPosto) {
         Scanner leitorUsuario = new Scanner(System.in);
-        int idPRota, opcRota;
+        int idPRota, opcRota, idPosto;
         String nome,descricao, localPartida, destino;
+        ArrayList<Posto> postosCredenciados = new ArrayList();
 
 
         System.out.println("""
@@ -288,9 +257,25 @@ public class Main {
                 localPartida = leitorUsuario.nextLine();
                 System.out.println("\nDestino: ");
                 destino = leitorUsuario.nextLine();;
+                while (opcRota != 0){
+                    System.out.println("===== Cadastro de postos na rota =====");
+                    System.out.println("Digite o id do posto que você deseja cadastrar: ");
+                    manipulaPosto.listarPostosCredenciados();
+                    idPosto = leitorUsuario.nextInt();
+                    leitorUsuario.nextLine();
 
-                Rota rota = new Rota(nome,descricao, localPartida, destino);
+                    postosCredenciados.add(manipulaPosto.buscaPostosCredenciadosID(idPosto));
+
+                    System.out.println("[1] Cadastrar outro posto");
+                    System.out.println("[0] Sair");
+                    opcRota = leitorUsuario.nextInt();
+                    leitorUsuario.nextLine();
+                }
+
+                Rota rota = new Rota(nome,descricao, localPartida, destino, postosCredenciados) ;
                 manipulaRotas.adicionaRota(rota);
+
+                postosCredenciados.removeAll(postosCredenciados);
                 break;
             case 2:
                 manipulaRotas.listarRotas();
@@ -307,10 +292,26 @@ public class Main {
                 System.out.println("\nLocal Partida: ");
                 localPartida = leitorUsuario.nextLine();
                 System.out.println("\nDestino: ");
-                destino = leitorUsuario.nextLine();;
+                destino = leitorUsuario.nextLine();
+                while (opcRota != 0){
+                    System.out.println("===== Cadastro de postos na rota =====");
+                    System.out.println("Digite o id do posto que você deseja cadastrar: ");
+                    manipulaPosto.listarPostosCredenciados();
+                    idPosto = leitorUsuario.nextInt();
+                    leitorUsuario.nextLine();
 
-                Rota rotaEditada = new Rota(nome,descricao, localPartida, destino);
+                    postosCredenciados.add(manipulaPosto.buscaPostosCredenciadosID(idPosto));
+
+                    System.out.println("[1] Cadastrar outro posto");
+                    System.out.println("[0] Sair");
+                    opcRota = leitorUsuario.nextInt();
+                    leitorUsuario.nextLine();
+                }
+
+                Rota rotaEditada = new Rota(nome,descricao, localPartida, destino, postosCredenciados);
                 manipulaRotas.editarRota(idPRota, rotaEditada);
+
+                postosCredenciados.removeAll(postosCredenciados);
                 break;
             case 4:
                 System.out.println("Digite o id da rota que deseja excluir");
@@ -572,6 +573,42 @@ public class Main {
         }
     }
 
+    public static int abastecerCaminhao(ManipulaPosto manipulaPosto, ManipulaCaminhao manipulaCaminhao, ManipulaRotas manipulaRotas){
+        Scanner leitorUsuario = new Scanner(System.in);
+        int opcCaminhao, idCaminhao, idPosto, quantidadeGasolina, idRota;
+
+        System.out.println("===== Abastecimento ======\n");
+        System.out.println("Digite o id do caminhão que deseja abastecer: ");
+        if(manipulaCaminhao.caminhoesLivres().size() == 0){
+            System.out.println("Não há caminhões cadastrados no momento, retornando ao menu principal!");
+           return 0;
+        }
+
+        manipulaCaminhao.listarCaminhao();
+        idCaminhao = leitorUsuario.nextInt();
+        leitorUsuario.nextLine();
+
+        System.out.println("Digite o id do posto que deseja abastecer: ");
+        manipulaRotas.listarPostoRotas();
+
+
+        manipulaPosto.listarPostosCredenciados();
+        idPosto = leitorUsuario.nextInt();
+        leitorUsuario.nextLine();
+
+        System.out.println("Digita a quantidade que deseja abastecer (1 a 100): ");
+        quantidadeGasolina = leitorUsuario.nextInt();
+        leitorUsuario.nextLine();
+
+        Posto postoBuscado = manipulaPosto.buscaPostosCredenciadosID(idPosto);
+        Caminhao caminhaoBuscado = manipulaCaminhao.buscaCaminhaoPorId(idCaminhao);
+
+
+        caminhaoBuscado.abastecer(postoBuscado, quantidadeGasolina);
+
+        return 0;
+    }
+
         public static void main (String[]args){
             ManipulaMotorista manipulaMotorista = new ManipulaMotorista();
             ManipulaCaminhao manipulaCaminhao = new ManipulaCaminhao();
@@ -657,7 +694,7 @@ public class Main {
                                 opcoesPosto(manipulaPosto);
                                 break;
                             case 4:
-                                opcoesRota(manipulaRota);
+                                opcoesRota(manipulaRota, manipulaPosto);
                                 break;
                             case 5:
                                 opcoesColaborador(manipulaColaborador, 0, manipulaMotorista);
@@ -671,6 +708,7 @@ public class Main {
                     while (opc != -3){
                         System.out.println("========== Escolha sua opção ==========");
                         System.out.println("[1] Opções de viagem");
+                        System.out.println("[2] Abastecer caminhao");
                         System.out.println("[9] Sair da conta");
 
                         opc = leitorUsuario.nextInt();
@@ -679,6 +717,9 @@ public class Main {
                         switch (opc) {
                             case 1:
                                 opcoesViagem(manipulaViagem, manipulaMotorista, manipulaCaminhao, manipulaRota, manipulaPosto);
+                                break;
+                            case 2:
+                                abastecerCaminhao(manipulaPosto, manipulaCaminhao, manipulaRota);
                                 break;
                             case 9:
                                 opc = -3;
@@ -692,10 +733,7 @@ public class Main {
                 System.out.println("[1] Continuar");
                 opc = leitorUsuario.nextInt();
                 leitorUsuario.nextLine();
-
             }
-
-
         }
     }
 
