@@ -1,8 +1,8 @@
 import java.util.ArrayList;
-import java.util.List;
 
-public class ManipulaColaborador {
+public class ManipulaColaborador{
     private ArrayList<Colaborador> listaColaborador = new ArrayList();
+
 
     public void adicionaColaborador(Colaborador colaborador){
         listaColaborador.add(colaborador);

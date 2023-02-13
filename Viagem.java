@@ -1,7 +1,7 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Viagem {
+public class Viagem implements ViagemMotorista{
     private Caminhao caminhao;
     private Motorista motorista;
     private Rota rota;
@@ -54,7 +54,8 @@ public class Viagem {
 
     //========== Metodos =========
 
-    public void finalizarViagem(){ //OK
+    @Override
+    public void finalizarViagem(){ 
         this.finalizada = true;
         caminhao.setEmViagem(false);
         motorista.setEmViagem(false);
