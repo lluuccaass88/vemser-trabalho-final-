@@ -434,7 +434,7 @@ public class Main {
                 caminhao = manipulaCaminhao.buscaCaminhaoPorId(idObjeto);
 
                 System.out.println("\nDigite o id do motorista disponivel: ");
-                if(manipulaCaminhao.caminhoesLivres().size() > 0) {
+                if(manipulaMotorista.motoristasLivres().size() > 0) {
                     manipulaMotorista.listarMotoristaDisponiveis();
                     idObjeto = leitorUsuario.nextInt();
                     leitorUsuario.nextLine();
@@ -468,7 +468,6 @@ public class Main {
                 manipulaViagem.listarViagens();
                 break;
             case 3:
-
                 System.out.println("=========== Editar Viagem ===========");
 
                 System.out.println("Digite o id da viagem que deseja editar (apenas viagens em andamento): ");
@@ -489,7 +488,7 @@ public class Main {
 
 
                 System.out.println("\nDigite o id do motorista disponivel: ");
-                if(manipulaCaminhao.caminhoesLivres().size() > 0) {
+                if(manipulaMotorista.motoristasLivres().size() > 0) {
                     manipulaMotorista.listarMotoristaDisponiveis();
                 }else {
                     System.out.println("Não temos motoristas disponiveis no momento!");
@@ -531,6 +530,7 @@ public class Main {
 
                 Viagem viagemBuscada2 = manipulaViagem.BuscaViagensId(idViagem);
                 viagemBuscada2.finalizarViagem();
+                System.out.println("Viagem finalizada com sucesso!");
                 break;
             case 6:
                 manipulaViagem.listarViagensRealizadas();
@@ -589,7 +589,7 @@ public class Main {
                                 idMotorista = leitorUsuario.nextInt();
                                 leitorUsuario.nextLine();
 
-                                if(manipulaCaminhao.buscaCaminhaoPorId(idMotorista) != null){
+                                if(manipulaMotorista.buscaMotoristaPorId(idMotorista) != null){
                                     System.out.println("Login efetuado! ");
                                 }
                                 isColaborador = false;
@@ -649,9 +649,6 @@ public class Main {
 
                     }
                 }
-
-
-
 
                 System.out.println("[0] Fechar programa");
                 System.out.println("[1] Continuar");

@@ -53,6 +53,14 @@ public class ManipulaMotorista {
         }
     }
 
+    public List<Motorista> motoristasLivres(){
+        List<Motorista> caminhaoDisponivel = listaMotorista.stream()
+                .filter(elemento -> elemento.getViagem() == false)
+                .toList();
+
+        return caminhaoDisponivel;
+    }
+
     public Motorista buscaMotoristaPorId(int index){
         return listaMotorista.get(index);
     }
