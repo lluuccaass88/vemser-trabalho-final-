@@ -606,6 +606,7 @@ public class Main {
                         System.out.println("[2] Opções do caminhão");
                         System.out.println("[3] Opções de Posto de gasolina");
                         System.out.println("[4] Opções de rotas");
+                        System.out.println("[5] Opções de colaboradores");
                         System.out.println("[9] Sair da conta");
 
                         opc = leitorUsuario.nextInt();
@@ -623,6 +624,9 @@ public class Main {
                                 break;
                             case 4:
                                 opcoesRota(manipulaRota);
+                                break;
+                            case 5:
+                                opcoesColaborador(manipulaColaborador, 0);
                                 break;
                             case 9:
                                 opc = -3;
