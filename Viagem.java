@@ -9,12 +9,11 @@ public class Viagem {
     private ArrayList<Posto> postosCredenciados = new ArrayList();
 
 
-    public Viagem(Caminhao caminhao, Motorista motorista, Rota rota, ArrayList<Posto> postosCredenciados) {
+    public Viagem(Caminhao caminhao, Motorista motorista, Rota rota) {
         this.caminhao = caminhao;
         this.motorista = motorista;
         this.rota = rota;
         this.finalizada = false;
-        this.postosCredenciados = postosCredenciados;
     }
 
     public Viagem() {

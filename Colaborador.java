@@ -1,8 +1,9 @@
 public class Colaborador  extends Usuario implements Imprimir{
     private String rg;
 
-    public Colaborador(String nome, String cpf, double salario, int idade) {
+    public Colaborador(String nome, String cpf, double salario, int idade, String rg) {
         super(nome, cpf, salario, idade);
+        this.rg = rg;
     }
 
     public String getRg() {

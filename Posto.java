@@ -7,10 +7,6 @@ public class Posto {
         this.valorCombustível = valorCombustível;
     }
 
-    public String toString(String nome, double valorCombustível) {
-        return super.toString();
-    }
-
     // Getters e Setters
     public String getNome() {
         return nome;

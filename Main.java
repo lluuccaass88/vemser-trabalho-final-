@@ -1,15 +1,17 @@
 import java.util.Scanner;
 public class Main {
 
-    public static void opcoesMotorista(ManipulaMotorista manipulaMotorista){
-        String nome, cpf, cnh;
+    public static void opcoesMotorista(ManipulaMotorista manipulaMotorista, int primeiroCadastro){
+        String nome, cpf, cnh, credencial;
         int idade, opcMotorista, idMotorista;
         double salario;
 
         Scanner leitorUsuario = new Scanner(System.in);
 
-
-        System.out.println("""
+        if(primeiroCadastro == 1){
+            opcMotorista = 1;
+        }else{
+            System.out.println("""
                 ===============Opções Motorista===============
                 Cadastrar Motorista: [1]
                 Ver Motoristas:      [2]
@@ -17,8 +19,9 @@ public class Main {
                 Excluir Motorista:   [4]
                 Digite sua opção:\s""");
 
-        opcMotorista = leitorUsuario.nextInt();
-        leitorUsuario.nextLine();
+            opcMotorista = leitorUsuario.nextInt();
+            leitorUsuario.nextLine();
+        }
 
         switch (opcMotorista){
             case 1:
@@ -38,6 +41,7 @@ public class Main {
 
                 Motorista motorista = new Motorista(nome, cpf, salario, idade, cnh);
                 manipulaMotorista.adicionaMotorista(motorista);
+
                 break;
             case 2:
                 manipulaMotorista.listarMotoristas();
@@ -318,6 +322,81 @@ public class Main {
         }
     }
 
+    public static void opcoesColaborador(ManipulaColaborador manipulaColaborador, int primeiroCadastro) {
+        String nome, cpf, rg;
+        int idade, opcColaborador, idColaborador;
+        double salario;
+
+        Scanner leitorUsuario = new Scanner(System.in);
+
+        if (primeiroCadastro == 1) {
+            opcColaborador = 1;
+        } else {
+            System.out.println("""
+                    ===============Opções Colaborador===============
+                    Cadastrar colaborador: [1]
+                    Ver colaborador:       [2]
+                    Editar colaborador:    [3]
+                    Excluir colaborador:   [4]
+                    Digite sua opção:\s""");
+
+            opcColaborador = leitorUsuario.nextInt();
+            leitorUsuario.nextLine();
+        }
+
+        switch (opcColaborador) {
+            case 1:
+                System.out.println("============== Cadastro de colaborador ==============");
+                System.out.println("\nNome: ");
+                nome = leitorUsuario.nextLine();
+                System.out.println("\ncpf: ");
+                cpf = leitorUsuario.nextLine();
+                System.out.println("\nRG: ");
+                rg = leitorUsuario.nextLine();
+                System.out.println("\nIdade: ");
+                idade = leitorUsuario.nextInt();
+                leitorUsuario.nextLine();
+                System.out.println("\nSalario: ");
+                salario = leitorUsuario.nextDouble();
+                leitorUsuario.nextLine();
+
+                Colaborador colaborador = new Colaborador(nome, cpf, salario, idade, rg);
+                manipulaColaborador.adicionaColaborador(colaborador);
+                break;
+            case 2:
+                manipulaColaborador.listarColaboradores();
+                break;
+            case 3:
+                System.out.println("Digite o id do Colavborador que deseja editar: ");
+                idColaborador = leitorUsuario.nextInt();
+                leitorUsuario.nextLine();
+
+                System.out.println("\nNome: ");
+                nome = leitorUsuario.nextLine();
+                System.out.println("\ncpf: ");
+                cpf = leitorUsuario.nextLine();
+                System.out.println("\nRG: ");
+                rg = leitorUsuario.nextLine();
+                System.out.println("\nIdade: ");
+                idade = leitorUsuario.nextInt();
+                leitorUsuario.nextLine();
+                System.out.println("\nSalario: ");
+                salario = leitorUsuario.nextDouble();
+                leitorUsuario.nextLine();
+
+                Colaborador colaboradorEditado = new Colaborador(nome, cpf, salario, idade, rg);
+
+                manipulaColaborador.editarColaborador(idColaborador, colaboradorEditado);
+                break;
+            case 4:
+                System.out.println("Digite o id do colaborador que deseja excluir");
+                idColaborador = leitorUsuario.nextInt();
+                leitorUsuario.nextLine();
+
+                manipulaColaborador.removerColaboradorPorIndice(idColaborador);
+        }
+    }
+
     public static void opcoesViagem(ManipulaViagem manipulaViagem, ManipulaMotorista manipulaMotorista, ManipulaCaminhao manipulaCaminhao, ManipulaRotas manipulaRota, ManipulaPosto manipulaPosto) {
         Scanner leitorUsuario = new Scanner(System.in);
         int idViagem, opcViagem, idObjeto, quantidadeGasolina;
@@ -380,7 +459,7 @@ public class Main {
 
                 rota = manipulaRota.buscaRotaoPorId(idObjeto);
 
-                Viagem viagem = new Viagem(caminhao, motorista, rota, manipulaPosto.retornaPosto());
+                Viagem viagem = new Viagem(caminhao, motorista, rota);
                 caminhao.setEmViagem(true);
                 motorista.setEmViagem(true);
                 manipulaViagem.adicionaViagem(viagem);
@@ -431,7 +510,7 @@ public class Main {
                 rota = manipulaRota.buscaRotaoPorId(idObjeto);
 
 
-                Viagem viagemEditada = new Viagem(caminhao, motorista, rota, manipulaPosto.retornaPosto());
+                Viagem viagemEditada = new Viagem(caminhao, motorista, rota);
                 caminhao.setEmViagem(true);
                 motorista.setEmViagem(true);
 
@@ -465,38 +544,119 @@ public class Main {
             ManipulaPosto manipulaPosto = new ManipulaPosto();
             ManipulaRotas manipulaRota = new ManipulaRotas();
             ManipulaViagem manipulaViagem = new ManipulaViagem();
+            ManipulaColaborador manipulaColaborador = new ManipulaColaborador();
 
             int opc = -1;
+            int idMotorista, idColaborador;
+            boolean isColaborador = false;
             Scanner leitorUsuario = new Scanner(System.in);
 
-            while (opc != 0) {
-                System.out.println("========== Escolha sua opção ==========");
-                System.out.println("[1] Opções de motorista");
-                System.out.println("[2] Opções do caminhão");
-                System.out.println("[3] Opções de Posto de gasolina");
-                System.out.println("[4] Opções de rotas");
-                System.out.println("[5] Opções de viagem");
+            while (opc != 0) { //Laço do programa
 
+
+                while (opc != -2){ //laço sem login
+                    System.out.println("========== Escolha sua opção: ==========");
+                    System.out.println("[1] Entrar como colaborador");
+                    System.out.println("[2] Entrar como motorista");
+                    opc = leitorUsuario.nextInt();
+                    leitorUsuario.nextLine();
+
+
+                    switch (opc){
+                        case 1:
+                            if(manipulaColaborador.retornaListaColaboradores().size() == 0) {
+                                System.out.println("O sistema não possui nem um colaborador cadastrado. ");
+                                opcoesColaborador(manipulaColaborador, 1);
+                            }else{
+                                System.out.println("Digite a id da sua conta de colaborador: ");
+
+                                idColaborador = leitorUsuario.nextInt();
+                                leitorUsuario.nextLine();
+
+                                if(manipulaColaborador.buscaColaboradorId(idColaborador) != null){
+                                    System.out.println("Login efetuado! ");
+                                }
+                            }
+                            isColaborador = true;
+                            opc = -2;
+                            break;
+                        case 2:
+                            if(manipulaMotorista.retornaListaMotorista().size() == 0){
+                                System.out.println("O sistema não possui nem um caminhoneiro cadastrado. ");
+                            }else{
+                                System.out.println("Digite a id da sua conta de motorista: ");
+
+                                idMotorista = leitorUsuario.nextInt();
+                                leitorUsuario.nextLine();
+
+                                if(manipulaCaminhao.buscaCaminhaoPorId(idMotorista) != null){
+                                    System.out.println("Login efetuado! ");
+                                }
+                                isColaborador = false;
+                                opc = -2;
+                            }
+                            break;
+                    }
+                }
+
+                if(isColaborador){
+                    while (opc != -3){
+                        System.out.println("========== Escolha sua opção ==========");
+                        System.out.println("[1] Opções de motorista");
+                        System.out.println("[2] Opções do caminhão");
+                        System.out.println("[3] Opções de Posto de gasolina");
+                        System.out.println("[4] Opções de rotas");
+                        System.out.println("[9] Sair da conta");
+
+                        opc = leitorUsuario.nextInt();
+                        leitorUsuario.nextLine();
+
+                        switch (opc) {
+                            case 1:
+                                opcoesMotorista(manipulaMotorista, 0);
+                                break;
+                            case  2:
+                                opcoesCaminhao(manipulaCaminhao, manipulaPosto);
+                                break;
+                            case 3:
+                                opcoesPosto(manipulaPosto);
+                                break;
+                            case 4:
+                                opcoesRota(manipulaRota);
+                                break;
+                            case 9:
+                                opc = -3;
+                                break;
+                        }
+                    }
+                }else{
+                    while (opc != -3){
+                        System.out.println("========== Escolha sua opção ==========");
+                        System.out.println("[1] Opções de viagem");
+                        System.out.println("[9] Sair da conta");
+
+                        opc = leitorUsuario.nextInt();
+                        leitorUsuario.nextLine();
+
+                        switch (opc) {
+                            case 1:
+                                opcoesViagem(manipulaViagem, manipulaMotorista, manipulaCaminhao, manipulaRota, manipulaPosto);
+                                break;
+                            case 9:
+                                opc = -3;
+                                break;
+                        }
+
+                    }
+                }
+
+
+
+
+                System.out.println("[0] Fechar programa");
+                System.out.println("[1] Continuar");
                 opc = leitorUsuario.nextInt();
                 leitorUsuario.nextLine();
-
-                switch (opc) {
-                    case 1:
-                        opcoesMotorista(manipulaMotorista);
-                        break;
-                    case  2:
-                        opcoesCaminhao(manipulaCaminhao, manipulaPosto);
-                        break;
-                    case 3:
-                        opcoesPosto(manipulaPosto);
-                        break;
-                    case 4:
-                        opcoesRota(manipulaRota);
-                        break;
-                    case 5:
-                        opcoesViagem(manipulaViagem, manipulaMotorista, manipulaCaminhao, manipulaRota, manipulaPosto);
-                        break;
-                }
 
             }
 

@@ -3,7 +3,6 @@ import java.util.List;
 
 public class ManipulaMotorista {
     private ArrayList<Motorista> listaMotorista = new ArrayList();
-    private ArrayList<Motorista> aux = new ArrayList();
 
     public void adicionaMotorista(Motorista motorista){
         listaMotorista.add(motorista);
@@ -54,17 +53,15 @@ public class ManipulaMotorista {
         }
     }
 
-    public List<Motorista>  motoristasLivres(){
-        List<Motorista> motoristaDisponivel = listaMotorista.stream()
-                .filter(elemento -> elemento.getViagem() == false)
-                .toList();
-
-        return motoristaDisponivel;
-    }
-
     public Motorista buscaMotoristaPorId(int index){
         return listaMotorista.get(index);
     }
+
+    public ArrayList<Motorista> retornaListaMotorista(){
+        return listaMotorista;
+    }
+
+
 
 }
 
