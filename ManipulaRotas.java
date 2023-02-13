@@ -31,6 +31,19 @@ public class ManipulaRotas {
         }
     }
 
+    public void listarPostoRotas() {
+        System.out.println("========== Rotas cadastradas ==========");
+        if(this.listaRota.size() >= 1){
+            for (int i = 0; i < listaRota.size(); i++) {
+                System.out.println("Id da rota: " + i + ": " );
+                listaRota.get(i).listaPostoCredenciado();
+                System.out.println("\n");
+            }
+        }else{
+            System.out.println("Não existem rotas cadastradas nesta rota.");
+        }
+    }
+
     public Rota buscaRotaoPorId(int index){
         return listaRota.get(index);
     }

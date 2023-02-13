@@ -21,7 +21,7 @@ public class ManipulaPosto {
         System.out.println("========== Postos Credenciados ==========");
         if(this.listaPosto.size() >= 1){
             for (int i = 0; i < listaPosto.size(); i++) {
-                System.out.println("Id posto: " + i + ": \n " + listaPosto.get(i).toString());
+                System.out.println("Id posto: " + i + ": \n " + listaPosto.get(i).toString() + "\n");
             }
         }else{
             System.out.println("Não existem postos cadastrados.");
