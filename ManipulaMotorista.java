@@ -69,6 +69,10 @@ public class ManipulaMotorista {
         return listaMotorista;
     }
 
+    public void aumento(int index, double valorAumento){
+        this.listaMotorista.get(index).aumentoSalario(valorAumento);
+    }
+
 
 
 }

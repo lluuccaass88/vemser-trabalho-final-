@@ -40,6 +40,10 @@ public class ManipulaColaborador{
         }
     }
 
+    public void aumento(int index, double valorAumento){
+        this.listaColaborador.get(index).aumentoSalario(valorAumento);
+    }
+
     public Colaborador buscaColaboradorId(int index){
         return listaColaborador.get(index);
     }

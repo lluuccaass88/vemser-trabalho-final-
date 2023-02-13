@@ -41,4 +41,8 @@ public abstract class Usuario {
     public void setIdade(int idade) {
         this.idade = idade;
     }
+
+    public void aumentoSalario(double aumento){
+        this.salario = this.salario + aumento;
+    }
 }

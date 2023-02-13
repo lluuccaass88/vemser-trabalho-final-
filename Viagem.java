@@ -55,7 +55,7 @@ public class Viagem implements ViagemMotorista{
     //========== Metodos =========
 
     @Override
-    public void finalizarViagem(){ 
+    public void finalizarViagem(){
         this.finalizada = true;
         caminhao.setEmViagem(false);
         motorista.setEmViagem(false);

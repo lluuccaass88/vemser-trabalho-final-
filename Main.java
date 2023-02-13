@@ -322,10 +322,10 @@ public class Main {
         }
     }
 
-    public static void opcoesColaborador(ManipulaColaborador manipulaColaborador, int primeiroCadastro) {
+    public static void opcoesColaborador(ManipulaColaborador manipulaColaborador, int primeiroCadastro, ManipulaMotorista manipulaMotorista) {
         String nome, cpf, rg;
         int idade, opcColaborador, idColaborador;
-        double salario;
+        double salario, aumentoSalario;
 
         Scanner leitorUsuario = new Scanner(System.in);
 
@@ -338,6 +338,7 @@ public class Main {
                     Ver colaborador:       [2]
                     Editar colaborador:    [3]
                     Excluir colaborador:   [4]
+                    Aumento:               [5] 
                     Digite sua opção:\s""");
 
             opcColaborador = leitorUsuario.nextInt();
@@ -394,6 +395,39 @@ public class Main {
                 leitorUsuario.nextLine();
 
                 manipulaColaborador.removerColaboradorPorIndice(idColaborador);
+                break;
+            case 5:
+                System.out.println("Digite para quem você deseja dar o aumento: ");
+                System.out.println("[1] Colaborador;");
+                System.out.println("[2] Motorista;");
+                opcColaborador = leitorUsuario.nextInt();
+                leitorUsuario.nextLine();
+
+                if(opcColaborador == 1){
+                    System.out.println("Digite o id do colaborador que você deseja dar o aumento: ");
+                    manipulaColaborador.listarColaboradores();
+                    opcColaborador = leitorUsuario.nextInt();
+                    leitorUsuario.nextLine();
+
+                    System.out.println("Valor do aumento: ");
+                    aumentoSalario = leitorUsuario.nextDouble();
+                    leitorUsuario.nextLine();
+
+                    manipulaColaborador.aumento(opcColaborador, aumentoSalario);
+                }else if (opcColaborador == 2){
+                    System.out.println("Digite o id do motorista que você deseja dar o aumento: ");
+                    manipulaMotorista.listarMotoristas();
+                    opcColaborador = leitorUsuario.nextInt();
+                    leitorUsuario.nextLine();
+
+                    System.out.println("Valor do aumento: ");
+                    aumentoSalario = leitorUsuario.nextDouble();
+                    leitorUsuario.nextLine();
+
+                    manipulaMotorista.aumento(opcColaborador, aumentoSalario);
+                }
+
+                break;
         }
     }
 
@@ -566,7 +600,7 @@ public class Main {
                         case 1:
                             if(manipulaColaborador.retornaListaColaboradores().size() == 0) {
                                 System.out.println("O sistema não possui nem um colaborador cadastrado. ");
-                                opcoesColaborador(manipulaColaborador, 1);
+                                opcoesColaborador(manipulaColaborador, 1, manipulaMotorista);
                             }else{
                                 System.out.println("Digite a id da sua conta de colaborador: ");
 
@@ -626,7 +660,7 @@ public class Main {
                                 opcoesRota(manipulaRota);
                                 break;
                             case 5:
-                                opcoesColaborador(manipulaColaborador, 0);
+                                opcoesColaborador(manipulaColaborador, 0, manipulaMotorista);
                                 break;
                             case 9:
                                 opc = -3;
