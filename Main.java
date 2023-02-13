@@ -446,7 +446,7 @@ public class Main {
                 Editar Viagem:    [3]
                 Excluir Viagem:   [4]
                 Finalizar viagem: [5]
-                Listar viagem fibalizada: [6]
+                Listar viagem finalizada: [6]
                 Digite sua opção:\s""");
 
         opcViagem = leitorUsuario.nextInt();
