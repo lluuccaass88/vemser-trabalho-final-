@@ -1,3 +1,5 @@
+package src;
+
 public abstract class Usuario {
     private String nome, cpf;
     private double salario;

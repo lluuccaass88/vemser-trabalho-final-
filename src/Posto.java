@@ -1,3 +1,4 @@
+package src;
 public class Posto {
     private String nome;
     private double valorCombustível;

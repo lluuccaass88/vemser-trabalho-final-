@@ -1,3 +1,4 @@
+package src;
 public class Motorista extends Usuario implements Imprimir{
     private String cnh;
     private boolean emViagem;

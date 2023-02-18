@@ -1,3 +1,4 @@
+package src;
 public class Colaborador  extends Usuario implements Imprimir{
     private String rg;
     private final static double TAXA_AUMENTO = 1.5;
