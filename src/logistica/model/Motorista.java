@@ -8,8 +8,9 @@ public class Motorista extends Usuario {
         this.cnh = cnh;
     }
 
-
     // MARCKLEN ESTEVE POR AQUI
+    //LUCAS ESTEVE AQUI
+
     public String getCnh() {
         return cnh;
     }
