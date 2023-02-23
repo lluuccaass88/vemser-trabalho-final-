@@ -7,18 +7,12 @@ public class Motorista extends Usuario {
         super(id, nome, usuario, senha);
         this.cnh = cnh;
     }
-
-    // MARCKLEN ESTEVE POR AQUI
-    //LUCAS ESTEVE AQUI
-
     public String getCnh() {
         return cnh;
     }
-
     public void setCnh(String cnh) {
         this.cnh = cnh;
     }
-
     @Override
     public String toString() {
         return super.toString() + " Motorista { " +
