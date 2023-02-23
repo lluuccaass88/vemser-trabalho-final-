@@ -1,4 +1,4 @@
-package src;
+package src.logistica.model;
 public class Posto {
     private String nome;
     private double valorCombustível;

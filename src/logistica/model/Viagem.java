@@ -1,9 +1,8 @@
-package src;
+package src.logistica.model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Viagem implements ViagemMotorista{
+public class Viagem  { // implements ViagemMotorista {
     private Caminhao caminhao;
     private Motorista motorista;
     private Rota rota;
@@ -56,12 +55,12 @@ public class Viagem implements ViagemMotorista{
 
     //========== Metodos =========
 
-    @Override
-    public void finalizarViagem(){
-        this.finalizada = true;
-        caminhao.setEmViagem(false);
-        motorista.setEmViagem(false);
-    }
+//    @Override
+//    public void finalizarViagem(){
+//        this.finalizada = true;
+//        caminhao.setEmViagem(false);
+//        motorista.setEmViagem(false);
+//    }
 
     @Override
     public String toString() {
