@@ -8,6 +8,8 @@ public class Motorista extends Usuario {
         this.cnh = cnh;
     }
 
+
+    // MARCKLEN ESTEVE POR AQUI
     public String getCnh() {
         return cnh;
     }
