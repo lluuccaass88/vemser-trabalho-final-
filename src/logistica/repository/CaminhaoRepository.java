@@ -36,25 +36,32 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
             caminhao.setIdCaminhao(proximoId);
 
             String sql = "INSERT INTO LOGISTICA.CAMINHAO\n" +
-                    "(ID_CAMINHAO, NOME, PLACA, EMVIAGEM)\n" +
-                    "VALUES(?, ?, ?, ?)\n";
+                    "(ID_CAMINHAO, MODELO, PLACA, GASOLINA, EMVIAGEM)\n" +
+                    "VALUES(?, ?, ?, ?, ?)\n";
 
             PreparedStatement stmt = con.prepareStatement(sql);
+
             stmt.setInt(1, caminhao.getIdCaminhao());
-            stmt.setString(2, caminhao.getNome());
+            System.out.println("caminhao.getIdCaminhao() = " + caminhao.getIdCaminhao());
+            stmt.setString(2, caminhao.getModelo());
+            System.out.println("caminhao.getModelo() = " + caminhao.getModelo());
             stmt.setString(3, caminhao.getPlaca());
-            stmt.setString(4, caminhao.getEmViagem().toString());
+            System.out.println("caminhao.getPlaca() = " + caminhao.getPlaca());
+            stmt.setInt(4, caminhao.getGasolina());
+            System.out.println("caminhao.getGasolina() = " + caminhao.getGasolina());
+            stmt.setInt(5, caminhao.getEmViagem().getOpcao());
+            System.out.println("caminhao.getEmViagem().getOpcao() = " + caminhao.getEmViagem().getOpcao());
 
             int res = stmt.executeUpdate();
             if (res == 0) {
-                throw new BancoDeDadosException("Erro ao adicionar colaborador");
+                throw new BancoDeDadosException("Erro ao adicionar caminhão");
             } else {
-                System.out.println("Colaborador adicionado com sucesso!" +
-                        "\nadicionarColaborador.res=" + res);
+                System.out.println("Caminhão cadastrado com sucesso!" +
+                        "\nadicionarCaminhão.res=" + res);
             }
             return caminhao;
         } catch (SQLException e) {
-            throw new BancoDeDadosException("Erro ao adicionar colaborador" + e);
+            throw new BancoDeDadosException("Erro ao adicionar caminhão: " + e);
         } finally {
             try {
                 if (con != null) {
@@ -105,8 +112,9 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
             con = ConexaoBancoDeDados.getConnection();
             StringBuilder sql = new StringBuilder();
             sql.append("UPDATE LOGISTICA.CAMINHAO SET ");
-            sql.append("NOME = ?, ");
+            sql.append("MODELO = ?, ");
             sql.append("PLACA = ?, ");
+            sql.append("GASOLINA = ?, ");
             sql.append("EMVIAGEM = ? ");
             sql.append("WHERE ID_CAMINHAO = ?");
             PreparedStatement stmt = con.prepareStatement(sql.toString());
@@ -139,18 +147,24 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
         Connection con = null;
         try {
             con = ConexaoBancoDeDados.getConnection();
-            Statement stmt = con.createStatement();
 
             String sql = "SELECT * FROM LOGISTICA.CAMINHAO";
-            ResultSet rs = stmt.executeQuery(sql);
 
+            PreparedStatement stmt = con.prepareStatement(sql);
+            // Executa-se a consulta
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Caminhao caminhao = getCaminhaoFromResultSet(rs);
+                Caminhao caminhao = new Caminhao();
+                caminhao.setIdCaminhao(rs.getInt("ID_CAMINHAO"));
+                caminhao.setModelo(rs.getString("MODELO"));
+                caminhao.setPlaca(rs.getString("PLACA"));
+                caminhao.setGasolina(rs.getInt("GASOLINA"));
+                caminhao.setEmViagem(EmViagem.getOpcaoEmViagem(rs.getInt("EMVIAGEM")));
                 caminhoes.add(caminhao);
             }
-            return caminhoes;
+
         } catch (SQLException e) {
-            throw new BancoDeDadosException("Erro ao listar caminhoes" + e);
+            throw new BancoDeDadosException("Erro ao listar caminhoes cadastrados: " + e);
         } finally {
             try {
                 if (con != null) {
@@ -160,15 +174,6 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
                 e.printStackTrace();
             }
         }
-    }
-
-    // Método criado para evitar repetição de código e para usar 2 tabelas
-    private Caminhao getCaminhaoFromResultSet(ResultSet rs) throws SQLException {
-        Caminhao caminhao = new Caminhao();
-        caminhao.setIdCaminhao(rs.getInt("ID_CAMINHAO"));
-        caminhao.setNome(rs.getString("NOME"));
-        caminhao.setPlaca(rs.getString("PLACA"));
-        caminhao.setEmViagem(EmViagem.getOpcaoEmViagem(rs.getInt("EM_VIAGEM")));
-        return caminhao;
+        return caminhoes;
     }
 }

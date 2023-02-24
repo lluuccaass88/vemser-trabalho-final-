@@ -17,7 +17,7 @@ public class CaminhaoService {
     // criando um objeto do tipo Caminhao
     public void adicionarCaminhao(Caminhao caminhao) {
         try {
-            if (caminhao.getPlaca().length() > 8) {
+            if (caminhao.getPlaca().length() < 8 || caminhao.getPlaca().length() > 10) {
                 throw new Exception("Placa inválida");
             }
             Caminhao caminhaoAdicionado = caminhaoRepository.adicionar(caminhao);
