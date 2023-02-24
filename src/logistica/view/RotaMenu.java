@@ -83,7 +83,7 @@ public class RotaMenu {
                     break;
                 }
             }
-            sc.close();
         }
+        sc.close();
     }
 }

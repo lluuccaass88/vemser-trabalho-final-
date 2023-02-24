@@ -1,6 +1,6 @@
 package src.logistica.model;
 public class Posto {
-    private int id_posto, id_rota;
+    private int idPosto, idRota;
     private String nomePosto;
     private double valorCombustível;
 
@@ -15,12 +15,12 @@ public class Posto {
     // Getters e Setters
 
 
-    public int getId_rota() {
-        return id_rota;
+    public int getIdRota() {
+        return idRota;
     }
 
-    public void setId_rota(int id_rota) {
-        this.id_rota = id_rota;
+    public void setIdRota(int idRota) {
+        this.idRota = idRota;
     }
 
     public String getNomePosto() {
@@ -31,26 +31,26 @@ public class Posto {
         this.nomePosto = nomePosto;
     }
 
-    public double getValorCombustível() {
+    public double getValorCombustivel() {
         return valorCombustível;
     }
 
-    public void setValorCombustível(double valorCombustível) {
+    public void setValorCombustivel(double valorCombustível) {
         this.valorCombustível = valorCombustível;
     }
 
-    public int getId_posto() {
-        return id_posto;
+    public int getIdPosto() {
+        return idPosto;
     }
 
-    public void setId_posto(int id_posto) {
-        this.id_posto = id_posto;
+    public void setIdPosto(int id_posto) {
+        this.idPosto = id_posto;
     }
 
     @Override
     public String toString() {
         return "Posto{" +
-                "Id : " + id_posto + '\'' +
+                "Id : " + idPosto + '\'' +
                 "nomePosto='" + nomePosto + '\'' +
                 ", valorCombustível=" + valorCombustível +
                 '}';

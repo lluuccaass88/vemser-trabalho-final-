@@ -82,7 +82,7 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
 
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, rota.getId_rota());
-            stmt.setInt(2, rota.getListaPostoCadastrado().get(index).getId_posto());
+            stmt.setInt(2, rota.getListaPostoCadastrado().get(index).getIdPosto());
 
             int res = stmt.executeUpdate();
 
@@ -193,7 +193,10 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
             String sql = "  SELECT r.ID_ROTA, r.DESCRICAO, r.LOCALPARTIDA, r.LOCALDESTINO,  p.ID_POSTO, p.NOMEPOSTO, p.VALORCOMBUSTIVEL  \n" +
                     "\tFROM LOGISTICA.ROTA r\n" +
                     "\t\tINNER JOIN LOGISTICA.ROTA_X_POSTO rxp ON r.ID_ROTA  = rxp.ID_ROTA  \n" +
-                    "\t\tINNER JOIN LOGISTICA.POSTO p ON p.ID_POSTO = rxp.ID_POSTO ";
+                    "\t\tINNER JOIN LOGISTICA.POSTO p ON p.ID_POSTO = rxp.ID_POSTO \n" +
+                    "\t\tORDER BY r.ID_ROTA \n";
+
+
 
             PreparedStatement stmt = con.prepareStatement(sql);
             // Executa-se a consulta
@@ -207,20 +210,15 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
                 Rota rota = new Rota();
                 Posto posto = new Posto();
 
-
-
                 rota.setId_rota(rs.getInt("ID_ROTA"));
                 rota.setDescricao(rs.getString("DESCRICAO"));
                 rota.setLocalDestino(rs.getString("LOCALPARTIDA"));
                 rota.setLocalPartida(rs.getString("LOCALDESTINO"));
 
-                posto.setId_posto(rs.getInt("ID_POSTO"));
+                posto.setIdPosto(rs.getInt("ID_POSTO"));
                 posto.setNomePosto(rs.getString("NOMEPOSTO"));
-                posto.setValorCombustível(rs.getDouble("VALORCOMBUSTIVEL"));
-                posto.setId_rota(rs.getInt("ID_ROTA"));
-
-
-
+                posto.setValorCombustivel(rs.getDouble("VALORCOMBUSTIVEL"));
+                posto.setIdRota(rs.getInt("ID_ROTA"));
 
                 if (rotaAnt.getId_rota() != rota.getId_rota()){ //Faz com que não se crie rotas repetidas
                     rotas.add(rota);
@@ -228,7 +226,7 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
                     cont++;
                 }
 
-                if(posto.getId_rota() == rota.getId_rota()){
+                if(posto.getIdRota() == rota.getId_rota()){
                     rotas.get(cont).setListaPostoCadastrado(posto);
                 }
 

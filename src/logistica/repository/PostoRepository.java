@@ -32,16 +32,16 @@ public class PostoRepository implements Repositorio<Integer, Posto> {
         try {
             con = ConexaoBancoDeDados.getConnection();
             Integer proximoId = this.getProximoId(con);
-            posto.setId_posto(proximoId);
+            posto.setIdPosto(proximoId);
 
             String sql = "INSERT INTO LOGISTICA.POSTO\n" +
                     "(ID_POSTO, NOMEPOSTO, VALORCOMBUSTIVEL)\n" +
                     "VALUES(?, ?, ?)";
 
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, posto.getId_posto());
+            stmt.setInt(1, posto.getIdPosto());
             stmt.setString(2, posto.getNomePosto());
-            stmt.setDouble(3, posto.getValorCombustível());
+            stmt.setDouble(3, posto.getValorCombustivel());
 
             int res = stmt.executeUpdate();
 
@@ -113,7 +113,7 @@ public class PostoRepository implements Repositorio<Integer, Posto> {
             PreparedStatement stmt = con.prepareStatement(sql.toString());
 
             stmt.setString(1, posto.getNomePosto());
-            stmt.setDouble(2, posto.getValorCombustível());
+            stmt.setDouble(2, posto.getValorCombustivel());
             stmt.setInt(3, id);
 
             // Executa-se a consulta
@@ -154,9 +154,9 @@ public class PostoRepository implements Repositorio<Integer, Posto> {
 
             while (rs.next()) {
                 Posto posto = new Posto();
-                posto.setId_posto(rs.getInt("ID_POSTO"));
+                posto.setIdPosto(rs.getInt("ID_POSTO"));
                 posto.setNomePosto(rs.getString("NOMEPOSTO"));
-                posto.setValorCombustível(rs.getDouble("VALORCOMBUSTIVEL"));
+                posto.setValorCombustivel(rs.getDouble("VALORCOMBUSTIVEL"));
                 postos.add(posto);
             }
         } catch (SQLException e) {
@@ -189,9 +189,9 @@ public class PostoRepository implements Repositorio<Integer, Posto> {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                posto.setId_posto(rs.getInt("ID_POSTO"));
+                posto.setIdPosto(rs.getInt("ID_POSTO"));
                 posto.setNomePosto(rs.getString("NOMEPOSTO"));
-                posto.setValorCombustível(rs.getDouble("VALORCOMBUSTIVEL"));
+                posto.setValorCombustivel(rs.getDouble("VALORCOMBUSTIVEL"));
             }
 
         } catch (SQLException e) {
