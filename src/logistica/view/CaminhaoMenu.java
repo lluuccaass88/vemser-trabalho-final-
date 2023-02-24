@@ -16,7 +16,7 @@ public class CaminhaoMenu {
         int opcao = -1;
         while (opcao != 0) {
             System.out.println("""
-                    ===============Opções Caminhões===============
+                    ===============Menu Caminhões===============
                     Cadastrar Caminhão:         [1]
                     Listar Caminhão:            [2]
                     Editar Caminhão:            [3]
@@ -44,7 +44,6 @@ public class CaminhaoMenu {
 
                     System.out.println(caminhao.getModelo());
                     caminhaoService.adicionarCaminhao(caminhao);
-                    break;
                 }
                 case 2 -> {
                     System.out.println("Listando Caminhões...");
@@ -66,7 +65,6 @@ public class CaminhaoMenu {
                     caminhao.setEmViagem(EmViagem.getOpcaoEmViagem(sc.nextInt()));
                     sc.nextLine();
                     caminhaoService.editarCaminhao(id, caminhao);
-                    break;
                 }
                 case 4 -> {
                     System.out.println("Excluindo Caminhão...");
@@ -83,7 +81,6 @@ public class CaminhaoMenu {
                             System.err.println("Número inválido");
                         }
                     }
-                    break;
                 }
                 case 0 -> {
                     System.out.println("Retornando ao Menu Principal");
