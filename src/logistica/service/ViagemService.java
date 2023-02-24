@@ -1,11 +1,6 @@
 package src.logistica.service;
 
-import src.logistica.model.Viagem;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class ManipulaViagem { }
+public class ViagemService { }
 //    private ArrayList<Viagem> listaViagem = new ArrayList();
 //
 //    public void adicionaViagem(Viagem viagem){

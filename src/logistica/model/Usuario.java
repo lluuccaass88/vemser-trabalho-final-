@@ -1,17 +1,25 @@
 package src.logistica.model;
 
-public abstract class Usuario {
+public class Usuario {
     private Integer id;
     private String nome;
     private String usuario;
     private String senha;
+    private Perfil perfil; // 1 - Colaborador, 2 - Motorista
+    private String cpf;
+    private String cnh;
 
-    public Usuario() { }
-    public Usuario(Integer id, String nome, String usuario, String senha) {
+    public Usuario() {
+    }
+
+    public Usuario(Integer id, String nome, String usuario, String senha, Perfil perfil, String cpf, String cnh) {
         this.id = id;
         this.nome = nome;
         this.usuario = usuario;
         this.senha = senha;
+        this.perfil = perfil; // 1 - Colaborador, 2 - Motorista
+        this.cpf = cpf;
+        this.cnh = cnh;
     }
 
     public Integer getId() {
@@ -46,6 +54,30 @@ public abstract class Usuario {
         this.senha = senha;
     }
 
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getCnh() {
+        return cnh;
+    }
+
+    public void setCnh(String cnh) {
+        this.cnh = cnh;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -53,6 +85,9 @@ public abstract class Usuario {
                 ", nome='" + nome + '\'' +
                 ", usuario='" + usuario + '\'' +
                 ", senha='" + senha + '\'' +
+                ", perfil=" + perfil +
+                ", cpf='" + cpf + '\'' +
+                ", cnh='" + cnh + '\'' +
                 '}';
     }
 }

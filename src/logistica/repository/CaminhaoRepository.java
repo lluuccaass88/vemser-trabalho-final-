@@ -42,15 +42,10 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
             PreparedStatement stmt = con.prepareStatement(sql);
 
             stmt.setInt(1, caminhao.getIdCaminhao());
-            System.out.println("caminhao.getIdCaminhao() = " + caminhao.getIdCaminhao());
             stmt.setString(2, caminhao.getModelo());
-            System.out.println("caminhao.getModelo() = " + caminhao.getModelo());
             stmt.setString(3, caminhao.getPlaca());
-            System.out.println("caminhao.getPlaca() = " + caminhao.getPlaca());
             stmt.setInt(4, caminhao.getGasolina());
-            System.out.println("caminhao.getGasolina() = " + caminhao.getGasolina());
             stmt.setInt(5, caminhao.getEmViagem().getOpcao());
-            System.out.println("caminhao.getEmViagem().getOpcao() = " + caminhao.getEmViagem().getOpcao());
 
             int res = stmt.executeUpdate();
             if (res == 0) {
