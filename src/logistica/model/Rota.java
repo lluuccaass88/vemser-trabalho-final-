@@ -19,6 +19,11 @@ public class Rota {
 
     //Getters e Setters
 
+
+    public void setListaPostoCadastrado(ArrayList<Posto> listaPostoCadastrado) {
+        this.listaPostoCadastrado = listaPostoCadastrado;
+    }
+
     public int getId_rota() {
         return id_rota;
     }

@@ -1,6 +1,7 @@
 package src.logistica.repository;
 
 import src.logistica.exception.BancoDeDadosException;
+import src.logistica.model.Posto;
 import src.logistica.model.Rota;
 
 import java.sql.*;
@@ -189,20 +190,50 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
         try {
             con = ConexaoBancoDeDados.getConnection();
 
-            String sql = "SELECT * FROM LOGISTICA.ROTA";
+            String sql = "  SELECT r.ID_ROTA, r.DESCRICAO, r.LOCALPARTIDA, r.LOCALDESTINO,  p.ID_POSTO, p.NOMEPOSTO, p.VALORCOMBUSTIVEL  \n" +
+                    "\tFROM LOGISTICA.ROTA r\n" +
+                    "\t\tINNER JOIN LOGISTICA.ROTA_X_POSTO rxp ON r.ID_ROTA  = rxp.ID_ROTA  \n" +
+                    "\t\tINNER JOIN LOGISTICA.POSTO p ON p.ID_POSTO = rxp.ID_POSTO ";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             // Executa-se a consulta
             ResultSet rs = stmt.executeQuery();
 
+            Rota rotaAnt = new Rota();
+            rotaAnt.setId_rota(0);
+            int cont = -1;
+
             while (rs.next()) {
                 Rota rota = new Rota();
+                Posto posto = new Posto();
+
+
+
                 rota.setId_rota(rs.getInt("ID_ROTA"));
                 rota.setDescricao(rs.getString("DESCRICAO"));
                 rota.setLocalDestino(rs.getString("LOCALPARTIDA"));
                 rota.setLocalPartida(rs.getString("LOCALDESTINO"));
-                rotas.add(rota);
+
+                posto.setId_posto(rs.getInt("ID_POSTO"));
+                posto.setNomePosto(rs.getString("NOMEPOSTO"));
+                posto.setValorCombustível(rs.getDouble("VALORCOMBUSTIVEL"));
+                posto.setId_rota(rs.getInt("ID_ROTA"));
+
+
+
+
+                if (rotaAnt.getId_rota() != rota.getId_rota()){ //Faz com que não se crie rotas repetidas
+                    rotas.add(rota);
+                    rotaAnt.setId_rota(rota.getId_rota());
+                    cont++;
+                }
+
+                if(posto.getId_rota() == rota.getId_rota()){
+                    rotas.get(cont).setListaPostoCadastrado(posto);
+                }
+
             }
+
         } catch (SQLException e) {
             throw new BancoDeDadosException("Erro ao listar rotas" + e);
         } finally {

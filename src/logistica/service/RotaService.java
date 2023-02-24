@@ -2,6 +2,7 @@ package src.logistica.service;
 
 import src.logistica.exception.BancoDeDadosException;
 import src.logistica.model.Rota;
+import src.logistica.model.Posto;
 import src.logistica.repository.RotaRepository;
 
 import java.util.List;
@@ -83,7 +84,21 @@ public class RotaService {
     public void listarRotas() {
         try {
             List<Rota> listar = rotaRepository.listar();
-            listar.forEach(System.out::println);
+
+            for(Rota itemRota : listar){
+                System.out.println("========== Informações da tora: ==========");
+                System.out.println(itemRota.toString());
+                System.out.println("========== Postos Cadastrados ==========");
+                for (Posto itemPosto : itemRota.getListaPostoCadastrado()){
+                    System.out.println(itemPosto.toString());
+                }
+                System.out.println("\n");
+            }
+//
+//            listar.forEach(
+//                    System.out::println
+//
+//            );
         } catch (BancoDeDadosException e ) {
             e.printStackTrace();
         }

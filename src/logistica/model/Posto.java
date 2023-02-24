@@ -1,6 +1,6 @@
 package src.logistica.model;
 public class Posto {
-    private int id_posto;
+    private int id_posto, id_rota;
     private String nomePosto;
     private double valorCombustível;
 
@@ -13,6 +13,15 @@ public class Posto {
     }
 
     // Getters e Setters
+
+
+    public int getId_rota() {
+        return id_rota;
+    }
+
+    public void setId_rota(int id_rota) {
+        this.id_rota = id_rota;
+    }
 
     public String getNomePosto() {
         return nomePosto;

@@ -1,6 +1,5 @@
 package src.logistica.repository;
 
-import oracle.jdbc.proxy.annotation.Post;
 import src.logistica.exception.BancoDeDadosException;
 import src.logistica.model.Posto;
 
