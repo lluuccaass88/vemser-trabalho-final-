@@ -1,9 +1,11 @@
 package src.logistica.repository;
 
 import src.logistica.exception.BancoDeDadosException;
+import src.logistica.model.Perfil;
 import src.logistica.model.Usuario;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioRepository implements Repositorio<Integer, Usuario> {
@@ -80,6 +82,37 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
 
     @Override
     public List<Usuario> listar() throws BancoDeDadosException {
-        return null;
+        List<Usuario> usuarios = new ArrayList<>();
+        Connection con = null;
+        try {
+            con = ConexaoBancoDeDados.getConnection();
+
+            String sql = "SELECT * FROM LOGISTICA.USUARIO"; // Consulta SQL no banco
+            PreparedStatement stmt = con.prepareStatement(sql); // Prepara a consulta
+            ResultSet rs = stmt.executeQuery(); // Executa-se a consulta
+
+            while (rs.next()) {
+                Usuario usuario = new Usuario();
+                usuario.setId(rs.getInt("ID_USUARIO"));
+                usuario.setNome(rs.getString("NOME"));
+                usuario.setUsuario(rs.getString("USUARIO"));
+                usuario.setSenha(rs.getString("SENHA"));
+                usuario.setPerfil(Perfil.ofTipoPerfil(rs.getInt("PERFIL")));
+                usuario.setCpf(rs.getString("CPF"));
+                usuario.setCnh(rs.getString("CNH"));
+                usuarios.add(usuario);
+            }
+            return usuarios;
+        } catch (SQLException e) {
+            throw new BancoDeDadosException("Erro ao listar usuarios: " + e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

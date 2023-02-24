@@ -49,6 +49,10 @@ public class UsuarioMenu {
 
                     usuarioService.adicionarUsuario(usuario);
                 }
+                case 2 -> {
+                    System.out.println("Listando Usuários...");
+                    usuarioService.listarUsuarios();
+                }
                 case 0 -> {
                     System.out.println("Retornando ao Menu Principal");
                 }

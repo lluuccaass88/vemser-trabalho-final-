@@ -28,4 +28,12 @@ public class UsuarioService {
             System.out.println("ERRO SQL-> " + e.getMessage());
         }
     }
+
+    public void listarUsuarios() {
+        try {
+            usuarioRepository.listar().forEach(System.out::println);
+        } catch (BancoDeDadosException e) {
+            e.printStackTrace();
+        }
+    }
 }
