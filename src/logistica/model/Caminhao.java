@@ -34,20 +34,20 @@ public class Caminhao {
         this.placa = placa;
     }
 
-    public EmViagem getEmViagem() {
-        return emViagem;
-    }
-
-    public void setEmViagem(EmViagem emViagem) {
-        this.emViagem = emViagem;
-    }
-
     public Integer getGasolina() {
         return gasolina;
     }
 
     public void setGasolina(Integer gasolina) {
         this.gasolina = gasolina;
+    }
+
+    public EmViagem getEmViagem() {
+        return emViagem;
+    }
+
+    public void setEmViagem(EmViagem emViagem) {
+        this.emViagem = emViagem;
     }
 
     @Override
