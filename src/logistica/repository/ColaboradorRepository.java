@@ -2,6 +2,7 @@ package src.logistica.repository;
 
 import src.logistica.exception.BancoDeDadosException;
 import src.logistica.model.Colaborador;
+import src.logistica.model.Colaborador;
 
 import java.sql.*;
 import java.util.ArrayList;

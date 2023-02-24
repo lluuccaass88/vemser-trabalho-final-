@@ -1,48 +1,44 @@
 package src.logistica.view;
 
-import src.logistica.model.*;
+import src.logistica.model.Rota;
 import src.logistica.service.*;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        ColaboradorService colaboradorService = new ColaboradorService();
+        RotaService rotaService = new RotaService();
 
         int opcao = -1;
         while (opcao != 0) {
-            System.out.println("Digite 1 para criar colaborador");
-            System.out.println("Digite 2 para listar colaboradores");
-            System.out.println("Digite 3 para editar um colaborador");
-            System.out.println("Digite 4 para excluir um colaborador");
+            System.out.println("Digite 1 para criar rota");
+            System.out.println("Digite 2 para listar rota");
+            System.out.println("Digite 3 para editar um rota");
+            System.out.println("Digite 4 para excluir um rota");
             System.out.println("Digite 0 para sair");
             opcao = scanner.nextInt();
             scanner.nextLine();
 
             switch (opcao) {
                 case 1: { // adicionando - podemos fazer em outra classe para nao poluir tanto o MAIN
-                    Colaborador colaborador = new Colaborador();
-                    System.out.println("Digite o nome do colaborador");
-                    colaborador.setNome(scanner.nextLine());
+                    Rota rota = new Rota();
+                    System.out.println("Digite a descrição da rota");
+                    rota.setDescricao(scanner.nextLine());
 
-                    System.out.println("Digite o usuário do colaborador");
-                    colaborador.setUsuario(scanner.nextLine());
+                    System.out.println("Digite o local de partida");
+                    rota.setLocalPartida(scanner.nextLine());
 
-                    System.out.println("Digite a senha do colaborador");
-                    colaborador.setSenha(scanner.nextLine());
+                    System.out.println("Digite o local de destino");
+                    rota.setLocalDestino(scanner.nextLine());
 
-                    System.out.println("Digite o cpf do colaborador");
-                    colaborador.setCpf(scanner.nextLine());
-
-                    colaboradorService.adicionaColaborador(colaborador);
+                    rotaService.adicionaRota(rota);
                     break;
                 }
 
                 case 2: { // listando
-                    colaboradorService.listarColaboradores();
+                    rotaService.listarRotas();
                     break;
                 }
 
@@ -60,6 +56,59 @@ public class Main {
             }
         }
         scanner.close();
+
+
+//        Scanner scanner = new Scanner(System.in);
+//        ColaboradorService colaboradorService = new ColaboradorService();
+//
+//        int opcao = -1;
+//        while (opcao != 0) {
+//            System.out.println("Digite 1 para criar colaborador");
+//            System.out.println("Digite 2 para listar colaboradores");
+//            System.out.println("Digite 3 para editar um colaborador");
+//            System.out.println("Digite 4 para excluir um colaborador");
+//            System.out.println("Digite 0 para sair");
+//            opcao = scanner.nextInt();
+//            scanner.nextLine();
+//
+//            switch (opcao) {
+//                case 1: { // adicionando - podemos fazer em outra classe para nao poluir tanto o MAIN
+//                    Colaborador colaborador = new Colaborador();
+//                    System.out.println("Digite o nome do colaborador");
+//                    colaborador.setNome(scanner.nextLine());
+//
+//                    System.out.println("Digite o usuário do colaborador");
+//                    colaborador.setUsuario(scanner.nextLine());
+//
+//                    System.out.println("Digite a senha do colaborador");
+//                    colaborador.setSenha(scanner.nextLine());
+//
+//                    System.out.println("Digite o cpf do colaborador");
+//                    colaborador.setCpf(scanner.nextLine());
+//
+//                    colaboradorService.adicionaColaborador(colaborador);
+//                    break;
+//                }
+//
+//                case 2: { // listando
+//                    colaboradorService.listarColaboradores();
+//                    break;
+//                }
+//
+//                case 3: { // editando
+//                    break;
+//                }
+//                case 4: { // excluindo
+//                    break;
+//                }
+//                case 0:
+//                    break;
+//                default:
+//                    System.err.println("opção inválida");
+//                    break;
+//            }
+//        }
+//        scanner.close();
     }
 }
 //    public static void opcoesMotorista(ManipulaMotorista manipulaMotorista, int primeiroCadastro){
