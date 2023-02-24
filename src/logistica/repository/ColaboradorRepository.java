@@ -106,7 +106,7 @@ public class ColaboradorRepository implements Repositorio<Integer, Colaborador> 
             con = ConexaoBancoDeDados.getConnection();
 
             StringBuilder sql = new StringBuilder();
-            sql.append("UPDATE LOGISTICA.COLABORADOR SET ");
+            sql.append("UPDATE LOGISTICA.COLABORADOR SET "); //Não esta especificando qual a linha quer editar
             sql.append("NOME = ?, ");
             sql.append("USUARIO = ?, ");
             sql.append("SENHA = ?, ");

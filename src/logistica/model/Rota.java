@@ -11,6 +11,12 @@ public class Rota {
 
     }
 
+    public Rota(String descricao, String localPartida, String localDestino) { //APENAS PARA TESTAR
+        this.descricao = descricao;
+        this.localPartida = localPartida;
+        this.localDestino = localDestino;
+    }
+
     //Getters e Setters
 
     public int getId_rota() {

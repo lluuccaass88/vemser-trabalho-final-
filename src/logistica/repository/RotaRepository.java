@@ -45,6 +45,7 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
             stmt.setString(4, rota.getLocalDestino());
 
             int res = stmt.executeUpdate();
+
             if (res == 0) {
                 throw new BancoDeDadosException("Erro ao adicionar rota");
             } else {
@@ -108,25 +109,30 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
             sql.append("UPDATE LOGISTICA.ROTA SET ");
             sql.append("DESCRICAO = ?, ");
             sql.append("LOCALPARTIDA = ?, ");
-            sql.append("LOCALDESTINO = ?, ");
+            sql.append("LOCALDESTINO = ? ");
+            sql.append("WHERE ID_ROTA =  ?");
 
             PreparedStatement stmt = con.prepareStatement(sql.toString());
 
             stmt.setString(1, rota.getDescricao());
             stmt.setString(2, rota.getLocalPartida());
             stmt.setString(3, rota.getLocalDestino());
+            stmt.setInt(4, id);
 
             // Executa-se a consulta
             int res = stmt.executeUpdate();
+
+            System.out.println("Res: " + res); //MARCANDO AQUI
+
             if (res == 0) {
-                throw new BancoDeDadosException("Erro ao editar rota");
+                throw new BancoDeDadosException("Erro ao editar rota.");
             } else {
-                System.out.println("Rota editado com sucesso!" +
+                System.out.println("Rota editada com sucesso!" +
                         "\neditarRotaPorId.res=" + res);
                 return res > 0;
             }
         } catch (SQLException e) {
-            throw new BancoDeDadosException("Erro ao editar rota" + e);
+            throw new BancoDeDadosException("Erro ao editar rota: " + e);
         } finally {
             try {
                 if (con != null) {

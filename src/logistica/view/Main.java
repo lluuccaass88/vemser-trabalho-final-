@@ -43,9 +43,12 @@ public class Main {
                 }
 
                 case 3: { // editando
+                    Rota rota = new Rota("Nova descrição", "Cidreira", "Osorio"); //APENAS TESTANDO
+                    rotaService.editarRota(1, rota);
                     break;
                 }
                 case 4: { // excluindo
+                    rotaService.removerRota(2);
                     break;
                 }
                 case 0:
