@@ -36,14 +36,15 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
             caminhao.setIdCaminhao(proximoId);
 
             String sql = "INSERT INTO LOGISTICA.CAMINHAO\n" +
-                    "(ID_CAMINHAO, NOME, PLACA, EMVIAGEM)\n" +
-                    "VALUES(?, ?, ?, ?)\n";
+                    "(ID_CAMINHAO, NOME, PLACA, GASOLINA, EMVIAGEM)\n" +
+                    "VALUES(?, ?, ?, ?, ?)\n";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, caminhao.getIdCaminhao());
-            stmt.setString(2, caminhao.getNome());
+            stmt.setString(2, caminhao.getModelo());
             stmt.setString(3, caminhao.getPlaca());
-            stmt.setString(4, caminhao.getEmViagem().toString());
+            stmt.setInt(4, caminhao.getGasolina());
+            stmt.setString(5, caminhao.getEmViagem().toString());
 
             int res = stmt.executeUpdate();
             if (res == 0) {
@@ -105,8 +106,9 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
             con = ConexaoBancoDeDados.getConnection();
             StringBuilder sql = new StringBuilder();
             sql.append("UPDATE LOGISTICA.CAMINHAO SET ");
-            sql.append("NOME = ?, ");
+            sql.append("MODELO = ?, ");
             sql.append("PLACA = ?, ");
+            sql.append("GASOLINA = ?, ");
             sql.append("EMVIAGEM = ? ");
             sql.append("WHERE ID_CAMINHAO = ?");
             PreparedStatement stmt = con.prepareStatement(sql.toString());
@@ -166,8 +168,9 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
     private Caminhao getCaminhaoFromResultSet(ResultSet rs) throws SQLException {
         Caminhao caminhao = new Caminhao();
         caminhao.setIdCaminhao(rs.getInt("ID_CAMINHAO"));
-        caminhao.setNome(rs.getString("NOME"));
+        caminhao.setModelo(rs.getString("MODELO"));
         caminhao.setPlaca(rs.getString("PLACA"));
+        caminhao.setGasolina(rs.getInt("GASOLINA"));
         caminhao.setEmViagem(EmViagem.getOpcaoEmViagem(rs.getInt("EM_VIAGEM")));
         return caminhao;
     }

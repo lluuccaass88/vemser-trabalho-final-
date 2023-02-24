@@ -10,6 +10,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         RotaService rotaService = new RotaService();
+        CaminhaoMenu caminhaoMenu = new CaminhaoMenu();
 
         int opcao = -1;
         while (opcao != 0) {
@@ -17,6 +18,7 @@ public class Main {
             System.out.println("Digite 2 para listar rota");
             System.out.println("Digite 3 para editar um rota");
             System.out.println("Digite 4 para excluir um rota");
+            System.out.println("Digite 5 para Menu de caminhão");
             System.out.println("Digite 0 para sair");
             opcao = scanner.nextInt();
             scanner.nextLine();
@@ -46,6 +48,10 @@ public class Main {
                     break;
                 }
                 case 4: { // excluindo
+                    break;
+                }
+                case 5: {
+                    caminhaoMenu.menuCaminhao();
                     break;
                 }
                 case 0:

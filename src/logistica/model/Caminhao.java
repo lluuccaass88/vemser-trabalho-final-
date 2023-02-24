@@ -5,9 +5,9 @@ import java.util.Scanner;
 public class Caminhao {
 
     private Integer idCaminhao;
-    private String nome;
+    private String modelo;
     private String placa;
-
+    private Integer gasolina;
     private EmViagem emViagem; // 1 - estacionado | 2 - em viagem
 
     public Integer getIdCaminhao() {
@@ -18,12 +18,12 @@ public class Caminhao {
         this.idCaminhao = idCaminhao;
     }
 
-    public String getNome() {
-        return nome;
+    public String getModelo() {
+        return modelo;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
 
     public String getPlaca() {
@@ -42,12 +42,21 @@ public class Caminhao {
         this.emViagem = emViagem;
     }
 
+    public Integer getGasolina() {
+        return gasolina;
+    }
+
+    public void setGasolina(Integer gasolina) {
+        this.gasolina = gasolina;
+    }
+
     @Override
     public String toString() {
         return "Caminhao{" +
                 "idCaminhao=" + idCaminhao +
-                ", nome='" + nome + '\'' +
+                ", modelo='" + modelo + '\'' +
                 ", placa='" + placa + '\'' +
+                ", gasolina=" + gasolina +
                 ", emViagem=" + emViagem +
                 '}';
     }
