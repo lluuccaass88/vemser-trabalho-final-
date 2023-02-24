@@ -34,6 +34,7 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
             Integer proximoId = this.getProximoId(con);
             rota.setId_rota(proximoId);
 
+            //Adicionando a rota na sua respectiva tabela do banco de dados
             String sql = "INSERT INTO LOGISTICA.ROTA\n" +
                     "(ID_ROTA, DESCRICAO, LOCALPARTIDA, LOCALDESTINO)\n" +
                     "VALUES(?, ?, ?, ?)\n";
@@ -52,9 +53,48 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
                 System.out.println("Rota adicionada com sucesso!" +
                         "\nadicionarRota.res=" + res);
             }
+
             return rota;
         } catch (SQLException e) {
             throw new BancoDeDadosException("Erro ao adicionar rota" + e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public Rota adicionarPosto_X_Rota(Rota rota, int index) throws BancoDeDadosException {
+        Connection con = null;
+        try {
+            con = ConexaoBancoDeDados.getConnection();
+
+            //inserindo o id de rota e o id de posto na tabela ROTA_X_POSTO
+            String sql = "INSERT INTO LOGISTICA.ROTA_X_POSTO\n" +
+                    "(ID_ROTA, ID_POSTO)\n" +
+                    "VALUES(?, ?)\n";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, rota.getId_rota());
+            stmt.setInt(2, rota.getListaPostoCadastrado().get(index).getId_posto());
+
+            int res = stmt.executeUpdate();
+
+            if (res == 0) {
+                throw new BancoDeDadosException("Erro ao adicionar POSTO_X_ROTA");
+            } else {
+                System.out.println("POSTO_X_ROTA adicionada com sucesso!" +
+                        "\nadicionarPOSTO_X_ROTA.res=" + res);
+            }
+
+            return rota;
+        } catch (SQLException e) {
+            throw new BancoDeDadosException("Erro ao adicionar POSTO_X_ROTA" + e);
         } finally {
             try {
                 if (con != null) {
@@ -121,8 +161,6 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
 
             // Executa-se a consulta
             int res = stmt.executeUpdate();
-
-            System.out.println("Res: " + res); //MARCANDO AQUI
 
             if (res == 0) {
                 throw new BancoDeDadosException("Erro ao editar rota.");

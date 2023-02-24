@@ -29,6 +29,26 @@ public class RotaService {
         }
     }
 
+    public void adicionaRota_X_Posto(Rota rota) {
+        try {
+            // validação para saber se o CPF nao tem mais que 11 digitos - Não cpf e não pensei em nem um campo para validar...
+//            if (colaborador.getCpf().length() > 11) {
+//                throw new Exception("CPF inválido");
+//            }
+
+
+            for(int i = 0; i < rota.getListaPostoCadastrado().size(); i++){
+                Rota rotaAdicionado = rotaRepository.adicionarPosto_X_Rota(rota, i);
+            }
+
+            //System.out.println("Adicionado relação de posto e rota com sucesso: " + rotaAdicionado);
+        } catch (BancoDeDadosException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("ERRO SQL-> " + e.getMessage());
+        }
+    }
+
     // removendo um obejto do tipo Colaborador passando o ID
     public void removerRota(Integer id) {
         try {

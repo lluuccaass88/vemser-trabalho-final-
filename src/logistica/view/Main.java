@@ -1,6 +1,6 @@
 package src.logistica.view;
 
-import src.logistica.model.Rota;
+import src.logistica.model.*;
 import src.logistica.service.*;
 
 import java.util.Scanner;
@@ -8,10 +8,69 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+
+        //        ========================= POSTO ======================
+//        Scanner scanner = new Scanner(System.in);
+//        PostoService postoService = new PostoService();
+//
+//        int opcao = -1;
+//        while (opcao != 0) {
+//            System.out.println("Digite 1 para criar posto");
+//            System.out.println("Digite 2 para listar posto");
+//            System.out.println("Digite 3 para editar um posto");
+//            System.out.println("Digite 4 para excluir um posto");
+//            System.out.println("Digite 0 para sair");
+//            opcao = scanner.nextInt();
+//            scanner.nextLine();
+//
+//            switch (opcao) {
+//                case 1: { // adicionando - podemos fazer em outra classe para nao poluir tanto o MAIN
+//                    Posto posto = new Posto();
+//                    System.out.println("Digite o nome do posto");
+//                    posto.setNomePosto(scanner.nextLine());
+//
+//                    System.out.println("Digite o valor do combustivel");
+//                    posto.setValorCombustível(scanner.nextDouble());
+//                    scanner.nextLine();
+//
+//                    //Chamar o posto service aqui
+//
+//                    postoService.adicionaPosto(posto);
+//                    break;
+//                }
+//
+//                case 2: { // listando
+//                    postoService.listarPosto();
+//                    break;
+//                }
+//
+//                case 3: { // editando
+//                    Posto posto = new Posto("novo Posto", 1); //APENAS TESTANDO
+//                    postoService.editarPosto(6, posto);
+//                    break;
+//                }
+//                case 4: { // excluindo
+//                    postoService.removerRotaPosto(6);
+//                    break;
+//                }
+//                case 0:
+//                    break;
+//                default:
+//                    System.err.println("opção inválida");
+//                    break;
+//            }
+//        }
+//        scanner.close();
+
+
+//        ========================= ROTA ======================
         Scanner scanner = new Scanner(System.in);
         RotaService rotaService = new RotaService();
+        PostoService postoService = new PostoService();
 
         int opcao = -1;
+        int opcIdPosto = -1;
+
         while (opcao != 0) {
             System.out.println("Digite 1 para criar rota");
             System.out.println("Digite 2 para listar rota");
@@ -33,7 +92,23 @@ public class Main {
                     System.out.println("Digite o local de destino");
                     rota.setLocalDestino(scanner.nextLine());
 
+                    System.out.println("Selecione os postos para cadastrar nesta rota digitando o seu id: \nPara sair digite 0");
+                    postoService.listarPosto();
+
+                    do {
+                        System.out.println("Digite o id: ");
+                        opcIdPosto = scanner.nextInt();
+                        scanner.nextLine();
+
+                        if(opcIdPosto != 0){
+
+                            rota.setListaPostoCadastrado(postoService.buscarPostoId(opcIdPosto));
+                        }
+
+                    } while (opcIdPosto != 0);
+
                     rotaService.adicionaRota(rota);
+                    rotaService.adicionaRota_X_Posto(rota);
                     break;
                 }
 
@@ -61,6 +136,7 @@ public class Main {
         scanner.close();
 
 
+        //====================== COLABORADOR ======================================
 //        Scanner scanner = new Scanner(System.in);
 //        ColaboradorService colaboradorService = new ColaboradorService();
 //

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Rota {
     private int id_rota;
     private String descricao, localPartida, localDestino;
-//    ArrayList<Posto> listaPostoCadastrado = new ArrayList(); //Os postos cadastrados poderão ser guardados aqui - Caso não seja utilizado APAGAR depois.
+    ArrayList<Posto> listaPostoCadastrado = new ArrayList(); //Os postos cadastrados poderão ser guardados aqui - Caso não seja utilizado APAGAR depois.
 
     public Rota(){
 
@@ -35,13 +35,13 @@ public class Rota {
         this.localDestino = localDestino;
     }
 
-//    public ArrayList<Posto> getListaPostoCadastrado() {
-//        return listaPostoCadastrado;
-//    }
+    public ArrayList<Posto> getListaPostoCadastrado() {
+        return listaPostoCadastrado;
+    }
 
-//    public void setListaPostoCadastrado(ArrayList<Posto> listaPostoCadastrado) {
-//        this.listaPostoCadastrado = listaPostoCadastrado;
-//    }
+    public void setListaPostoCadastrado(Posto posto) {
+        this.listaPostoCadastrado.add(posto);
+    }
 
     public String getLocalPartida() {
         return localPartida;

@@ -1,29 +1,49 @@
 package src.logistica.model;
 public class Posto {
-    private String nome;
+    private int id_posto;
+    private String nomePosto;
     private double valorCombustível;
 
-    public Posto(String nome, double valorCombustível) {
-        this.nome = nome;
+    public Posto(String nomePosto, double valorCombustível) {
+        this.nomePosto = nomePosto;
         this.valorCombustível = valorCombustível;
     }
 
-    // Getters e Setters
-    public String getNome() {
-        return nome;
+    public Posto() {
     }
+
+    // Getters e Setters
+
+    public String getNomePosto() {
+        return nomePosto;
+    }
+
+    public void setNomePosto(String nomePosto) {
+        this.nomePosto = nomePosto;
+    }
+
     public double getValorCombustível() {
         return valorCombustível;
     }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+
     public void setValorCombustível(double valorCombustível) {
         this.valorCombustível = valorCombustível;
     }
 
+    public int getId_posto() {
+        return id_posto;
+    }
+
+    public void setId_posto(int id_posto) {
+        this.id_posto = id_posto;
+    }
+
     @Override
     public String toString() {
-        return "Nome: " + this.nome + "\n Valor do combustivel: " + this.valorCombustível;
+        return "Posto{" +
+                "Id : " + id_posto + '\'' +
+                "nomePosto='" + nomePosto + '\'' +
+                ", valorCombustível=" + valorCombustível +
+                '}';
     }
 }
