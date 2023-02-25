@@ -71,7 +71,10 @@ public class RotaMenu {
                     break;
                 }
                 case 4: { // excluindo
-                    rotaService.removerRota(2);
+                    System.out.println("Digite o id da rota que deseja excluir: ");
+                    opcIdPosto = sc.nextInt();
+                    sc.nextLine();
+                    rotaService.removerRota(opcIdPosto);
                     break;
                 }
                 case 0: {
