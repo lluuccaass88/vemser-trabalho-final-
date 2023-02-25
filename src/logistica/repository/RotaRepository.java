@@ -33,7 +33,7 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
         try {
             con = ConexaoBancoDeDados.getConnection();
             Integer proximoId = this.getProximoId(con);
-            rota.setId_rota(proximoId);
+            rota.setIdRota(proximoId);
 
             //Adicionando a rota na sua respectiva tabela do banco de dados
             String sql = "INSERT INTO LOGISTICA.ROTA\n" +
@@ -41,7 +41,7 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
                     "VALUES(?, ?, ?, ?)\n";
 
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, rota.getId_rota());
+            stmt.setInt(1, rota.getIdRota());
             stmt.setString(2, rota.getDescricao());
             stmt.setString(3, rota.getLocalPartida());
             stmt.setString(4, rota.getLocalDestino());
@@ -81,7 +81,7 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
                     "VALUES(?, ?)\n";
 
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, rota.getId_rota());
+            stmt.setInt(1, rota.getIdRota());
             stmt.setInt(2, rota.getListaPostoCadastrado().get(index).getIdPosto());
 
             int res = stmt.executeUpdate();
@@ -235,14 +235,14 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
             ResultSet rs = stmt.executeQuery();
 
             Rota rotaAnt = new Rota();
-            rotaAnt.setId_rota(0);
+            rotaAnt.setIdRota(0);
             int cont = -1;
 
             while (rs.next()) {
                 Rota rota = new Rota();
                 Posto posto = new Posto();
 
-                rota.setId_rota(rs.getInt("ID_ROTA"));
+                rota.setIdRota(rs.getInt("ID_ROTA"));
                 rota.setDescricao(rs.getString("DESCRICAO"));
                 rota.setLocalDestino(rs.getString("LOCALPARTIDA"));
                 rota.setLocalPartida(rs.getString("LOCALDESTINO"));
@@ -252,13 +252,13 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
                 posto.setValorCombustivel(rs.getDouble("VALORCOMBUSTIVEL"));
                 posto.setIdRota(rs.getInt("ID_ROTA"));
 
-                if (rotaAnt.getId_rota() != rota.getId_rota()){ //Faz com que não se crie rotas repetidas
+                if (rotaAnt.getIdRota() != rota.getIdRota()){ //Faz com que não se crie rotas repetidas
                     rotas.add(rota);
-                    rotaAnt.setId_rota(rota.getId_rota());
+                    rotaAnt.setIdRota(rota.getIdRota());
                     cont++;
                 }
 
-                if(posto.getIdRota() == rota.getId_rota()){
+                if(posto.getIdRota() == rota.getIdRota()){
                     rotas.get(cont).setListaPostoCadastrado(posto);
                 }
 

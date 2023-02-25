@@ -80,14 +80,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", usuario='" + usuario + '\'' +
-                ", senha='" + senha + '\'' +
-                ", perfil=" + perfil +
-                ", cpf='" + cpf + '\'' +
-                ", cnh='" + cnh + '\'' +
-                '}';
+        return "Id: " + this.id + "\nNome: " + this.nome + "\nUsuario: " + this.usuario + "\nPerfil: " + this.perfil + "\nCPF: " + this.cpf + "\nCNH: " + this.cnh + "\n ===============";
+
     }
 }

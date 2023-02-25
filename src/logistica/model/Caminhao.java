@@ -52,12 +52,7 @@ public class Caminhao {
 
     @Override
     public String toString() {
-        return "Caminhao{" +
-                "idCaminhao=" + idCaminhao +
-                ", modelo='" + modelo + '\'' +
-                ", placa='" + placa + '\'' +
-                ", gasolina=" + gasolina +
-                ", emViagem=" + emViagem +
-                '}';
+        return "Id: " + this.idCaminhao + "\nMoelo: " + this.modelo + "\nPlaca: " + this.placa + "\nGasolina: " + this.gasolina + "\nEm viagem: " + this.emViagem + "\n ====================";
+
     }
 }

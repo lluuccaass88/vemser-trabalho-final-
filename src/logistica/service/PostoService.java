@@ -29,10 +29,11 @@ public class PostoService {
     }
 
 
-    public void removerRotaPosto(Integer id) {
+    public void removerPosto(Integer id) {
         try {
+            boolean conseguiuRemoverRelacionamento = postoRepository.removerPosto_X_Rota(id);
             boolean conseguiuRemover = postoRepository.remover(id);
-            if (conseguiuRemover) {
+            if (conseguiuRemover && conseguiuRemoverRelacionamento) {
                 System.out.println("Posto " + conseguiuRemover + "| com id= "
                         + id + " removido com sucesso");
             } else {

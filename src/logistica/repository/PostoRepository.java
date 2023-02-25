@@ -65,6 +65,38 @@ public class PostoRepository implements Repositorio<Integer, Posto> {
         }
     }
 
+    public boolean removerPosto_X_Rota(Integer id) throws BancoDeDadosException {
+        Connection con = null;
+        try {
+            con = ConexaoBancoDeDados.getConnection();
+
+            String sql = "DELETE FROM LOGISTICA.ROTA_X_POSTO WHERE ID_POSTO = ?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, id);
+
+            // Executa-se a consulta
+            int res = stmt.executeUpdate();
+            if (res == 0) {
+                throw new BancoDeDadosException("Erro ao remover rota");
+            } else {
+                System.out.println("Relacionamento de rota com posto removida com sucesso!" +
+                        "\nremoverRotaPorId.res=" + res);
+                return res > 0;
+            }
+        } catch (SQLException e) {
+            throw new BancoDeDadosException("Erro ao remover o relacionamento de rota e posto" + e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     @Override
     public boolean remover(Integer id) throws BancoDeDadosException {
         Connection con = null;

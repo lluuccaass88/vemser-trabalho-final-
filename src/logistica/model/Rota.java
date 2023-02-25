@@ -3,7 +3,7 @@ package src.logistica.model;
 import java.util.ArrayList;
 
 public class Rota {
-    private int id_rota;
+    private int idRota;
     private String descricao, localPartida, localDestino;
     ArrayList<Posto> listaPostoCadastrado = new ArrayList(); //Os postos cadastrados poderão ser guardados aqui - Caso não seja utilizado APAGAR depois.
 
@@ -18,18 +18,16 @@ public class Rota {
     }
 
     //Getters e Setters
-
-
     public void setListaPostoCadastrado(ArrayList<Posto> listaPostoCadastrado) {
         this.listaPostoCadastrado = listaPostoCadastrado;
     }
 
-    public int getId_rota() {
-        return id_rota;
+    public int getIdRota() {
+        return idRota;
     }
 
-    public void setId_rota(int id_rota) {
-        this.id_rota = id_rota;
+    public void setIdRota(int idRota) {
+        this.idRota = idRota;
     }
 
     public String getLocalDestino() {
@@ -66,11 +64,6 @@ public class Rota {
 
     @Override
     public String toString() {
-        return "Rota{" +
-                "id_rota=" + id_rota +
-                ", descricao='" + descricao + '\'' +
-                ", localPartida='" + localPartida + '\'' +
-                ", localDestino='" + localDestino + '\'' +
-                '}';
+        return "Id: " + this.idRota + "\nDescrição: " + this.descricao + "\nLocal de partida: " + this.localPartida + "\nLocal de destino: " + this.localDestino + "\n =====================";
     }
 }

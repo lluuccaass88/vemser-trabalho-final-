@@ -83,7 +83,7 @@ public class RotaService {
             for(Rota itemRota : listar){
                 System.out.println("========== Informações da tora: ==========");
                 System.out.println(itemRota.toString());
-                System.out.println("========== Postos Cadastrados ==========");
+                System.out.println("========== Postos Cadastrados na rota " + itemRota.getIdRota() + " ==========");
                 for (Posto itemPosto : itemRota.getListaPostoCadastrado()){
                     System.out.println(itemPosto.toString());
                 }

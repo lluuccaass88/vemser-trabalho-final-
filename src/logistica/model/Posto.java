@@ -49,10 +49,6 @@ public class Posto {
 
     @Override
     public String toString() {
-        return "Posto{" +
-                "Id : " + idPosto + '\'' +
-                "nomePosto='" + nomePosto + '\'' +
-                ", valorCombustível=" + valorCombustível +
-                '}';
+        return "Id: " + this.idPosto + "\n Nome: " + this.nomePosto + "\nValor do combustivel: " + this.valorCombustível + "\n =====================";
     }
 }
