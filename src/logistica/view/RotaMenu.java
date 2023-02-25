@@ -30,7 +30,7 @@ public class RotaMenu {
             sc.nextLine();
 
             switch (opcao) {
-                case 1: { // adicionando - podemos fazer em outra classe para nao poluir tanto o MAIN
+                case 1: { // cadastrando
                     Rota rota = new Rota();
                     System.out.println("Digite a descrição da rota");
                     rota.setDescricao(sc.nextLine());
@@ -57,7 +57,7 @@ public class RotaMenu {
                     } while (opcIdPosto != 0);
 
                     rotaService.adicionaRota(rota);
-                    rotaService.adicionaRota_X_Posto(rota);
+                    rotaService.adicionaRotaXPosto(rota);
                     break;
                 }
 
@@ -67,9 +67,6 @@ public class RotaMenu {
                 }
 
                 case 3: { // editando
-
-//                    private int idRota;
-//                    private String descricao, localPartida, localDestino;
                     System.out.println("Digite o id da rota para editar: ");
                     int id = sc.nextInt();
 

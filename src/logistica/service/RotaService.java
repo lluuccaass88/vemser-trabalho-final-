@@ -26,10 +26,11 @@ public class RotaService {
         }
     }
 
-    public void adicionaRota_X_Posto(Rota rota) {
+    // adicionar Rota_X_Posto conforme tabela de relacionamento no banco de dados
+    public void adicionaRotaXPosto(Rota rota) {
         try {
             for(int i = 0; i < rota.getListaPostoCadastrado().size(); i++){
-                Rota rotaAdicionado = rotaRepository.adicionarPosto_X_Rota(rota, i);
+                Rota rotaAdicionado = rotaRepository.adicionarPostoXRota(rota, i);
             }
         } catch (BancoDeDadosException e) {
             e.printStackTrace();
@@ -42,7 +43,7 @@ public class RotaService {
     public void removerRota(Integer id) {
         try {
 
-            boolean conseguiuRemoverRelacionamento = rotaRepository.removerPosto_X_Rota(id);
+            boolean conseguiuRemoverRelacionamento = rotaRepository.removerPostoXRota(id);
             boolean conseguiuRemover = rotaRepository.remover(id);
 
             if (conseguiuRemover && conseguiuRemoverRelacionamento) {
@@ -77,7 +78,7 @@ public class RotaService {
             List<Rota> listar = rotaRepository.listar();
 
             for(Rota itemRota : listar){
-                System.out.println("========== Informações da tora: ==========");
+                System.out.println("========== Informações da rota: ==========");
                 System.out.println(itemRota.toString());
                 System.out.println("========== Postos Cadastrados na rota " + itemRota.getIdRota() + " ==========");
                 for (Posto itemPosto : itemRota.getListaPostoCadastrado()){

@@ -28,7 +28,7 @@ public class PostoMenu {
             sc.nextLine();
 
             switch (opcao) {
-                case 1 -> { // adicionando - podemos fazer em outra classe para nao poluir tanto o MAIN
+                case 1 -> { // cadastrando
 
                     System.out.println("Digite o nome do posto: ");
                     posto.setNomePosto(sc.nextLine());

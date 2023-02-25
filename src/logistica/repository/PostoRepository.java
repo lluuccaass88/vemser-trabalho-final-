@@ -65,7 +65,8 @@ public class PostoRepository implements Repositorio<Integer, Posto> {
         }
     }
 
-    public boolean removerPosto_X_Rota(Integer id) throws BancoDeDadosException {
+    // removerPosto_X_Rota conforme está descrito na tabela
+    public boolean removerPostoXRota(Integer id) throws BancoDeDadosException {
         Connection con = null;
         try {
             con = ConexaoBancoDeDados.getConnection();
