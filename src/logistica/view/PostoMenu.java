@@ -3,6 +3,7 @@ package src.logistica.view;
 import src.logistica.model.Posto;
 import src.logistica.service.PostoService;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class PostoMenu {
@@ -57,9 +58,19 @@ public class PostoMenu {
                 }
                 case 4 -> { // excluindo
                     System.out.println("Digite do id do posto para excluir: ");
-                    int id = sc.nextInt();
-                    postoService.removerPosto(id);
+                    boolean validacao = false;
+                    while (!validacao) {
+                        try {
+                            int id = sc.nextInt();
+                            sc.nextLine();
+                            postoService.removerPosto(id);
+                            validacao = true;
+                        } catch (InputMismatchException ex) {
+                            System.err.println("Número inválido");
+                        }
+                    }
                 }
+
                 case 0 -> {
                     System.out.println("Retornando ao Menu Principal");
                 }

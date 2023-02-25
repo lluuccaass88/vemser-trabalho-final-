@@ -4,6 +4,7 @@ import src.logistica.model.Rota;
 import src.logistica.service.PostoService;
 import src.logistica.service.RotaService;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class RotaMenu {
@@ -66,15 +67,39 @@ public class RotaMenu {
                 }
 
                 case 3: { // editando
-                    Rota rota = new Rota("Nova descrição", "Cidreira", "Osorio"); //APENAS TESTANDO
-                    rotaService.editarRota(1, rota);
-                    break;
+
+//                    private int idRota;
+//                    private String descricao, localPartida, localDestino;
+                    System.out.println("Digite o id da rota para editar: ");
+                    int id = sc.nextInt();
+
+                    System.out.println("Editar descrição:  ");
+                    rota.setDescricao(sc.nextLine());
+
+                    System.out.println("Editar local de partida: ");
+                    rota.setLocalPartida(sc.nextLine());
+
+                    System.out.println("Editar local de destino: ");
+                    rota.setLocalDestino(sc.nextLine());
+
+                    rotaService.editarRota(id, rota);
+
+                    System.out.println("Rota editada com sucesso!");
+
                 }
                 case 4: { // excluindo
                     System.out.println("Digite o id da rota que deseja excluir: ");
-                    opcIdPosto = sc.nextInt();
-                    sc.nextLine();
-                    rotaService.removerRota(opcIdPosto);
+                    boolean validacao = false;
+                    while (!validacao) {
+                        try {
+                            int id = sc.nextInt();
+                            sc.nextLine();
+                            rotaService.removerRota(id);
+                            validacao = true;
+                        } catch (InputMismatchException ex) {
+                            System.err.println("Número inválido");
+                        }
+                    }
                     break;
                 }
                 case 0: {
