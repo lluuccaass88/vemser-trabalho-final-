@@ -69,7 +69,6 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
         }
     }
 
-
     public Rota adicionarPosto_X_Rota(Rota rota, int index) throws BancoDeDadosException {
         Connection con = null;
         try {

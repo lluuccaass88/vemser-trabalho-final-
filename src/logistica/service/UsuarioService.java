@@ -4,6 +4,9 @@ import src.logistica.exception.BancoDeDadosException;
 import src.logistica.model.Usuario;
 import src.logistica.repository.UsuarioRepository;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class UsuarioService {
 
     private UsuarioRepository usuarioRepository;
@@ -35,5 +38,23 @@ public class UsuarioService {
         } catch (BancoDeDadosException e) {
             e.printStackTrace();
         }
+    }
+
+    public Usuario loginUsuario(String usurario, String senha){
+        Usuario usuarioLogado = new Usuario();
+        try {
+            usuarioLogado = usuarioRepository.login(usurario, senha);
+            if(usuarioLogado.getId() == null){
+                throw new Exception("Erro ao fazer o login, verifique seu usuario ou senha");
+            }else{
+                System.out.println("Entrando...");
+                return usuarioLogado;
+            }
+        } catch (BancoDeDadosException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("ERRO SQL-> " + e.getMessage());
+        }
+        return usuarioLogado;
     }
 }

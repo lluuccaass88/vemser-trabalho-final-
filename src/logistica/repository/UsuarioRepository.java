@@ -115,4 +115,45 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
             }
         }
     }
+
+
+    public Usuario login(String usurario, String senha) throws BancoDeDadosException{
+        Usuario usuario = new Usuario();
+        Connection con = null;
+        try {
+            con = ConexaoBancoDeDados.getConnection();
+
+            String sql = "SELECT * FROM LOGISTICA.USUARIO u \n" +
+                    "\tWHERE u.USUARIO = ? AND u.SENHA = ?"; // Consulta SQL no banco
+            PreparedStatement stmt = con.prepareStatement(sql); // Prepara a consulta
+
+            stmt.setString(1, usurario);
+            stmt.setString(2, senha);
+
+            ResultSet rs = stmt.executeQuery(); // Executa-se a consulta
+
+
+            while (rs.next()) {
+                usuario.setId(rs.getInt("ID_USUARIO"));
+                usuario.setNome(rs.getString("NOME"));
+                usuario.setUsuario(rs.getString("USUARIO"));
+                usuario.setSenha(rs.getString("SENHA"));
+                usuario.setPerfil(Perfil.ofTipoPerfil(rs.getInt("PERFIL")));
+                usuario.setCpf(rs.getString("CPF"));
+                usuario.setCnh(rs.getString("CNH"));
+            }
+            return usuario;
+        } catch (SQLException e) {
+            throw new BancoDeDadosException("Erro ao listar usuarios: " + e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

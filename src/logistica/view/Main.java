@@ -1,17 +1,27 @@
 package src.logistica.view;
 
+import src.logistica.model.Usuario;
+import src.logistica.service.UsuarioService;
+
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Usuario usuarioLogado = new Usuario();
 
         Scanner scanner = new Scanner(System.in);
 
         CaminhaoMenu caminhaoMenu = new CaminhaoMenu();
         RotaMenu rotaMenu = new RotaMenu();
         UsuarioMenu usuarioMenu = new UsuarioMenu();
+        HomeMenu homeMenu = new HomeMenu();
 
         int opcao = -1;
+
+        usuarioLogado = homeMenu.MenuHome(); //Para logar ou cadastrar
+
+        System.out.println("=== Bem vindo " + usuarioLogado.getNome() + " ===");
+
         while (opcao != 0) {
             System.out.println("""
                     =========MENU PRINCIPAL=========
