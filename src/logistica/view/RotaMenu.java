@@ -4,6 +4,7 @@ import src.logistica.model.Rota;
 import src.logistica.service.PostoService;
 import src.logistica.service.RotaService;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class RotaMenu {
@@ -29,7 +30,7 @@ public class RotaMenu {
             sc.nextLine();
 
             switch (opcao) {
-                case 1: { // adicionando - podemos fazer em outra classe para nao poluir tanto o MAIN
+                case 1: { // cadastrando
                     Rota rota = new Rota();
                     System.out.println("Digite a descrição da rota");
                     rota.setDescricao(sc.nextLine());
@@ -56,7 +57,7 @@ public class RotaMenu {
                     } while (opcIdPosto != 0);
 
                     rotaService.adicionaRota(rota);
-                    rotaService.adicionaRota_X_Posto(rota);
+                    rotaService.adicionaRotaXPosto(rota);
                     break;
                 }
 
@@ -66,15 +67,36 @@ public class RotaMenu {
                 }
 
                 case 3: { // editando
-                    Rota rota = new Rota("Nova descrição", "Cidreira", "Osorio"); //APENAS TESTANDO
-                    rotaService.editarRota(1, rota);
-                    break;
+                    System.out.println("Digite o id da rota para editar: ");
+                    int id = sc.nextInt();
+
+                    System.out.println("Editar descrição:  ");
+                    rota.setDescricao(sc.nextLine());
+
+                    System.out.println("Editar local de partida: ");
+                    rota.setLocalPartida(sc.nextLine());
+
+                    System.out.println("Editar local de destino: ");
+                    rota.setLocalDestino(sc.nextLine());
+
+                    rotaService.editarRota(id, rota);
+
+                    System.out.println("Rota editada com sucesso!");
+
                 }
                 case 4: { // excluindo
                     System.out.println("Digite o id da rota que deseja excluir: ");
-                    opcIdPosto = sc.nextInt();
-                    sc.nextLine();
-                    rotaService.removerRota(opcIdPosto);
+                    boolean validacao = false;
+                    while (!validacao) {
+                        try {
+                            int id = sc.nextInt();
+                            sc.nextLine();
+                            rotaService.removerRota(id);
+                            validacao = true;
+                        } catch (InputMismatchException ex) {
+                            System.err.println("Número inválido");
+                        }
+                    }
                     break;
                 }
                 case 0: {

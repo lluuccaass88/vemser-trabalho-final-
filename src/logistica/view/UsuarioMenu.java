@@ -4,6 +4,7 @@ import src.logistica.model.Perfil;
 import src.logistica.model.Usuario;
 import src.logistica.service.UsuarioService;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UsuarioMenu {
@@ -52,6 +53,52 @@ public class UsuarioMenu {
                 case 2 -> {
                     System.out.println("Listando Usuários...");
                     usuarioService.listarUsuarios();
+                }
+                case 3 -> {
+                    System.out.println("Editando Usuário...");
+                    System.out.println("Digite o ID do usuário que deseja editar:");
+                    int id = sc.nextInt();
+                    sc.nextLine();
+                    if (id != usuario.getId()) {
+                        System.out.println("Usuário não encontrado, retornando ao Menu Usuário");
+                    } else {
+                        System.out.println("Informe o seu nome:");
+                        usuario.setNome(sc.nextLine());
+
+                        System.out.println("Informe o login de usuário:");
+                        usuario.setUsuario(sc.nextLine());
+
+                        System.out.println("Informe a senha de usuário:");
+                        usuario.setSenha(sc.nextLine());
+
+                        System.out.println("Informe o perfil: (1) Colaborador ou (2) Motorista");
+                        usuario.setPerfil(Perfil.ofTipoPerfil(sc.nextInt()));
+                        sc.nextLine();
+
+                        System.out.println("Informe o CPF do usuário: " + usuario.getNome());
+                        usuario.setCpf(sc.nextLine());
+
+                        System.out.println("Informe a CNH do usuário: " + usuario.getNome());
+                        usuario.setCnh(sc.nextLine());
+
+                        usuarioService.editarUsuarios(id, usuario);
+                    }
+                }
+                case 4 -> {
+                    System.out.println("Excluindo Usuário...");
+                    usuarioService.listarUsuarios();
+                    System.out.println("Digite o ID do usuário que deseja excluir:");
+                    boolean validacao = false;
+                    while (!validacao) {
+                        try {
+                            int id = sc.nextInt();
+                            sc.nextLine();
+                            usuarioService.removerUsuarios(id);
+                            validacao = true;
+                        } catch (InputMismatchException ex) {
+                            System.err.println("Número inválido");
+                        }
+                    }
                 }
                 case 0 -> {
                     System.out.println("Retornando ao Menu Principal");

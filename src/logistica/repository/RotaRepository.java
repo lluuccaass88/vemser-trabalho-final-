@@ -69,7 +69,12 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
         }
     }
 
+<<<<<<< HEAD
     public Rota adicionarPosto_X_Rota(Rota rota, int index) throws BancoDeDadosException {
+=======
+    // adicionarPosto_X_Rota conforme relacionamento na tabela POSTO_X_ROTA
+    public Rota adicionarPostoXRota(Rota rota, int index) throws BancoDeDadosException {
+>>>>>>> 1d7a624d3d5f196dcb8d288dd0a12ea3a3c5899a
         Connection con = null;
         try {
             con = ConexaoBancoDeDados.getConnection();
@@ -106,7 +111,8 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
         }
     }
 
-    public boolean removerPosto_X_Rota(Integer id) throws BancoDeDadosException {
+    // removerPosto_X_Rota conforme relacionamento na tabela POSTO_X_ROTA
+    public boolean removerPostoXRota(Integer id) throws BancoDeDadosException {
         Connection con = null;
         try {
             con = ConexaoBancoDeDados.getConnection();

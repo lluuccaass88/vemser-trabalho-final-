@@ -15,10 +15,6 @@ public class PostoService {
 
     public void adicionaPosto(Posto posto) {
         try {
-            // validação para saber se o CPF nao tem mais que 11 digitos - Posto não tem cpf e não pensei em nem um campo para validar...
-//            if (colaborador.getCpf().length() > 11) {
-//                throw new Exception("CPF inválido");
-//            }
             Posto postoAdicionado = postoRepository.adicionar(posto);
             System.out.println("Posto adicionado com sucesso: " + postoAdicionado);
         } catch (BancoDeDadosException e) {
@@ -31,7 +27,7 @@ public class PostoService {
 
     public void removerPosto(Integer id) {
         try {
-            boolean conseguiuRemoverRelacionamento = postoRepository.removerPosto_X_Rota(id);
+            boolean conseguiuRemoverRelacionamento = postoRepository.removerPostoXRota(id);
             boolean conseguiuRemover = postoRepository.remover(id);
             if (conseguiuRemover && conseguiuRemoverRelacionamento) {
                 System.out.println("Posto " + conseguiuRemover + "| com id= "

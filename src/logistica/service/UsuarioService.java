@@ -40,6 +40,7 @@ public class UsuarioService {
         }
     }
 
+<<<<<<< HEAD
     public Usuario loginUsuario(String usurario, String senha){
         Usuario usuarioLogado = new Usuario();
         try {
@@ -58,3 +59,33 @@ public class UsuarioService {
         return usuarioLogado;
     }
 }
+=======
+    public void editarUsuarios(Integer id, Usuario usuario){
+        try {
+            boolean conseguiuEditar = usuarioRepository.editar(id, usuario);
+            if (conseguiuEditar) {
+                System.out.println("Usuário " + conseguiuEditar + "| com id= "
+                        + id + " editado com sucesso");
+            } else {
+                System.out.println("Não foi possível editar o " + id + " do usuário");
+            }
+        } catch (BancoDeDadosException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void removerUsuarios(Integer id){
+        try {
+            boolean conseguiuRemover = usuarioRepository.remover(id);
+            if (conseguiuRemover) {
+                System.out.println("Usuário " + conseguiuRemover + "| com id= "
+                        + id + " removido com sucesso");
+            } else {
+                System.out.println("Não foi possível remover o " + id + " do usuário");
+            }
+        } catch (BancoDeDadosException e) {
+            e.printStackTrace();
+        }
+    }
+}
+>>>>>>> 1d7a624d3d5f196dcb8d288dd0a12ea3a3c5899a
