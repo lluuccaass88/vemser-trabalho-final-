@@ -72,12 +72,76 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
 
     @Override
     public boolean remover(Integer id) throws BancoDeDadosException {
-        return false;
+        Connection con = null;
+        try {
+            con = ConexaoBancoDeDados.getConnection();
+
+            String sql = "DELETE FROM LOGISTICA.USUARIO WHERE ID_USUARIO = ?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, id);
+            int res = stmt.executeUpdate();
+            if (res == 0) {
+                throw new BancoDeDadosException("Erro ao remover usuário");
+            } else {
+                System.out.println("Usuário removido com sucesso!" +
+                        "\nremoverUsuário.res=" + res);
+                return res > 0;
+            }
+        } catch (SQLException e) {
+            throw new BancoDeDadosException("Erro ao remover usuário" + e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
     public boolean editar(Integer id, Usuario usuario) throws BancoDeDadosException {
-        return false;
+        Connection con = null;
+        try {
+            con = ConexaoBancoDeDados.getConnection();
+
+            StringBuilder sql = new StringBuilder();
+            sql.append("UPDATE LOGISTICA.USUARIO SET ");
+            sql.append(" NOME = ?, ");
+            sql.append(" USUARIO = ?, ");
+            sql.append(" SENHA = ?, ");
+            sql.append(" PERFIL = ?, ");
+            sql.append(" CPF = ?, ");
+            sql.append(" CNH = ? ");
+            sql.append(" WHERE ID_USUARIO = ? ");
+
+            PreparedStatement stmt = con.prepareStatement(sql.toString());
+
+            stmt.setString(1, usuario.getNome());
+            stmt.setString(2, usuario.getUsuario());
+            stmt.setString(3, usuario.getSenha());
+            stmt.setInt(4, usuario.getPerfil().getPerfil());
+            stmt.setString(5, usuario.getCpf());
+            stmt.setString(6, usuario.getCnh());
+            stmt.setInt(7, id);
+
+            int res = stmt.executeUpdate();
+            System.out.println("editarUsuario.res=" + res);
+
+            return res > 0;
+        } catch (SQLException e) {
+            throw new BancoDeDadosException("Erro ao editar usuário" + e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -86,10 +150,11 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
         Connection con = null;
         try {
             con = ConexaoBancoDeDados.getConnection();
+            Statement stmt = con.createStatement();
 
             String sql = "SELECT * FROM LOGISTICA.USUARIO"; // Consulta SQL no banco
-            PreparedStatement stmt = con.prepareStatement(sql); // Prepara a consulta
-            ResultSet rs = stmt.executeQuery(); // Executa-se a consulta
+
+            ResultSet rs = stmt.executeQuery(sql); // Executa-se a consulta
 
             while (rs.next()) {
                 Usuario usuario = new Usuario();
@@ -102,7 +167,6 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
                 usuario.setCnh(rs.getString("CNH"));
                 usuarios.add(usuario);
             }
-            return usuarios;
         } catch (SQLException e) {
             throw new BancoDeDadosException("Erro ao listar usuarios: " + e);
         } finally {
@@ -114,5 +178,6 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
                 e.printStackTrace();
             }
         }
+        return usuarios;
     }
 }

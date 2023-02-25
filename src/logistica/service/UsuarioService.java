@@ -36,4 +36,32 @@ public class UsuarioService {
             e.printStackTrace();
         }
     }
+
+    public void editarUsuarios(Integer id, Usuario usuario){
+        try {
+            boolean conseguiuEditar = usuarioRepository.editar(id, usuario);
+            if (conseguiuEditar) {
+                System.out.println("Usuário " + conseguiuEditar + "| com id= "
+                        + id + " editado com sucesso");
+            } else {
+                System.out.println("Não foi possível editar o " + id + " do usuário");
+            }
+        } catch (BancoDeDadosException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void removerUsuarios(Integer id){
+        try {
+            boolean conseguiuRemover = usuarioRepository.remover(id);
+            if (conseguiuRemover) {
+                System.out.println("Usuário " + conseguiuRemover + "| com id= "
+                        + id + " removido com sucesso");
+            } else {
+                System.out.println("Não foi possível remover o " + id + " do usuário");
+            }
+        } catch (BancoDeDadosException e) {
+            e.printStackTrace();
+        }
+    }
 }
