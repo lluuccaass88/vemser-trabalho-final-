@@ -17,10 +17,6 @@ public class RotaService {
     // criando um objeto do tipo Rota
     public void adicionaRota(Rota rota) {
         try {
-            // validação para saber se o CPF nao tem mais que 11 digitos - Não cpf e não pensei em nem um campo para validar...
-//            if (colaborador.getCpf().length() > 11) {
-//                throw new Exception("CPF inválido");
-//            }
             Rota rotaAdicionado = rotaRepository.adicionar(rota);
             System.out.println("Rota adicionado com sucesso: " + rotaAdicionado);
         } catch (BancoDeDadosException e) {

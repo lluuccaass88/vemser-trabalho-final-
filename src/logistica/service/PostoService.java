@@ -15,10 +15,6 @@ public class PostoService {
 
     public void adicionaPosto(Posto posto) {
         try {
-            // validação para saber se o CPF nao tem mais que 11 digitos - Posto não tem cpf e não pensei em nem um campo para validar...
-//            if (colaborador.getCpf().length() > 11) {
-//                throw new Exception("CPF inválido");
-//            }
             Posto postoAdicionado = postoRepository.adicionar(posto);
             System.out.println("Posto adicionado com sucesso: " + postoAdicionado);
         } catch (BancoDeDadosException e) {
