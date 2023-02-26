@@ -218,7 +218,7 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
         return caminhao;
     }
 
-    public boolean editaEmViagem (int index)throws BancoDeDadosException{
+    public boolean editaEmViagem (int index) throws BancoDeDadosException{
         Connection con = null;
 
         try {
@@ -255,5 +255,42 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
         }
     }
 
-    
+    public Caminhao abastecerCaminhao(int index, int gasolina) throws BancoDeDadosException{
+        Connection con = null;
+        Caminhao caminhao = new Caminhao();
+        try {
+            con = ConexaoBancoDeDados.getConnection();
+            StringBuilder sql = new StringBuilder();
+            sql.append("UPDATE LOGISTICA.CAMINHAO SET ");
+            sql.append("GASOLINA = ? ");
+            sql.append("WHERE ID_CAMINHAO = ?");
+            PreparedStatement stmt = con.prepareStatement(sql.toString());
+
+            stmt.setInt(1, gasolina);
+            stmt.setInt(2, index);
+
+            // Executa-se a consulta
+            int res = stmt.executeUpdate();
+            System.out.println("abastecerCaminhao.res=" + res);
+
+            if (res == 0) {
+                throw new BancoDeDadosException("Erro ao abastecer caminhão");
+            } else {
+                System.out.println("Caminhão abastecido com sucesso!" +
+                        "\nabastecerCaminhao.res=" + res);
+                return caminhao;
+            }
+
+        } catch (SQLException e) {
+            throw new BancoDeDadosException("Erro ao abastecer caminhão" + e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

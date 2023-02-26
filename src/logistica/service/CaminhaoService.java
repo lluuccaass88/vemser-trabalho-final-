@@ -60,8 +60,9 @@ public class CaminhaoService {
             e.printStackTrace();
         }
     }
+
     // listando todos os objetos do tipo Caminhao
-    public void listarCaminhoes(){
+    public void listarCaminhoes() {
         try {
             List<Caminhao> listar = caminhaoRepository.listar();
             listar.forEach(System.out::println);
@@ -70,7 +71,7 @@ public class CaminhaoService {
         }
     }
 
-    public void listarCaminhoesLivres(){
+    public void listarCaminhoesLivres() {
         try {
             List<Caminhao> listar = caminhaoRepository.listar();
             List<Caminhao> caminhaoDisponivel = listar.stream()
@@ -82,7 +83,7 @@ public class CaminhaoService {
         }
     }
 
-    public Caminhao retornaPorId(int index){
+    public Caminhao retornaPorId(int index) {
         try {
             Caminhao caminhao = caminhaoRepository.buscaPorId(index);
             return caminhao;
@@ -94,6 +95,21 @@ public class CaminhaoService {
 
     // abastercer o caminhão somente em postos e se tiver em rota, se nao tiver em rota nao
     // pode abastercer em qualquer posto independente de ser ou nao posto cadastrado.
-    public void abastecerCaminhao() {
+    public void abastecerCaminhao(int index, int gasolina) {
+        try {
+            Caminhao caminhao = caminhaoRepository.buscaPorId(index);
+            int totalGasolinaEmTanque = caminhao.getGasolina() + gasolina;
+            if (caminhao.getEmViagem().getOpcao().equals(1)) {
+                if (caminhao.getGasolina() + gasolina <= 100) {
+                    caminhao = caminhaoRepository.abastecerCaminhao(index, totalGasolinaEmTanque);
+                    caminhao.setGasolina(caminhao.getGasolina() + gasolina);
+                    System.out.println("Caminhão abastecido com sucesso");
+                } else {
+                    System.out.println("Caminhão com tanque cheio, não é necessário abastecer");
+                }
+            }
+        } catch (BancoDeDadosException e) {
+            e.printStackTrace();
+        }
     }
 }
