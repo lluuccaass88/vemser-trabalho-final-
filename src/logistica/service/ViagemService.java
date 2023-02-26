@@ -15,7 +15,7 @@ public class ViagemService {
     }
 
     // criando um objeto do tipo Caminhao
-    public void adicionarCaminhao(Viagem viagem) {
+    public void adicionarViagem(Viagem viagem) {
         try {
             Viagem viagemAdicionada = viagemRepository.adicionar(viagem);
             System.out.println("Viagem adicionado com sucesso: " + viagemAdicionada);

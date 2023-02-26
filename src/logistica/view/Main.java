@@ -53,7 +53,7 @@ public class Main {
                 }
                 case 5 -> {
                     System.out.println("Acessando o Menu de Viagens");
-                    viagemMenu.menuUsuario();
+                    viagemMenu.menuUsuario(usuarioLogado);
                 }
                 case 0 -> {
                     System.out.println("Saindo do Sistema...");

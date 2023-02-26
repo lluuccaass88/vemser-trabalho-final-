@@ -171,4 +171,42 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
         }
         return caminhoes;
     }
+
+    public Caminhao buscaPorId(int index) throws BancoDeDadosException{
+        Connection con = null;
+        Caminhao caminhao = new Caminhao();
+        try {
+            con = ConexaoBancoDeDados.getConnection();
+
+            String sql = "SELECT * FROM LOGISTICA.CAMINHAO c \n" +
+                    "\tWHERE ID_CAMINHAO = ?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            stmt.setInt(1, index);
+
+            // Executa-se a consulta
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                caminhao.setIdCaminhao(rs.getInt("ID_CAMINHAO"));
+                caminhao.setModelo(rs.getString("MODELO"));
+                caminhao.setPlaca(rs.getString("PLACA"));
+                caminhao.setGasolina(rs.getInt("GASOLINA"));
+                caminhao.setEmViagem(EmViagem.getOpcaoEmViagem(rs.getInt("EMVIAGEM")));
+            }
+
+        } catch (SQLException e) {
+            throw new BancoDeDadosException("Erro ao listar caminhoes cadastrados: " + e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return caminhao;
+    }
 }

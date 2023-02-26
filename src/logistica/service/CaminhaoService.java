@@ -81,4 +81,16 @@ public class CaminhaoService {
             e.printStackTrace();
         }
     }
+
+    public Caminhao retornaPorId(int index){
+        try {
+            Caminhao caminhao = caminhaoRepository.buscaPorId(index);
+            return caminhao;
+        } catch (BancoDeDadosException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }

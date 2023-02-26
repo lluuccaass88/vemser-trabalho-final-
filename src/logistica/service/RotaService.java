@@ -1,6 +1,7 @@
 package src.logistica.service;
 
 import src.logistica.exception.BancoDeDadosException;
+import src.logistica.model.Caminhao;
 import src.logistica.model.Rota;
 import src.logistica.model.Posto;
 import src.logistica.repository.RotaRepository;
@@ -91,4 +92,13 @@ public class RotaService {
         }
     }
 
+    public Rota retornaPorId(int index){
+        try {
+            Rota rota = rotaRepository.buscaPorId(index);
+            return rota;
+        } catch (BancoDeDadosException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

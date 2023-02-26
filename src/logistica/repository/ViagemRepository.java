@@ -12,7 +12,7 @@ public class ViagemRepository implements Repositorio<Integer, Viagem>{
     @Override
     public Integer getProximoId(Connection connection) throws SQLException {
         try {
-            String sql = "SELECT LOGISTICA.SEQ_CAMINHAO.NEXTVAL mysequence FROM DUAL";
+            String sql = "SELECT LOGISTICA.SEQ_VIAGEM.NEXTVAL mysequence FROM DUAL";
 
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -41,10 +41,10 @@ public class ViagemRepository implements Repositorio<Integer, Viagem>{
             PreparedStatement stmt = con.prepareStatement(sql);
 
             stmt.setInt(1, viagem.getIdViagem());
-            stmt.setInt(1, viagem.getCaminhao().getIdCaminhao());
-            stmt.setInt(1, viagem.getRota().getIdRota());
-            stmt.setInt(1, viagem.getUsuario().getId());
-            stmt.setInt(1, viagem.getFinalizada());
+            stmt.setInt(2, viagem.getCaminhao().getIdCaminhao());
+            stmt.setInt(3, viagem.getRota().getIdRota());
+            stmt.setInt(4, viagem.getUsuario().getId());
+            stmt.setInt(5, viagem.getFinalizada());
 
 
             int res = stmt.executeUpdate();
