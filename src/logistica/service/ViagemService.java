@@ -1,6 +1,69 @@
 package src.logistica.service;
 
-public class ViagemService { }
+import src.logistica.exception.BancoDeDadosException;
+import src.logistica.model.Caminhao;
+import src.logistica.model.Viagem;
+import src.logistica.repository.ViagemRepository;
+
+import java.util.List;
+
+public class ViagemService {
+    private ViagemRepository viagemRepository;
+
+    public ViagemService() {
+        viagemRepository = new ViagemRepository();
+    }
+
+    // criando um objeto do tipo Caminhao
+    public void adicionarCaminhao(Viagem viagem) {
+        try {
+            Viagem viagemAdicionada = viagemRepository.adicionar(viagem);
+            System.out.println("Viagem adicionado com sucesso: " + viagemAdicionada);
+        } catch (BancoDeDadosException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("ERRO SQL-> " + e.getMessage());
+        }
+    }
+
+    // removendo um obejto do tipo Caminhao passando o ID
+//    public void removerCaminhao(Integer id) {
+//        try {
+//            boolean conseguiuRemover = caminhaoRepository.remover(id);
+//            if (conseguiuRemover) {
+//                System.out.println("Caminhão " + conseguiuRemover + "| com id= "
+//                        + id + " removido com sucesso");
+//            } else {
+//                System.out.println("Não foi possível remover o " + id + " do caminhão");
+//            }
+//        } catch (BancoDeDadosException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    // editando um objeto do tipo Caminhao passando o ID e o objeto CAMINHAO
+//    public void editarCaminhao(Integer id, Caminhao caminhao) {
+//        try {
+//            boolean conseguiuEditar = caminhaoRepository.editar(id, caminhao);
+//            if (conseguiuEditar) {
+//                System.out.println("Caminhão " + conseguiuEditar + "| com id= "
+//                        + id + " editado com sucesso");
+//            } else {
+//                System.out.println("Não foi possível editar o " + id + " do caminhão");
+//            }
+//        } catch (BancoDeDadosException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    // listando todos os objetos do tipo Caminhao
+//    public void listarCaminhoes(){
+//        try {
+//            List<Caminhao> listar = caminhaoRepository.listar();
+//            listar.forEach(System.out::println);
+//        } catch (BancoDeDadosException e) {
+//            e.printStackTrace();
+//        }
+//    }
+}
 //    private ArrayList<Viagem> listaViagem = new ArrayList();
 //
 //    public void adicionaViagem(Viagem viagem){

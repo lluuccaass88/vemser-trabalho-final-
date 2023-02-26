@@ -220,5 +220,4 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
             }
         }
     }
-
 }

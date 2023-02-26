@@ -15,6 +15,7 @@ public class Main {
         RotaMenu rotaMenu = new RotaMenu();
         UsuarioMenu usuarioMenu = new UsuarioMenu();
         HomeMenu homeMenu = new HomeMenu();
+        ViagemMenu viagemMenu = new ViagemMenu();
 
         int opcao = -1;
 
@@ -52,6 +53,7 @@ public class Main {
                 }
                 case 5 -> {
                     System.out.println("Acessando o Menu de Viagens");
+                    viagemMenu.menuUsuario();
                 }
                 case 0 -> {
                     System.out.println("Saindo do Sistema...");
