@@ -35,8 +35,8 @@ public class ViagemRepository implements Repositorio<Integer, Viagem>{
             viagem.setIdViagem(proximoId);
 
             String sql = "INSERT INTO LOGISTICA.VIAGEM\n" +
-                    "\t(ID_VIAGEM, ID_CAMINHAO, ID_ROTA, ID_USUARIO, FINALIZADA)\n" +
-                    "\t\tVALUES(?, ?, ?, ?, ?);";
+                    "(ID_VIAGEM, ID_CAMINHAO, ID_ROTA, ID_USUARIO, FINALIZADA)\n" +
+                    "VALUES(?, ?, ?, ?, ?);";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 

@@ -50,7 +50,6 @@ public class Main {
                     }
                     case 3 -> {
                         System.out.println("Acessando o Menu de Postos");
-                        postoMenu.menuPosto();
                     }
                     case 4 -> {
                         System.out.println("Acessando o Menu de Rotas");
@@ -58,31 +57,12 @@ public class Main {
                     }
                     case 5 -> {
                         System.out.println("Acessando o Menu de Viagens");
-                        viagemMenu.menuUsuario();
+                        viagemMenu.menuViagem(usuarioLogado);
                     }
                     case 0 -> {
                         System.out.println("Saindo do Sistema...");
                     }
                 }
-<<<<<<< HEAD
-                case 2 -> {
-                    System.out.println("Acessando o Menu de Caminhões");
-                    caminhaoMenu.menuCaminhao();
-                }
-                case 3 -> {
-                    System.out.println("Acessando o Menu de Postos");
-                }
-                case 4 -> {
-                    System.out.println("Acessando o Menu de Rotas");
-                    rotaMenu.menuRota();
-                }
-                case 5 -> {
-                    System.out.println("Acessando o Menu de Viagens");
-                    viagemMenu.menuUsuario(usuarioLogado);
-                }
-                case 0 -> {
-                    System.out.println("Saindo do Sistema...");
-=======
             }
         } else {
             System.out.println("Acesso ao menu de Motorista");
@@ -112,7 +92,6 @@ public class Main {
                     case 0 -> {
                         System.out.println("Saindo do Sistema...");
                     }
->>>>>>> 156e5935adddd445cd8589c8eef6d7adbc5438e8
                 }
             }
         }
