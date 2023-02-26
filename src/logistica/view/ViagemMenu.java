@@ -6,11 +6,10 @@ import src.logistica.service.ViagemService;
 import java.util.Scanner;
 
 public class ViagemMenu {
-    UsuarioService usuarioService = new UsuarioService();
-    CaminhaoService caminhaoService = new CaminhaoService();
-    Usuario usuario = new Usuario();
+    ViagemService viagemService = new ViagemService();
+    Viagem viagem = new Viagem();
 
-    public void menuUsuario() {
+    public void menuViagem() {
         Scanner sc = new Scanner(System.in);
         int opcao = -1;
         while (opcao != 0) {
@@ -27,7 +26,7 @@ public class ViagemMenu {
             switch (opcao) {
                 case 1 -> {
                     System.out.println("Listando Caminhões Livres para Viagem..");
-                    caminhaoService.listarCaminhoesLivres();
+                    viagemService.adicionar;
 
 
                     //                    usuario.setNome(sc.nextLine());
@@ -53,7 +52,7 @@ public class ViagemMenu {
 //                    usuarioService.adicionarUsuario(usuario);
                 }
                 case 2 -> {
-
+                    viagemService.listarViagens();
                 }
                 case 3 -> {
 
