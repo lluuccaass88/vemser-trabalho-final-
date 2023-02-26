@@ -59,30 +59,26 @@ public class UsuarioMenu {
                     System.out.println("Digite o ID do usuário que deseja editar:");
                     int id = sc.nextInt();
                     sc.nextLine();
-                    if (id != usuario.getId()) {
-                        System.out.println("Usuário não encontrado, retornando ao Menu Usuário");
-                    } else {
-                        System.out.println("Informe o seu nome:");
-                        usuario.setNome(sc.nextLine());
+                    System.out.println("Informe o seu nome:");
+                    usuario.setNome(sc.nextLine());
 
-                        System.out.println("Informe o login de usuário:");
-                        usuario.setUsuario(sc.nextLine());
+                    System.out.println("Informe o login de usuário:");
+                    usuario.setUsuario(sc.nextLine());
 
-                        System.out.println("Informe a senha de usuário:");
-                        usuario.setSenha(sc.nextLine());
+                    System.out.println("Informe a senha de usuário:");
+                    usuario.setSenha(sc.nextLine());
 
-                        System.out.println("Informe o perfil: (1) Colaborador ou (2) Motorista");
-                        usuario.setPerfil(Perfil.ofTipoPerfil(sc.nextInt()));
-                        sc.nextLine();
+                    System.out.println("Informe o perfil: (1) Colaborador ou (2) Motorista");
+                    usuario.setPerfil(Perfil.ofTipoPerfil(sc.nextInt()));
+                    sc.nextLine();
 
-                        System.out.println("Informe o CPF do usuário: " + usuario.getNome());
-                        usuario.setCpf(sc.nextLine());
+                    System.out.println("Informe o CPF do usuário: " + usuario.getNome());
+                    usuario.setCpf(sc.nextLine());
 
-                        System.out.println("Informe a CNH do usuário: " + usuario.getNome());
-                        usuario.setCnh(sc.nextLine());
+                    System.out.println("Informe a CNH do usuário: " + usuario.getNome());
+                    usuario.setCnh(sc.nextLine());
 
-                        usuarioService.editarUsuarios(id, usuario);
-                    }
+                    usuarioService.editarUsuarios(id, usuario);
                 }
                 case 4 -> {
                     System.out.println("Excluindo Usuário...");
