@@ -40,7 +40,6 @@ public class UsuarioService {
         }
     }
 
-<<<<<<< HEAD
     public Usuario loginUsuario(String usurario, String senha){
         Usuario usuarioLogado = new Usuario();
         try {
@@ -58,8 +57,7 @@ public class UsuarioService {
         }
         return usuarioLogado;
     }
-}
-=======
+
     public void editarUsuarios(Integer id, Usuario usuario){
         try {
             boolean conseguiuEditar = usuarioRepository.editar(id, usuario);
@@ -88,4 +86,4 @@ public class UsuarioService {
         }
     }
 }
->>>>>>> 1d7a624d3d5f196dcb8d288dd0a12ea3a3c5899a
+

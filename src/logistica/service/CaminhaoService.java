@@ -2,6 +2,7 @@ package src.logistica.service;
 
 import src.logistica.exception.BancoDeDadosException;
 import src.logistica.model.Caminhao;
+import src.logistica.model.EmViagem;
 import src.logistica.repository.CaminhaoRepository;
 
 import java.util.List;
@@ -44,6 +45,7 @@ public class CaminhaoService {
         }
     }
     // editando um objeto do tipo Caminhao passando o ID e o objeto CAMINHAO
+
     public void editarCaminhao(Integer id, Caminhao caminhao) {
         try {
             boolean conseguiuEditar = caminhaoRepository.editar(id, caminhao);
@@ -62,6 +64,18 @@ public class CaminhaoService {
         try {
             List<Caminhao> listar = caminhaoRepository.listar();
             listar.forEach(System.out::println);
+        } catch (BancoDeDadosException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void listarCaminhoesLivres(){
+        try {
+            List<Caminhao> listar = caminhaoRepository.listar();
+            List<Caminhao> caminhaoDisponivel = listar.stream()
+                    .filter(elemento -> elemento.getEmViagem().equals("ESTACIONADO") ) //Descobrir cm compara o enum para listar somente os que não estiverem em viagem
+                    .toList();
+            caminhaoDisponivel.forEach(System.out::println);
         } catch (BancoDeDadosException e) {
             e.printStackTrace();
         }

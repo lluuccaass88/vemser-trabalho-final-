@@ -69,12 +69,9 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
         }
     }
 
-<<<<<<< HEAD
-    public Rota adicionarPosto_X_Rota(Rota rota, int index) throws BancoDeDadosException {
-=======
     // adicionarPosto_X_Rota conforme relacionamento na tabela POSTO_X_ROTA
     public Rota adicionarPostoXRota(Rota rota, int index) throws BancoDeDadosException {
->>>>>>> 1d7a624d3d5f196dcb8d288dd0a12ea3a3c5899a
+
         Connection con = null;
         try {
             con = ConexaoBancoDeDados.getConnection();
@@ -234,7 +231,6 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
                     "\t\tORDER BY r.ID_ROTA \n";
 
 
-
             PreparedStatement stmt = con.prepareStatement(sql);
             // Executa-se a consulta
             ResultSet rs = stmt.executeQuery();
@@ -257,13 +253,13 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
                 posto.setValorCombustivel(rs.getDouble("VALORCOMBUSTIVEL"));
                 posto.setIdRota(rs.getInt("ID_ROTA"));
 
-                if (rotaAnt.getIdRota() != rota.getIdRota()){ //Faz com que não se crie rotas repetidas
+                if (rotaAnt.getIdRota() != rota.getIdRota()) { //Faz com que não se crie rotas repetidas
                     rotas.add(rota);
                     rotaAnt.setIdRota(rota.getIdRota());
                     cont++;
                 }
 
-                if(posto.getIdRota() == rota.getIdRota()){
+                if (posto.getIdRota() == rota.getIdRota()) {
                     rotas.get(cont).setListaPostoCadastrado(posto);
                 }
 
@@ -283,3 +279,4 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
         return rotas;
     }
 }
+
