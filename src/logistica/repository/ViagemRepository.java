@@ -36,7 +36,7 @@ public class ViagemRepository implements Repositorio<Integer, Viagem>{
 
             String sql = "INSERT INTO LOGISTICA.VIAGEM\n" +
                     "(ID_VIAGEM, ID_CAMINHAO, ID_ROTA, ID_USUARIO, FINALIZADA)\n" +
-                    "VALUES(?, ?, ?, ?, ?);";
+                    "VALUES(?, ?, ?, ?, ?)";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
@@ -45,7 +45,6 @@ public class ViagemRepository implements Repositorio<Integer, Viagem>{
             stmt.setInt(3, viagem.getRota().getIdRota());
             stmt.setInt(4, viagem.getUsuario().getId());
             stmt.setInt(5, viagem.getFinalizada());
-
 
             int res = stmt.executeUpdate();
             if (res == 0) {
