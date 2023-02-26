@@ -144,14 +144,19 @@ public class ViagemRepository implements Repositorio<Integer, Viagem>{
             con = ConexaoBancoDeDados.getConnection();
 
             String sql = "SELECT * \n" +
-                    "\tFROM viagem v\n" +
-                    "\t\tINNER JOIN USUARIO u  ON v.ID_USUARIO = u.ID_USUARIO \n" +
-                    "\t\tINNER JOIN CAMINHAO c ON c.ID_CAMINHAO = v.ID_CAMINHAO \n" +
-                    "\t\tINNER JOIN ROTA r ON r.ID_ROTA = r.ID_ROTA ";
+                    "\tFROM LOGISTICA.VIAGEM v\n" +
+                    "\t\tINNER JOIN LOGISTICA.USUARIO u  ON v.ID_USUARIO = u.ID_USUARIO \n" +
+                    "\t\tINNER JOIN LOGISTICA.CAMINHAO c ON c.ID_CAMINHAO = v.ID_CAMINHAO \n" +
+                    "\t\tINNER JOIN LOGISTICA.ROTA r ON r.ID_ROTA = r.ID_ROTA \n" +
+                    "ORDER BY v.ID_VIAGEM";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             // Executa-se a consulta
             ResultSet rs = stmt.executeQuery();
+
+            Viagem viagemAnt = new Viagem();
+            viagemAnt.setIdViagem(0);
+
             while (rs.next()) {
                 Viagem viagem = new Viagem();
                 Usuario usuario = new Usuario();
@@ -182,7 +187,11 @@ public class ViagemRepository implements Repositorio<Integer, Viagem>{
                 viagem.setRota(rota);
                 viagem.setCaminhao(caminhao);
 
-                viagens.add(viagem);
+                if (viagemAnt.getIdViagem() != viagem.getIdViagem()) { //Faz com que não se crie rotas repetidas
+                    viagens.add(viagem);
+                    viagemAnt.setIdViagem(viagem.getIdViagem());
+                }
+
             }
 
         } catch (SQLException e) {

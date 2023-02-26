@@ -54,7 +54,14 @@ public class ViagemService {
         }
     }
 
-
+    public void listarViagens(){
+        try {
+            List<Viagem> listar = viagemRepository.listar();
+            listar.forEach(System.out::println);
+        } catch (BancoDeDadosException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

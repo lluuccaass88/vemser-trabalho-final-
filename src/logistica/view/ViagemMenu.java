@@ -61,7 +61,7 @@ public class ViagemMenu {
                     viagemService.adicionarViagem(viagem);
                 }
                 case 2 -> {
-//                    viagemService.listarViagens();
+                   viagemService.listarViagens();
                 }
                 case 3 -> {
 //                    viagemService.editar();
