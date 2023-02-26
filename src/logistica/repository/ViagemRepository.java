@@ -191,6 +191,70 @@ public class ViagemRepository implements Repositorio<Integer, Viagem>{
         return viagens;
     }
 
+    public Viagem buuscaViagemId(int index) throws BancoDeDadosException{
+        Connection con = null;
+        Viagem viagem = new Viagem();
+        
+        try {
+            con = ConexaoBancoDeDados.getConnection();
 
+            String sql = "SELECT * \n" +
+                    "\tFROM LOGISTICA.VIAGEM v\n" +
+                    "\t\tINNER JOIN LOGISTICA.USUARIO u  ON v.ID_USUARIO = u.ID_USUARIO \n" +
+                    "\t\tINNER JOIN LOGISTICA.CAMINHAO c ON c.ID_CAMINHAO = v.ID_CAMINHAO \n" +
+                    "\t\tINNER JOIN LOGISTICA.ROTA r ON r.ID_ROTA = r.ID_ROTA \n" +
+                    "WHERE v.ID_VIAGEM  = ?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            stmt.setInt(1, index);
+            // Executa-se a consulta
+            ResultSet rs = stmt.executeQuery();
+                  
+            while (rs.next()) {
+
+                Usuario usuario = new Usuario();
+                Rota rota = new Rota();
+                Caminhao caminhao = new Caminhao();
+
+                usuario.setId(rs.getInt("ID_USUARIO"));
+                usuario.setNome(rs.getString("NOME"));
+                usuario.setUsuario(rs.getString("USUARIO"));
+                usuario.setSenha(rs.getString("SENHA"));
+                usuario.setPerfil(Perfil.ofTipoPerfil(rs.getInt("PERFIL")));
+                usuario.setCpf(rs.getString("CPF"));
+                usuario.setCnh(rs.getString("CNH"));
+
+                rota.setIdRota(rs.getInt("ID_ROTA"));
+                rota.setDescricao(rs.getString("DESCRICAO"));
+                rota.setLocalDestino(rs.getString("LOCALPARTIDA"));
+                rota.setLocalPartida(rs.getString("LOCALDESTINO"));
+
+                caminhao.setIdCaminhao(rs.getInt("ID_CAMINHAO"));
+                caminhao.setModelo(rs.getString("MODELO"));
+                caminhao.setPlaca(rs.getString("PLACA"));
+                caminhao.setGasolina(rs.getInt("GASOLINA"));
+                caminhao.setEmViagem(EmViagem.getOpcaoEmViagem(rs.getInt("EMVIAGEM")));
+
+                viagem.setIdViagem(rs.getInt("ID_VIAGEM"));
+                viagem.setUsuario(usuario);
+                viagem.setRota(rota);
+                viagem.setCaminhao(caminhao);
+
+            }
+
+        } catch (SQLException e) {
+            throw new BancoDeDadosException("Erro ao listar caminhoes cadastrados: " + e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return viagem;
+    }
 
 }

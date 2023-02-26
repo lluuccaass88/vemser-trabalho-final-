@@ -55,11 +55,7 @@ public class ViagemMenu {
                     viagemService.adicionarViagem(viagem);
                 }
                 case 2 -> {
-<<<<<<< HEAD
                    viagemService.listarViagens();
-=======
-                   //viagemService.listarViagens();
->>>>>>> 53fab628cce66ee7935bb9e3d18621a79e0686d1
                 }
 
                 case 3 -> {
@@ -87,7 +83,7 @@ public class ViagemMenu {
                         try {
                             int id = sc.nextInt();
                             sc.nextLine();
-                            //viagemService.finalizarViagem(id);
+                            viagemService.finalizarViagem(id);
                             validacao = true;
                         } catch (InputMismatchException ex) {
                             System.err.println("Número inválido");

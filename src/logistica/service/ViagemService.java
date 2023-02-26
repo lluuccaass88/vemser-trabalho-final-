@@ -38,10 +38,15 @@ public class ViagemService {
     // removendo um obejto do tipo Viagem passando o ID
     public void finalizarViagem(Integer id) { //Precia pegar o id co caminhão que esta ligado nessa viagem
         CaminhaoRepository caminhaoRepository = new CaminhaoRepository();
-        try {
-            boolean conseguiuFianlizar = viagemRepository.remover(id);
-            boolean conseguiuMudarEmViagem = caminhaoRepository.editaEmViagem(id);
+        Viagem viagemFinalizada = new Viagem();
 
+        try {
+
+            boolean conseguiuFianlizar = viagemRepository.remover(id);
+            viagemFinalizada = viagemRepository.buuscaViagemId(id);//Retorna a viagem a ser finalizada
+            boolean conseguiuMudarEmViagem = caminhaoRepository.editaEmViagem(viagemFinalizada.getCaminhao().getIdCaminhao()); //Edita o status do caminhão para estacionado
+            viagemFinalizada.setFinalizada(1); //Mudando o status para finalizado
+            //AQUI VAI A FUNÇÃO DE EDITAR VIAGEM PARA MUDAR O STATUS DA VIAGEM NO BANCO
 
             if (conseguiuFianlizar && conseguiuMudarEmViagem) {
                 System.out.println("Viagem " + conseguiuFianlizar + "| com id= "
