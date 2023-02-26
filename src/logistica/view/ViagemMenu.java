@@ -1,17 +1,13 @@
 package src.logistica.view;
 
-import src.logistica.model.Usuario;
-import src.logistica.model.Perfil;
-import src.logistica.model.Usuario;
-import src.logistica.model.Viagem;
+
+import src.logistica.model.*;
 import src.logistica.service.CaminhaoService;
 import src.logistica.service.RotaService;
-import src.logistica.service.UsuarioService;
 import src.logistica.model.Viagem;
-import src.logistica.service.CaminhaoService;
-import src.logistica.service.UsuarioService;
 import src.logistica.service.ViagemService;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ViagemMenu {
@@ -23,21 +19,19 @@ public class ViagemMenu {
 
     public void menuViagem(Usuario usuario) {
 
+    Viagem viagem = new Viagem();
+
         Scanner sc = new Scanner(System.in);
         int opcao = -1;
 
         while (opcao != 0) {
             System.out.println("""
-                    ==========Menu Usuário==========
-                    Cadastrar Viagem :          [1]
-                    Listar Usuário:             [2]
-                    Editar Usuário:             [3]
-                    Excluir Usuário :           [4]
                     ==========Menu Viagem==========
                     Cadastrar Viagem :          [1]
                     Listar Viagens:             [2]
                     Editar Viagem:              [3]
-                    Excluir Viagem :            [4]
+                    Finalizar Viagem :          [4]
+                    Listar Viagens Finalizadas  [5]
                     Retornar ao Menu Principal: [0]
                     Digite sua opção:\s""");
             opcao = sc.nextInt();
@@ -61,14 +55,47 @@ public class ViagemMenu {
                     viagemService.adicionarViagem(viagem);
                 }
                 case 2 -> {
-//                    viagemService.listarViagens();
+                   //viagemService.listarViagens();
                 }
+
                 case 3 -> {
-//                    viagemService.editar();
-                }
+                    System.out.println("Editando Viagem...");
+                    System.out.println("Digite o ID da viagem que deseja editar: ");
+                    int id = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Informe o id do caminhão: ");
+                    viagem.setCaminhao(caminhaoService.retornaPorId(id));
+                    System.out.println("Selecione o id da rota que deseja fazer: ");
+                    rotaService.listarRotas();
+                    id = sc.nextInt();
+                    sc.nextLine();
+                    viagem.setRota(rotaService.retornaPorId(id));
+                    //viagemService.editarViagem(id, viagem);
+
+                    }
+
                 case 4 -> {
-//                    viagemService.finalizar();
+                    System.out.println("Finalizar Viagem...");
+                    //viagemService.listarViagens();
+                    System.out.println("Digite o ID da viagem que deseja finalizar: ");
+                    boolean validacao = false;
+                    while (!validacao) {
+                        try {
+                            int id = sc.nextInt();
+                            sc.nextLine();
+                            //viagemService.finalizarViagem(id);
+                            validacao = true;
+                        } catch (InputMismatchException ex) {
+                            System.err.println("Número inválido");
+                        }
+                    }
                 }
+                
+                case 5 -> {
+                    System.out.println("Listando viagens finalizadas: ");
+                    //viagemService.listarViagensFinalizadas();
+                }
+
                 case 0 -> {
                     System.out.println("Retornando ao Menu Principal");
                 }
