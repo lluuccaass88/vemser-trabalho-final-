@@ -93,7 +93,7 @@ public class ViagemMenu {
                 
                 case 5 -> {
                     System.out.println("Listando viagens finalizadas: ");
-                    //viagemService.listarViagensFinalizadas();
+                    viagemService.listarViagensFinalizadas();
                 }
 
                 case 0 -> {

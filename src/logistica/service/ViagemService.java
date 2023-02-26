@@ -69,6 +69,20 @@ public class ViagemService {
     }
 
 
+    public void listarViagensFinalizadas(){
+        try {
+            List<Viagem> listar = viagemRepository.listar();
+            List<Viagem> viagensFinalizadas = listar.stream()
+                    .filter(elemento -> elemento.getFinalizada() == 1) //Descobrir cm compara o enum para listar somente os que não estiverem em viagem
+                    .toList();
+            viagensFinalizadas.forEach(System.out::println);
+        } catch (BancoDeDadosException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 
 
