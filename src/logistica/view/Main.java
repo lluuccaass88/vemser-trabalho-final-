@@ -1,5 +1,6 @@
 package src.logistica.view;
 
+import src.logistica.model.Caminhao;
 import src.logistica.model.Usuario;
 import src.logistica.service.CaminhaoService;
 
@@ -33,7 +34,6 @@ public class Main {
                         Caminhões:       [2]
                         Postos:          [3]
                         Rotas:           [4]
-                        Viagens:         [5]
                         Sair do Sistema: [0]
                         Digite sua opção:\s""");
                 opcao = scanner.nextInt();
@@ -55,10 +55,6 @@ public class Main {
                         System.out.println("Acessando o Menu de Rotas");
                         rotaMenu.menuRota();
                     }
-                    case 5 -> {
-                        System.out.println("Acessando o Menu de Viagens");
-                        viagemMenu.menuViagem(usuarioLogado);
-                    }
                     case 0 -> {
                         System.out.println("Saindo do Sistema...");
                     }
@@ -69,13 +65,14 @@ public class Main {
             while (opcao != 0) {
                 System.out.println("""
                         =========MENU PRINCIPAL=========
-                        Viagens:         [1]
-                        Abastecimento:   [2]
-                        Caminhoes:       [3]
-                        Sair do Sistema: [0]
+                        Viagens:                [1]
+                        Abastecimento:          [2]
+                        Caminhoes disponiveis:  [3]
+                        Sair do Sistema:        [0]
                         Digite sua opção:\s""");
                 opcao = scanner.nextInt();
                 scanner.nextLine();
+                System.out.println("opcao viagem" + opcao);
                 switch (opcao) {
 
                     case 1 -> {
@@ -84,7 +81,16 @@ public class Main {
                     }
                     case 2 -> {
                         System.out.println("Acessando o Menu de Abastecimento");
-                        caminhaoService.abastecerCaminhao();
+                        caminhaoService.listarCaminhoesLivres();
+                        System.out.println("Informe a ID do caminhhão que deseja realizar abastecimento");
+                        int index = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.println("Abastecendo o caminhão " + index + " informando que o caminhão já tem + "
+                                + caminhaoService.retornaPorId(index).getGasolina() + " % do seu tanque preenchido");
+                        System.out.println("Informe a quantidade de gasolina (em %) que deseja abastecer:");
+                        int gasolina = scanner.nextInt();
+                        scanner.nextLine();
+                        caminhaoService.abastecerCaminhao(index, gasolina);
                     }
                     case 3 -> {
                         System.out.println("Listando todos os caminhoes disponiveis para viagens");

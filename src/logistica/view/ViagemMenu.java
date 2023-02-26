@@ -38,12 +38,13 @@ public class ViagemMenu {
 
             switch (opcao) {
                 case 1 -> {
+                    int id;
+
                     System.out.println("Listando Caminhões Livres para Viagem..");
                     caminhaoService.listarCaminhoesLivres();
-                    int id = sc.nextInt();
+                    id = sc.nextInt();
                     sc.nextLine();
                     viagem.setCaminhao(caminhaoService.retornaPorId(id));
-
                     System.out.println("Selecione o id da rota que deseja fazer: ");
                     rotaService.listarRotas();
                     id = sc.nextInt();
