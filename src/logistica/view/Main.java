@@ -58,7 +58,7 @@ public class Main {
                     }
                     case 5 -> {
                         System.out.println("Acessando o Menu de Viagens");
-                        viagemMenu.menuUsuario();
+                        viagemMenu.menuViagem();
                     }
                     case 0 -> {
                         System.out.println("Saindo do Sistema...");
@@ -81,7 +81,7 @@ public class Main {
 
                     case 1 -> {
                         System.out.println("Acessando as viagens ... ");
-//                        usuarioMenu.menuUsuario();
+                        viagemMenu.menuViagem();
                     }
                     case 2 -> {
                         System.out.println("Acessando o Menu de Abastecimento");

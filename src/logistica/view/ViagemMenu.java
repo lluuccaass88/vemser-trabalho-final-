@@ -1,6 +1,9 @@
 package src.logistica.view;
 
+import src.logistica.model.Usuario;
 import src.logistica.model.Viagem;
+import src.logistica.service.CaminhaoService;
+import src.logistica.service.UsuarioService;
 import src.logistica.service.ViagemService;
 
 import java.util.Scanner;
@@ -10,7 +13,7 @@ public class ViagemMenu {
     CaminhaoService caminhaoService = new CaminhaoService();
     Usuario usuario = new Usuario();
 
-    public void menuUsuario() {
+    public void menuViagem() {
         Scanner sc = new Scanner(System.in);
         int opcao = -1;
         while (opcao != 0) {
