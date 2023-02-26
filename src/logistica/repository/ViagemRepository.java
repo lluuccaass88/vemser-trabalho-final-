@@ -51,7 +51,7 @@ public class ViagemRepository implements Repositorio<Integer, Viagem>{
                 throw new BancoDeDadosException("Erro ao adicionar viagem");
             } else {
                 System.out.println("Viagem cadastrado com sucesso!" +
-                        "\nadicionarCaminhão.res=" + res);
+                        "\nadicionarViagem.res=" + res);
             }
             return viagem;
         } catch (SQLException e) {
@@ -73,21 +73,22 @@ public class ViagemRepository implements Repositorio<Integer, Viagem>{
         try {
             con = ConexaoBancoDeDados.getConnection();
 
-            String sql = "DELETE FROM LOGISTICA.CAMINHAO WHERE ID_CAMINHAO = ?";
+            String sql = "UPDATE LOGISTICA.VIAGEM SET FINALIZADA = 1 WHERE ID_VIAGEM = ?";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, id);
+
             // Executa-se a consulta SQL
             int res = stmt.executeUpdate();
             if (res == 0) {
-                throw new BancoDeDadosException("Erro ao remover caminhão");
+                throw new BancoDeDadosException("Erro ao remover Viagem");
             } else {
-                System.out.println("Caminhão removido com sucesso!" +
+                System.out.println("Viagem finalizada com sucesso!" +
                         "\nremoverCaminhão.res=" + res);
                 return res > 0;
             }
         } catch (SQLException e) {
-            throw new BancoDeDadosException("Erro ao remover caminhão" + e);
+            throw new BancoDeDadosException("Erro ao finalizar viagem" + e);
         } finally {
             try {
                 if (con != null) {
@@ -142,20 +143,45 @@ public class ViagemRepository implements Repositorio<Integer, Viagem>{
         try {
             con = ConexaoBancoDeDados.getConnection();
 
-            String sql = "SELECT * FROM LOGISTICA.CAMINHAO";
+            String sql = "SELECT * \n" +
+                    "\tFROM viagem v\n" +
+                    "\t\tINNER JOIN USUARIO u  ON v.ID_USUARIO = u.ID_USUARIO \n" +
+                    "\t\tINNER JOIN CAMINHAO c ON c.ID_CAMINHAO = v.ID_CAMINHAO \n" +
+                    "\t\tINNER JOIN ROTA r ON r.ID_ROTA = r.ID_ROTA ";
 
             PreparedStatement stmt = con.prepareStatement(sql);
             // Executa-se a consulta
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Viagem viagem = new Viagem();
-//                viagem.se
-//
-//                caminhao.setIdCaminhao(rs.getInt("ID_CAMINHAO"));
-//                caminhao.setModelo(rs.getString("MODELO"));
-//                caminhao.setPlaca(rs.getString("PLACA"));
-//                caminhao.setGasolina(rs.getInt("GASOLINA"));
-//                caminhao.setEmViagem(EmViagem.getOpcaoEmViagem(rs.getInt("EMVIAGEM")));
+                Usuario usuario = new Usuario();
+                Rota rota = new Rota();
+                Caminhao caminhao = new Caminhao();
+
+                usuario.setId(rs.getInt("ID_USUARIO"));
+                usuario.setNome(rs.getString("NOME"));
+                usuario.setUsuario(rs.getString("USUARIO"));
+                usuario.setSenha(rs.getString("SENHA"));
+                usuario.setPerfil(Perfil.ofTipoPerfil(rs.getInt("PERFIL")));
+                usuario.setCpf(rs.getString("CPF"));
+                usuario.setCnh(rs.getString("CNH"));
+
+                rota.setIdRota(rs.getInt("ID_ROTA"));
+                rota.setDescricao(rs.getString("DESCRICAO"));
+                rota.setLocalDestino(rs.getString("LOCALPARTIDA"));
+                rota.setLocalPartida(rs.getString("LOCALDESTINO"));
+
+                caminhao.setIdCaminhao(rs.getInt("ID_CAMINHAO"));
+                caminhao.setModelo(rs.getString("MODELO"));
+                caminhao.setPlaca(rs.getString("PLACA"));
+                caminhao.setGasolina(rs.getInt("GASOLINA"));
+                caminhao.setEmViagem(EmViagem.getOpcaoEmViagem(rs.getInt("EMVIAGEM")));
+
+                viagem.setIdViagem(rs.getInt("ID_VIAGEM"));
+                viagem.setUsuario(usuario);
+                viagem.setRota(rota);
+                viagem.setCaminhao(caminhao);
+
                 viagens.add(viagem);
             }
 
@@ -172,4 +198,7 @@ public class ViagemRepository implements Repositorio<Integer, Viagem>{
         }
         return viagens;
     }
+
+
+
 }

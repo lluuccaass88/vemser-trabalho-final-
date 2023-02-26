@@ -54,4 +54,24 @@ public class Viagem  {
     public void setFinalizada(int finalizada) {
         this.finalizada = finalizada;
     }
+
+    @Override
+    public String toString() {
+        if(finalizada != 0){
+            return "Viagem{" +
+                    "id Viagem = " + idViagem +
+                    ", Placa do caminhao = " + caminhao.getPlaca() +
+                    ", rota = " + rota.getDescricao() +
+                    ", usuario = " + usuario.getNome() +
+                    ", viagem finalizada }";
+        }else{
+            return "Viagem{" +
+                    "idViagem=" + idViagem +
+                    ", Placa do caminhao = " + caminhao.getPlaca() +
+                    ", rota = " + rota.getDescricao() +
+                    ", usuario = " + usuario.getNome() +
+                    ", viagem em andamento }";
+        }
+
+    }
 }

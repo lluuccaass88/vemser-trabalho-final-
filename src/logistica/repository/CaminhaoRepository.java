@@ -103,6 +103,7 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
     @Override
     public boolean editar(Integer id, Caminhao caminhao) throws BancoDeDadosException {
         Connection con = null;
+
         try {
             con = ConexaoBancoDeDados.getConnection();
             StringBuilder sql = new StringBuilder();
@@ -113,7 +114,14 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
             sql.append("EMVIAGEM = ? ");
             sql.append("WHERE ID_CAMINHAO = ?");
             PreparedStatement stmt = con.prepareStatement(sql.toString());
-            // Executa-se a consulta
+
+            stmt.setString(1, caminhao.getModelo());
+            stmt.setString(2, caminhao.getPlaca());
+            stmt.setInt(3, caminhao.getGasolina());
+            stmt.setInt(4, caminhao.getEmViagem().getOpcao());
+            stmt.setInt(5, caminhao.getIdCaminhao());
+
+              // Executa-se a consulta
             int res = stmt.executeUpdate();
             System.out.println("editarCaminhao.res=" + res);
             if (res == 0) {
@@ -208,5 +216,42 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
             }
         }
         return caminhao;
+    }
+
+    public boolean editaEmViagem (int index)throws BancoDeDadosException{
+        Connection con = null;
+
+        try {
+            con = ConexaoBancoDeDados.getConnection();
+            StringBuilder sql = new StringBuilder();
+            sql.append("UPDATE LOGISTICA.CAMINHAO SET ");
+            sql.append("EMVIAGEM = 1 ");
+            sql.append("WHERE ID_CAMINHAO = ?");
+            PreparedStatement stmt = con.prepareStatement(sql.toString());
+
+            stmt.setInt(1, index);
+            // Executa-se a consulta
+            int res = stmt.executeUpdate();
+            System.out.println("EmVoiagemEditado.res=" + res);
+
+            if (res == 0) {
+                throw new BancoDeDadosException("Erro ao editar caminhão");
+            } else {
+                System.out.println("Caminhão editado com sucesso!" +
+                        "\neditarCaminhão.res=" + res);
+                return true;
+            }
+
+        } catch (SQLException e) {
+            throw new BancoDeDadosException("Erro ao editar caminhão" + e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

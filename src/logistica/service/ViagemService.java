@@ -2,7 +2,9 @@ package src.logistica.service;
 
 import src.logistica.exception.BancoDeDadosException;
 import src.logistica.model.Caminhao;
+import src.logistica.model.EmViagem;
 import src.logistica.model.Viagem;
+import src.logistica.repository.CaminhaoRepository;
 import src.logistica.repository.ViagemRepository;
 
 import java.util.List;
@@ -10,14 +12,21 @@ import java.util.List;
 public class ViagemService {
     private ViagemRepository viagemRepository;
 
+
     public ViagemService() {
+
         viagemRepository = new ViagemRepository();
     }
 
     // criando um objeto do tipo Caminhao
     public void adicionarViagem(Viagem viagem) {
+        CaminhaoRepository caminhaoRepository = new CaminhaoRepository();
         try {
             Viagem viagemAdicionada = viagemRepository.adicionar(viagem);
+
+            viagem.getCaminhao().setEmViagem(EmViagem.getOpcaoEmViagem(2)); //Mudando o status do caminhão de estacionado para em viagem
+            caminhaoRepository.editar(viagem.getCaminhao().getIdCaminhao(), viagem.getCaminhao());
+
             System.out.println("Viagem adicionado com sucesso: " + viagemAdicionada);
         } catch (BancoDeDadosException e) {
             e.printStackTrace();
@@ -26,20 +35,42 @@ public class ViagemService {
         }
     }
 
-    // removendo um obejto do tipo Caminhao passando o ID
-//    public void removerCaminhao(Integer id) {
-//        try {
-//            boolean conseguiuRemover = caminhaoRepository.remover(id);
-//            if (conseguiuRemover) {
-//                System.out.println("Caminhão " + conseguiuRemover + "| com id= "
-//                        + id + " removido com sucesso");
-//            } else {
-//                System.out.println("Não foi possível remover o " + id + " do caminhão");
-//            }
-//        } catch (BancoDeDadosException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    // removendo um obejto do tipo Viagem passando o ID
+    public void finalizarViagem(Integer id) { //Precia pegar o id co caminhão que esta ligado nessa viagem
+        CaminhaoRepository caminhaoRepository = new CaminhaoRepository();
+        try {
+            boolean conseguiuFianlizar = viagemRepository.remover(id);
+            boolean conseguiuMudarEmViagem = caminhaoRepository.editaEmViagem(id);
+
+
+            if (conseguiuFianlizar && conseguiuMudarEmViagem) {
+                System.out.println("Viagem " + conseguiuFianlizar + "| com id= "
+                        + id + " finalizada com sucesso");
+            } else {
+                System.out.println("Não foi possível finalizar a " + id + " da viagem");
+            }
+        } catch (BancoDeDadosException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //    // editando um objeto do tipo Caminhao passando o ID e o objeto CAMINHAO
 //    public void editarCaminhao(Integer id, Caminhao caminhao) {
 //        try {
@@ -64,6 +95,16 @@ public class ViagemService {
 //        }
 //    }
 }
+
+
+
+
+
+
+
+
+
+
 //    private ArrayList<Viagem> listaViagem = new ArrayList();
 //
 //    public void adicionaViagem(Viagem viagem){
