@@ -104,24 +104,7 @@ public class ViagemRepository implements Repositorio<Integer, Viagem>{
         Connection con = null;
         try {
             con = ConexaoBancoDeDados.getConnection();
-            StringBuilder sql = new StringBuilder();
-            sql.append("UPDATE LOGISTICA.CAMINHAO SET ");
-            sql.append("MODELO = ?, ");
-            sql.append("PLACA = ?, ");
-            sql.append("GASOLINA = ?, ");
-            sql.append("EMVIAGEM = ? ");
-            sql.append("WHERE ID_CAMINHAO = ?");
-            PreparedStatement stmt = con.prepareStatement(sql.toString());
-            // Executa-se a consulta
-            int res = stmt.executeUpdate();
-            System.out.println("editarCaminhao.res=" + res);
-            if (res == 0) {
-                throw new BancoDeDadosException("Erro ao editar caminhão");
-            } else {
-                System.out.println("Caminhão editado com sucesso!" +
-                        "\neditarCaminhão.res=" + res);
-                return res > 0;
-            }
+            return true;
         } catch (SQLException e) {
             throw new BancoDeDadosException("Erro ao editar caminhão" + e);
         } finally {
