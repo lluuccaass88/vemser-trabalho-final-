@@ -2,7 +2,6 @@ package src.logistica.view;
 
 import src.logistica.model.Usuario;
 import src.logistica.service.CaminhaoService;
-import src.logistica.service.UsuarioService;
 
 import java.util.Scanner;
 
@@ -58,7 +57,7 @@ public class Main {
                     }
                     case 5 -> {
                         System.out.println("Acessando o Menu de Viagens");
-                        viagemMenu.menuViagem();
+                        viagemMenu.menuViagem(usuarioLogado);
                     }
                     case 0 -> {
                         System.out.println("Saindo do Sistema...");
@@ -81,7 +80,7 @@ public class Main {
 
                     case 1 -> {
                         System.out.println("Acessando as viagens ... ");
-                        viagemMenu.menuViagem();
+                        viagemMenu.menuViagem(usuarioLogado);
                     }
                     case 2 -> {
                         System.out.println("Acessando o Menu de Abastecimento");
