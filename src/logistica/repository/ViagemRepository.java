@@ -216,7 +216,7 @@ public class ViagemRepository implements Repositorio<Integer, Viagem>{
         return viagens;
     }
 
-    public Viagem buuscaViagemId(int index) throws BancoDeDadosException{
+    public Viagem buscaViagemId(int index) throws BancoDeDadosException{
         Connection con = null;
         Viagem viagem = new Viagem();
         

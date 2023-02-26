@@ -218,7 +218,7 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
         return caminhao;
     }
 
-    public boolean editaEmViagem (int index)throws BancoDeDadosException{
+    public boolean estacionar(int index)throws BancoDeDadosException{
         Connection con = null;
 
         try {
@@ -226,6 +226,43 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
             StringBuilder sql = new StringBuilder();
             sql.append("UPDATE LOGISTICA.CAMINHAO SET ");
             sql.append("EMVIAGEM = 1 ");
+            sql.append("WHERE ID_CAMINHAO = ?");
+            PreparedStatement stmt = con.prepareStatement(sql.toString());
+
+            stmt.setInt(1, index);
+            // Executa-se a consulta
+            int res = stmt.executeUpdate();
+            System.out.println("EmVoiagemEditado.res=" + res);
+
+            if (res == 0) {
+                throw new BancoDeDadosException("Erro ao editar caminhão");
+            } else {
+                System.out.println("Caminhão editado com sucesso!" +
+                        "\neditarCaminhão.res=" + res);
+                return true;
+            }
+
+        } catch (SQLException e) {
+            throw new BancoDeDadosException("Erro ao editar caminhão" + e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public boolean viajar(int index)throws BancoDeDadosException{
+        Connection con = null;
+
+        try {
+            con = ConexaoBancoDeDados.getConnection();
+            StringBuilder sql = new StringBuilder();
+            sql.append("UPDATE LOGISTICA.CAMINHAO SET ");
+            sql.append("EMVIAGEM = 0 ");
             sql.append("WHERE ID_CAMINHAO = ?");
             PreparedStatement stmt = con.prepareStatement(sql.toString());
 
