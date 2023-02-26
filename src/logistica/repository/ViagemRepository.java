@@ -190,6 +190,7 @@ public class ViagemRepository implements Repositorio<Integer, Viagem>{
                 caminhao.setEmViagem(EmViagem.getOpcaoEmViagem(rs.getInt("EMVIAGEM")));
 
                 viagem.setIdViagem(rs.getInt("ID_VIAGEM"));
+                viagem.setFinalizada(rs.getInt("FINALIZADA"));
                 viagem.setUsuario(usuario);
                 viagem.setRota(rota);
                 viagem.setCaminhao(caminhao);

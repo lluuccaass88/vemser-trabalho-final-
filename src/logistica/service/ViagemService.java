@@ -46,7 +46,6 @@ public class ViagemService {
             boolean conseguiuMudarEmViagem = caminhaoRepository.editaEmViagem(viagemFinalizada.getCaminhao().getIdCaminhao()); //Edita o status do caminhão para estacionado
             viagemFinalizada.setFinalizada(1); //Mudando o status para finalizado
             viagemRepository.editar(id, viagemFinalizada);
-            //AQUI VAI A FUNÇÃO DE EDITAR VIAGEM PARA MUDAR O STATUS DA VIAGEM NO BANCO
             if (conseguiuFianlizar && conseguiuMudarEmViagem) {
                 System.out.println("Viagem " + conseguiuFianlizar + "| com id= "
                         + id + " finalizada com sucesso");

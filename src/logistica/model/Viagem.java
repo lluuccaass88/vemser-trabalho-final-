@@ -57,7 +57,7 @@ public class Viagem  {
 
     @Override
     public String toString() {
-        if(finalizada != 0){
+        if(this.finalizada == 1 ){
             return "Viagem{" +
                     "id Viagem = " + idViagem +
                     ", Placa do caminhao = " + caminhao.getPlaca() +
