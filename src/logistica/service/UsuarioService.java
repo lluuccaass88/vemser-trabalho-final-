@@ -1,6 +1,7 @@
 package src.logistica.service;
 
 import src.logistica.exception.BancoDeDadosException;
+import src.logistica.exception.RegraDeNegocioException;
 import src.logistica.model.Usuario;
 import src.logistica.repository.UsuarioRepository;
 
@@ -18,10 +19,10 @@ public class UsuarioService {
     public void adicionarUsuario(Usuario usuario) {
         try {
             if (usuario.getCpf().length() != 11) {
-                throw new Exception("CPF inválido");
+                throw new RegraDeNegocioException("CPF inválido, deve conter 11 digitos");
             }
             if (usuario.getCnh().length() != 11) {
-                throw new Exception("CNH inválida");
+                throw new RegraDeNegocioException("CNH inválida, deve conter 11 digitos");
             }
             Usuario usuarioAdicionado = usuarioRepository.adicionar(usuario);
             System.out.println("Usuário adicionado com sucesso: " + usuarioAdicionado);

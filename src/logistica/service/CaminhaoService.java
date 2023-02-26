@@ -1,6 +1,7 @@
 package src.logistica.service;
 
 import src.logistica.exception.BancoDeDadosException;
+import src.logistica.exception.RegraDeNegocioException;
 import src.logistica.model.Caminhao;
 import src.logistica.model.EmViagem;
 import src.logistica.repository.CaminhaoRepository;
@@ -19,7 +20,7 @@ public class CaminhaoService {
     public void adicionarCaminhao(Caminhao caminhao) {
         try {
             if (caminhao.getPlaca().length() < 8 || caminhao.getPlaca().length() > 10) {
-                throw new Exception("Placa inválida");
+                throw new RegraDeNegocioException("Placa inválida, deve conter entre 8 e 10 caracteres");
             }
             Caminhao caminhaoAdicionado = caminhaoRepository.adicionar(caminhao);
             System.out.println("Caminhão adicionado com sucesso: " + caminhaoAdicionado);
