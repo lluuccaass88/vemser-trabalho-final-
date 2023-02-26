@@ -14,7 +14,6 @@ public class PostoMenu {
     public void menuPosto() {
         Scanner sc = new Scanner(System.in);
         int opcao = -1;
-        int opcIdPosto = -1;
         while (opcao != 0) {
             System.out.println("""
                     ===============Menu Posto===============
@@ -70,7 +69,6 @@ public class PostoMenu {
                         }
                     }
                 }
-
                 case 0 -> {
                     System.out.println("Retornando ao Menu Principal");
                 }

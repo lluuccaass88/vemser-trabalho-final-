@@ -41,13 +41,12 @@ public class ViagemService {
         Viagem viagemFinalizada = new Viagem();
 
         try {
-
             boolean conseguiuFianlizar = viagemRepository.remover(id);
             viagemFinalizada = viagemRepository.buuscaViagemId(id);//Retorna a viagem a ser finalizada
             boolean conseguiuMudarEmViagem = caminhaoRepository.editaEmViagem(viagemFinalizada.getCaminhao().getIdCaminhao()); //Edita o status do caminhão para estacionado
             viagemFinalizada.setFinalizada(1); //Mudando o status para finalizado
+            viagemRepository.editar(id, viagemFinalizada);
             //AQUI VAI A FUNÇÃO DE EDITAR VIAGEM PARA MUDAR O STATUS DA VIAGEM NO BANCO
-
             if (conseguiuFianlizar && conseguiuMudarEmViagem) {
                 System.out.println("Viagem " + conseguiuFianlizar + "| com id= "
                         + id + " finalizada com sucesso");
@@ -59,7 +58,7 @@ public class ViagemService {
         }
     }
 
-    public void listarViagens(){
+    public void listarViagens() {
         try {
             List<Viagem> listar = viagemRepository.listar();
             listar.forEach(System.out::println);
@@ -69,7 +68,7 @@ public class ViagemService {
     }
 
 
-    public void listarViagensFinalizadas(){
+    public void listarViagensFinalizadas() {
         try {
             List<Viagem> listar = viagemRepository.listar();
             List<Viagem> viagensFinalizadas = listar.stream()
@@ -81,125 +80,17 @@ public class ViagemService {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    // editando um objeto do tipo Caminhao passando o ID e o objeto CAMINHAO
-//    public void editarCaminhao(Integer id, Caminhao caminhao) {
-//        try {
-//            boolean conseguiuEditar = caminhaoRepository.editar(id, caminhao);
-//            if (conseguiuEditar) {
-//                System.out.println("Caminhão " + conseguiuEditar + "| com id= "
-//                        + id + " editado com sucesso");
-//            } else {
-//                System.out.println("Não foi possível editar o " + id + " do caminhão");
-//            }
-//        } catch (BancoDeDadosException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//    // listando todos os objetos do tipo Caminhao
-//    public void listarCaminhoes(){
-//        try {
-//            List<Caminhao> listar = caminhaoRepository.listar();
-//            listar.forEach(System.out::println);
-//        } catch (BancoDeDadosException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public void editarViagem(Integer id, Viagem viagem) {
+        try {
+            boolean conseguiuEditar = viagemRepository.editar(id, viagem);
+            if (conseguiuEditar) {
+                System.out.println("Viagem " + conseguiuEditar + "| com id= "
+                        + id + " editada com sucesso");
+            } else {
+                System.out.println("Não foi possível editar a " + id + " da viagem");
+            }
+        } catch (BancoDeDadosException e) {
+            e.printStackTrace();
+        }
+    }
 }
-
-
-
-
-
-
-
-
-
-
-//    private ArrayList<Viagem> listaViagem = new ArrayList();
-//
-//    public void adicionaViagem(Viagem viagem){
-//        this.listaViagem.add(viagem);
-//    }
-//
-//    public void removerViagemPorIndice(Integer index) {
-//        this.listaViagem.remove(index.intValue());
-//    }
-//
-//    public void editarViagem(Integer index, Viagem viagem) {
-//        Viagem viagemProcurada = listaViagem.get(index);
-//
-//        viagemProcurada.getCaminhao().setEmViagem(false);
-//        viagemProcurada.getMotorista().setEmViagem(false);
-//
-//        viagemProcurada.setMotorista(viagem.getMotorista());
-//        viagemProcurada.setCaminhao(viagem.getCaminhao());
-//        viagemProcurada.setRota(viagem.getRota());
-//    }
-//
-//    public void listarViagens() {
-//        System.out.println("========== Viagens ==========");
-//        if(this.listaViagem.size() >= 1){
-//            for (int i = 0; i < listaViagem.size(); i++) {
-//                System.out.println("Id da viagem " + i + ": \n " + listaViagem.get(i).toString() + "\n");
-//            }
-//        }else{
-//            System.out.println("Não existem viagens cadastradas no momento.");
-//        }
-//
-//    }
-//
-//    public Viagem BuscaViagensId(int index) {
-//        return listaViagem.get(index);
-//    }
-//
-//    public void listarViagensRealizadas() {
-//        System.out.println("========= Viagens Reaizadas ==========");
-//        List<Viagem> filtrada = listaViagem.stream()
-//                .filter(elemento -> elemento.getFinalizada() == true)
-//                .toList();
-//
-//        if(filtrada.size() >= 1){
-//            for (int i = 0; i < filtrada.size(); i++) {
-//                System.out.println("Id da viagem " + i + ":\n " + filtrada.get(i).toString() + "\n");
-//            }
-//        }else{
-//            System.out.println("Não existem viagens realizadas no momento.");
-//        }
-//
-//    }
-//
-//    public void listarViagensEmAndamento() {
-//        System.out.println("========= Viagens Em andamento ==========");
-//        List<Viagem> filtrada = listaViagem.stream()
-//                .filter(elemento -> elemento.getFinalizada() == false)
-//                .toList();
-//
-//        if(filtrada.size() >= 1){
-//            for (int i = 0; i < filtrada.size(); i++) {
-//                System.out.println("Id da viagem " + i + ":\n " + filtrada.get(i).toString() + "\n");
-//            }
-//        }else{
-//            System.out.println("Não existem viagens em andamento no momento.");
-//        }
-//    }
-//
-//
-//
-//
-//}

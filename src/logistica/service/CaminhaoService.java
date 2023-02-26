@@ -45,8 +45,8 @@ public class CaminhaoService {
             e.printStackTrace();
         }
     }
-    // editando um objeto do tipo Caminhao passando o ID e o objeto CAMINHAO
 
+    // editando um objeto do tipo Caminhao passando o ID e o objeto CAMINHAO
     public void editarCaminhao(Integer id, Caminhao caminhao) {
         try {
             boolean conseguiuEditar = caminhaoRepository.editar(id, caminhao);
@@ -92,5 +92,8 @@ public class CaminhaoService {
         return null;
     }
 
-
+    // abastercer o caminhão somente em postos e se tiver em rota, se nao tiver em rota nao
+    // pode abastercer em qualquer posto independente de ser ou nao posto cadastrado.
+    public void abastecerCaminhao() {
+    }
 }

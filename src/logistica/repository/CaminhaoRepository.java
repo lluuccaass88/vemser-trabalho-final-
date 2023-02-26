@@ -254,4 +254,6 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
             }
         }
     }
+
+    
 }

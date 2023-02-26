@@ -15,7 +15,6 @@ public class ViagemMenu {
     RotaService rotaService = new RotaService();
     CaminhaoService caminhaoService = new CaminhaoService();
     Viagem viagem = new Viagem();
-    private int id;
 
     public void menuViagem(Usuario usuario) {
 
@@ -41,7 +40,7 @@ public class ViagemMenu {
                 case 1 -> {
                     System.out.println("Listando Caminhões Livres para Viagem..");
                     caminhaoService.listarCaminhoesLivres();
-                    id = sc.nextInt();
+                    int id = sc.nextInt();
                     sc.nextLine();
                     viagem.setCaminhao(caminhaoService.retornaPorId(id));
 
@@ -61,17 +60,20 @@ public class ViagemMenu {
                 case 3 -> {
                     System.out.println("Editando Viagem...");
                     System.out.println("Digite o ID da viagem que deseja editar: ");
-                    int id = sc.nextInt();
+                    int idViagem = sc.nextInt();
                     sc.nextLine();
                     System.out.println("Informe o id do caminhão: ");
-                    viagem.setCaminhao(caminhaoService.retornaPorId(id));
+                    caminhaoService.listarCaminhoesLivres();
+                    int idCaminhao = sc.nextInt();
+                    sc.nextLine();
+                    viagem.setCaminhao(caminhaoService.retornaPorId(idCaminhao));
                     System.out.println("Selecione o id da rota que deseja fazer: ");
                     rotaService.listarRotas();
-                    id = sc.nextInt();
+                    int idRota = sc.nextInt();
                     sc.nextLine();
-                    viagem.setRota(rotaService.retornaPorId(id));
-                    //viagemService.editarViagem(id, viagem);
-
+                    viagem.setRota(rotaService.retornaPorId(idRota));
+                    viagem.setUsuario(usuario);
+                    viagemService.editarViagem(idViagem, viagem);
                     }
 
                 case 4 -> {

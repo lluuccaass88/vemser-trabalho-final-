@@ -84,6 +84,7 @@ public class Main {
                     }
                     case 2 -> {
                         System.out.println("Acessando o Menu de Abastecimento");
+                        caminhaoService.abastecerCaminhao();
                     }
                     case 3 -> {
                         System.out.println("Listando todos os caminhoes disponiveis para viagens");
