@@ -17,7 +17,7 @@ public class PostoMenu {
         int opcIdPosto = -1;
         while (opcao != 0) {
             System.out.println("""
-                    ===============Menu Rotas===============
+                    ===============Menu Posto===============
                     Cadastrar Posto:             [1]
                     Listar Posto:                [2]
                     Editar Posto:                [3]

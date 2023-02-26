@@ -1,11 +1,8 @@
 package src.logistica.view;
 
-import src.logistica.model.Perfil;
-import src.logistica.model.Usuario;
-import src.logistica.service.CaminhaoService;
-import src.logistica.service.UsuarioService;
+import src.logistica.model.Viagem;
+import src.logistica.service.ViagemService;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ViagemMenu {
@@ -18,11 +15,11 @@ public class ViagemMenu {
         int opcao = -1;
         while (opcao != 0) {
             System.out.println("""
-                    ==========Menu Usuário==========
-                    Cadastrar Usuário :         [1]
-                    Listar Usuário:             [2]
-                    Editar Usuário:             [3]
-                    Excluir Usuário :           [4]
+                    ==========Menu Viagem==========
+                    Cadastrar Viagem :          [1]
+                    Listar Viagens:             [2]
+                    Editar Viagem:              [3]
+                    Excluir Viagem :            [4]
                     Retornar ao Menu Principal: [0]
                     Digite sua opção:\s""");
             opcao = sc.nextInt();
