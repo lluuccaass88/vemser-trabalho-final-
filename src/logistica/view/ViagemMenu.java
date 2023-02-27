@@ -38,11 +38,9 @@ public class ViagemMenu {
 
             switch (opcao) {
                 case 1 -> {
-                    int id;
-
                     System.out.println("Listando Caminhões Livres para Viagem..");
                     caminhaoService.listarCaminhoesLivres();
-                    id = sc.nextInt();
+                    int id = sc.nextInt();
                     sc.nextLine();
                     viagem.setCaminhao(caminhaoService.retornaPorId(id));
                     System.out.println("Selecione o id da rota que deseja fazer: ");
@@ -77,7 +75,7 @@ public class ViagemMenu {
                     }
                 case 4 -> {
                     System.out.println("Finalizar Viagem...");
-                    //viagemService.listarViagens();
+                    viagemService.listarViagens();
                     System.out.println("Digite o ID da viagem que deseja finalizar: ");
                     boolean validacao = false;
                     while (!validacao) {

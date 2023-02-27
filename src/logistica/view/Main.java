@@ -71,9 +71,7 @@ public class Main {
                         Digite sua opção:\s""");
                 opcao = scanner.nextInt();
                 scanner.nextLine();
-                System.out.println("opcao viagem" + opcao);
                 switch (opcao) {
-
                     case 1 -> {
                         System.out.println("Acessando as viagens ... ");
                         viagemMenu.menuViagem(usuarioLogado);

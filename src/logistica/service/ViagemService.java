@@ -1,7 +1,6 @@
 package src.logistica.service;
 
 import src.logistica.exception.BancoDeDadosException;
-import src.logistica.model.Caminhao;
 import src.logistica.model.EmViagem;
 import src.logistica.model.Viagem;
 import src.logistica.repository.CaminhaoRepository;
@@ -13,13 +12,11 @@ import java.util.List;
 public class ViagemService {
     private ViagemRepository viagemRepository;
 
-
     public ViagemService() {
-
         viagemRepository = new ViagemRepository();
     }
 
-    // criando um objeto do tipo Caminhao
+    // criando um objeto do tipo Viagem
     public void adicionarViagem(Viagem viagem) {
         CaminhaoRepository caminhaoRepository = new CaminhaoRepository();
         try {
@@ -28,7 +25,7 @@ public class ViagemService {
             viagem.getCaminhao().setEmViagem(EmViagem.getOpcaoEmViagem(2)); //Mudando o status do caminhão de estacionado para em viagem
             caminhaoRepository.editar(viagem.getCaminhao().getIdCaminhao(), viagem.getCaminhao());
 
-            System.out.println("Viagem adicionado com sucesso: " + viagemAdicionada);
+            System.out.println("Viagem adicionada com sucesso: " + viagemAdicionada);
         } catch (BancoDeDadosException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -37,7 +34,7 @@ public class ViagemService {
     }
 
     // removendo um obejto do tipo Viagem passando o ID
-    public void finalizarViagem(Integer id) { //Precia pegar o id co caminhão que esta ligado nessa viagem
+    public void finalizarViagem(Integer id) { //Precisa pegar o id co caminhão que esta ligado nessa viagem
         CaminhaoRepository caminhaoRepository = new CaminhaoRepository();
         Viagem viagemFinalizada = new Viagem();
 
@@ -80,7 +77,6 @@ public class ViagemService {
     }
 
     public void editarViagem(Integer id, Viagem viagem) {
-
         Viagem viagemSemEdicao = new Viagem();
 
         CaminhaoRepository caminhaoRepository = new CaminhaoRepository();

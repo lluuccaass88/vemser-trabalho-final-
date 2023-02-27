@@ -22,7 +22,7 @@ public class ViagemRepository implements Repositorio<Integer, Viagem>{
             }
             return null;
         } catch (SQLException e) {
-            throw new BancoDeDadosException("Erro ao buscar sequence de Caminhão " + e);
+            throw new BancoDeDadosException("Erro ao buscar sequence de viagem " + e);
         }
     }
 
@@ -50,7 +50,7 @@ public class ViagemRepository implements Repositorio<Integer, Viagem>{
             if (res == 0) {
                 throw new BancoDeDadosException("Erro ao adicionar viagem");
             } else {
-                System.out.println("Viagem cadastrado com sucesso!" +
+                System.out.println("Viagem cadastrada com sucesso!" +
                         "\nadicionarViagem.res=" + res);
             }
             return viagem;
@@ -269,7 +269,7 @@ public class ViagemRepository implements Repositorio<Integer, Viagem>{
             }
 
         } catch (SQLException e) {
-            throw new BancoDeDadosException("Erro ao listar caminhoes cadastrados: " + e);
+            throw new BancoDeDadosException("Erro ao listar viagens cadastradas: " + e);
         } finally {
             try {
                 if (con != null) {
@@ -281,5 +281,4 @@ public class ViagemRepository implements Repositorio<Integer, Viagem>{
         }
         return viagem;
     }
-
 }

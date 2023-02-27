@@ -99,11 +99,12 @@ public class CaminhaoService {
     public void abastecerCaminhao(int index, int gasolina) {
         try {
             Caminhao caminhao = caminhaoRepository.buscaPorId(index);
-            int totalGasolinaEmTanque = caminhao.getGasolina() + gasolina;
+            Integer totalGasolinaEmTanque = caminhao.getGasolina() + gasolina;
+            System.out.println(totalGasolinaEmTanque);
             if (caminhao.getEmViagem().getOpcao().equals(1)) {
                 if (caminhao.getGasolina() + gasolina <= 100) {
                     caminhao = caminhaoRepository.abastecerCaminhao(index, totalGasolinaEmTanque);
-                    caminhao.setGasolina(caminhao.getGasolina() + gasolina);
+                    caminhao.setGasolina(totalGasolinaEmTanque);
                     System.out.println("Caminhão abastecido com sucesso");
                 } else {
                     System.out.println("Caminhão com tanque cheio, não é necessário abastecer");
