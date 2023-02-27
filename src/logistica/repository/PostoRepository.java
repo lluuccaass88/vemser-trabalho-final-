@@ -21,7 +21,7 @@ public class PostoRepository implements Repositorio<Integer, Posto> {
             }
             return null;
         } catch (SQLException e) {
-            throw new BancoDeDadosException("Erro ao buscar sequence de Rotas" + e);
+            throw new BancoDeDadosException("Erro ao buscar sequence de posto" + e);
         }
     }
 
@@ -79,7 +79,7 @@ public class PostoRepository implements Repositorio<Integer, Posto> {
             // Executa-se a consulta
             int res = stmt.executeUpdate();
             if (res == 0) {
-                throw new BancoDeDadosException("Erro ao remover rota");
+                throw new BancoDeDadosException("Erro ao remover posto");
             } else {
                 System.out.println("Relacionamento de rota com posto removida com sucesso!" +
                         "\nremoverRotaPorId.res=" + res);

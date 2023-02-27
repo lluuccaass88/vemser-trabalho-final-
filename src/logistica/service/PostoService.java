@@ -24,7 +24,6 @@ public class PostoService {
         }
     }
 
-
     public void removerPosto(Integer id) {
         try {
             boolean conseguiuRemoverRelacionamento = postoRepository.removerPostoXRota(id);

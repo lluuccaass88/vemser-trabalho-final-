@@ -75,7 +75,7 @@ public class CaminhaoService {
         try {
             List<Caminhao> listar = caminhaoRepository.listar();
             List<Caminhao> caminhaoDisponivel = listar.stream()
-                    .filter(elemento -> elemento.getEmViagem().getOpcao().equals(1)) //Descobrir cm compara o enum para listar somente os que não estiverem em viagem
+                    .filter(elemento -> elemento.getEmViagem().getOpcao().equals(1))
                     .toList();
 
             caminhaoDisponivel.forEach(System.out::println);
