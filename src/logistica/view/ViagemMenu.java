@@ -38,12 +38,13 @@ public class ViagemMenu {
 
             switch (opcao) {
                 case 1 -> {
+                    int id;
+
                     System.out.println("Listando Caminhões Livres para Viagem..");
                     caminhaoService.listarCaminhoesLivres();
-                    int id = sc.nextInt();
+                    id = sc.nextInt();
                     sc.nextLine();
                     viagem.setCaminhao(caminhaoService.retornaPorId(id));
-
                     System.out.println("Selecione o id da rota que deseja fazer: ");
                     rotaService.listarRotas();
                     id = sc.nextInt();
@@ -56,7 +57,6 @@ public class ViagemMenu {
                 case 2 -> {
                    viagemService.listarViagens();
                 }
-
                 case 3 -> {
                     System.out.println("Editando Viagem...");
                     System.out.println("Digite o ID da viagem que deseja editar: ");
@@ -75,7 +75,6 @@ public class ViagemMenu {
                     viagem.setUsuario(usuario);
                     viagemService.editarViagem(idViagem, viagem);
                     }
-
                 case 4 -> {
                     System.out.println("Finalizar Viagem...");
                     //viagemService.listarViagens();
@@ -92,12 +91,10 @@ public class ViagemMenu {
                         }
                     }
                 }
-                
                 case 5 -> {
                     System.out.println("Listando viagens finalizadas: ");
                     viagemService.listarViagensFinalizadas();
                 }
-
                 case 0 -> {
                     System.out.println("Retornando ao Menu Principal");
                 }

@@ -64,13 +64,14 @@ public class Main {
             while (opcao != 0) {
                 System.out.println("""
                         =========MENU PRINCIPAL=========
-                        Viagens:         [1]
-                        Abastecimento:   [2]
-                        Caminhoes:       [3]
-                        Sair do Sistema: [0]
+                        Viagens:                [1]
+                        Abastecimento:          [2]
+                        Caminhoes disponiveis:  [3]
+                        Sair do Sistema:        [0]
                         Digite sua opção:\s""");
                 opcao = scanner.nextInt();
                 scanner.nextLine();
+                System.out.println("opcao viagem" + opcao);
                 switch (opcao) {
 
                     case 1 -> {

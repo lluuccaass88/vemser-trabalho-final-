@@ -121,7 +121,7 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
             stmt.setInt(4, caminhao.getEmViagem().getOpcao());
             stmt.setInt(5, caminhao.getIdCaminhao());
 
-              // Executa-se a consulta
+            // Executa-se a consulta
             int res = stmt.executeUpdate();
             System.out.println("editarCaminhao.res=" + res);
             if (res == 0) {
@@ -149,6 +149,7 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
         List<Caminhao> caminhoes = new ArrayList<>();
         Connection con = null;
         try {
+
             con = ConexaoBancoDeDados.getConnection();
 
             String sql = "SELECT * FROM LOGISTICA.CAMINHAO";
@@ -162,7 +163,7 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
                 caminhao.setModelo(rs.getString("MODELO"));
                 caminhao.setPlaca(rs.getString("PLACA"));
                 caminhao.setGasolina(rs.getInt("GASOLINA"));
-                caminhao.setEmViagem(EmViagem.getOpcaoEmViagem(rs.getInt("EMVIAGEM")));
+                caminhao.setEmViagem(EmViagem.getOpcaoEmViagem(rs.getInt("EMVIAGEM"))); //O erro deve ser aqui dentro, ele fala que não esta retornando nada
                 caminhoes.add(caminhao);
             }
 
@@ -180,7 +181,7 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
         return caminhoes;
     }
 
-    public Caminhao buscaPorId(int index) throws BancoDeDadosException{
+    public Caminhao buscaPorId(int index) throws BancoDeDadosException {
         Connection con = null;
         Caminhao caminhao = new Caminhao();
         try {
@@ -220,7 +221,7 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
         return caminhao;
     }
 
-    public boolean editaEmViagem (int index) throws BancoDeDadosException{
+    public boolean estacionar(int index) throws BancoDeDadosException {
         Connection con = null;
 
         try {
@@ -255,9 +256,49 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
                 e.printStackTrace();
             }
         }
+
     }
 
-    public Caminhao abastecerCaminhao(int index, int gasolina) throws BancoDeDadosException{
+    public boolean viajar(int index) throws BancoDeDadosException {
+
+        Connection con = null;
+
+        try {
+            con = ConexaoBancoDeDados.getConnection();
+            StringBuilder sql = new StringBuilder();
+            sql.append("UPDATE LOGISTICA.CAMINHAO SET ");
+            sql.append("EMVIAGEM = 2 ");
+            sql.append("WHERE ID_CAMINHAO = ?");
+            PreparedStatement stmt = con.prepareStatement(sql.toString());
+
+            stmt.setInt(1, index);
+            // Executa-se a consulta
+            int res = stmt.executeUpdate();
+            System.out.println("EmVoiagemEditado.res=" + res);
+
+            if (res == 0) {
+                throw new BancoDeDadosException("Erro ao editar caminhão");
+            } else {
+                System.out.println("Caminhão editado com sucesso!" +
+                        "\neditarCaminhão.res=" + res);
+                return true;
+            }
+
+        } catch (SQLException e) {
+            throw new BancoDeDadosException("Erro ao editar caminhão" + e);
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public Caminhao abastecerCaminhao(int index, int gasolina) throws BancoDeDadosException {
+
         Connection con = null;
         Caminhao caminhao = new Caminhao();
         try {
@@ -282,7 +323,6 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
                         "\nabastecerCaminhao.res=" + res);
                 return caminhao;
             }
-
         } catch (SQLException e) {
             throw new BancoDeDadosException("Erro ao abastecer caminhão" + e);
         } finally {

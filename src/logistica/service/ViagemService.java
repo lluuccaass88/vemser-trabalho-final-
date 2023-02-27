@@ -5,6 +5,7 @@ import src.logistica.model.Caminhao;
 import src.logistica.model.EmViagem;
 import src.logistica.model.Viagem;
 import src.logistica.repository.CaminhaoRepository;
+import src.logistica.repository.RotaRepository;
 import src.logistica.repository.ViagemRepository;
 
 import java.util.List;
@@ -42,8 +43,8 @@ public class ViagemService {
 
         try {
             boolean conseguiuFianlizar = viagemRepository.remover(id);
-            viagemFinalizada = viagemRepository.buuscaViagemId(id);//Retorna a viagem a ser finalizada
-            boolean conseguiuMudarEmViagem = caminhaoRepository.editaEmViagem(viagemFinalizada.getCaminhao().getIdCaminhao()); //Edita o status do caminhão para estacionado
+            viagemFinalizada = viagemRepository.buscaViagemId(id);//Retorna a viagem a ser finalizada
+            boolean conseguiuMudarEmViagem = caminhaoRepository.estacionar(viagemFinalizada.getCaminhao().getIdCaminhao()); //Edita o status do caminhão para estacionado
             viagemFinalizada.setFinalizada(1); //Mudando o status para finalizado
             viagemRepository.editar(id, viagemFinalizada);
             if (conseguiuFianlizar && conseguiuMudarEmViagem) {
@@ -66,12 +67,11 @@ public class ViagemService {
         }
     }
 
-
     public void listarViagensFinalizadas() {
         try {
             List<Viagem> listar = viagemRepository.listar();
             List<Viagem> viagensFinalizadas = listar.stream()
-                    .filter(elemento -> elemento.getFinalizada() == 1) //Descobrir cm compara o enum para listar somente os que não estiverem em viagem
+                    .filter(elemento -> elemento.getFinalizada() == 1)
                     .toList();
             viagensFinalizadas.forEach(System.out::println);
         } catch (BancoDeDadosException e) {
@@ -80,10 +80,22 @@ public class ViagemService {
     }
 
     public void editarViagem(Integer id, Viagem viagem) {
+
+        Viagem viagemSemEdicao = new Viagem();
+
+        CaminhaoRepository caminhaoRepository = new CaminhaoRepository();
+        RotaRepository rotaRepository = new RotaRepository();
+
         try {
-            boolean conseguiuEditar = viagemRepository.editar(id, viagem);
-            if (conseguiuEditar) {
-                System.out.println("Viagem " + conseguiuEditar + "| com id= "
+            viagemSemEdicao = viagemRepository.buscaViagemId(id); //Busca a viagem antes de ser editada;
+
+            boolean conseguiuMudarEstacionado = caminhaoRepository.estacionar(viagemSemEdicao.getCaminhao().getIdCaminhao()); //Edita status do caminhão para estacionado
+            boolean conseguiuMudarEmViagem = caminhaoRepository.viajar(viagem.getCaminhao().getIdCaminhao()); //Edita o status do caminhão para em viagem
+
+            boolean conseguiuEditarViagem = viagemRepository.editar(id, viagem); //Edita viagem
+
+            if (conseguiuEditarViagem && conseguiuMudarEstacionado && conseguiuMudarEmViagem) {
+                System.out.println("Viagem " + conseguiuEditarViagem + "| com id= "
                         + id + " editada com sucesso");
             } else {
                 System.out.println("Não foi possível editar a " + id + " da viagem");
