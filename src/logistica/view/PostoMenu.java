@@ -45,6 +45,7 @@ public class PostoMenu {
                 case 3 -> { // editando
                     System.out.println("Digite o id do posto para editar: ");
                     int id = sc.nextInt();
+                    sc.nextLine();
 
                     System.out.println("Digite o nome do posto: ");
                     posto.setNomePosto(sc.nextLine());

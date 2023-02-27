@@ -110,16 +110,14 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
             sql.append("UPDATE LOGISTICA.CAMINHAO SET ");
             sql.append("MODELO = ?, ");
             sql.append("PLACA = ?, ");
-            sql.append("GASOLINA = ?, ");
-            sql.append("EMVIAGEM = ? ");
+            sql.append("GASOLINA = ? ");
             sql.append("WHERE ID_CAMINHAO = ?");
             PreparedStatement stmt = con.prepareStatement(sql.toString());
 
             stmt.setString(1, caminhao.getModelo());
             stmt.setString(2, caminhao.getPlaca());
             stmt.setInt(3, caminhao.getGasolina());
-            stmt.setInt(4, caminhao.getEmViagem().getOpcao());
-            stmt.setInt(5, caminhao.getIdCaminhao());
+            stmt.setInt(4, id);
 
             // Executa-se a consulta
             int res = stmt.executeUpdate();
@@ -127,8 +125,9 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
             if (res == 0) {
                 throw new BancoDeDadosException("Erro ao editar caminhão");
             } else {
-                System.out.println("Caminhão editado com sucesso!" +
-                        "\neditarCaminhão.res=" + res);
+//                System.out.println("Caminhão editado com sucesso!" +
+//                        "\neditarCaminhão.res=" + res);
+                System.out.println("Caminhão editado com sucesso!");
                 return res > 0;
             }
         } catch (SQLException e) {

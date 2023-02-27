@@ -19,7 +19,7 @@ public class RotaService {
     public void adicionaRota(Rota rota) {
         try {
             Rota rotaAdicionado = rotaRepository.adicionar(rota);
-            System.out.println("Rota adicionado com sucesso: " + rotaAdicionado);
+            System.out.println("Dados da rota adicionada: \n" + rotaAdicionado);
         } catch (BancoDeDadosException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -48,7 +48,7 @@ public class RotaService {
             boolean conseguiuRemover = rotaRepository.remover(id);
 
             if (conseguiuRemover && conseguiuRemoverRelacionamento) {
-                System.out.println("Rota: " + conseguiuRemover + "| com id= "
+                System.out.println("Rota removida: " + conseguiuRemover + "| Rota com o id= "
                         + id + " removido com sucesso");
             } else {
                 System.out.println("Não foi possível remover o " + id + " do rota");

@@ -25,7 +25,6 @@ public class PostoRepository implements Repositorio<Integer, Posto> {
         }
     }
 
-
     @Override
     public Posto adicionar(Posto posto) throws BancoDeDadosException {
         Connection con = null;
@@ -48,8 +47,9 @@ public class PostoRepository implements Repositorio<Integer, Posto> {
             if (res == 0) {
                 throw new BancoDeDadosException("Erro ao adicionar posto");
             } else {
-                System.out.println("Posto adicionada com sucesso!" +
-                        "\nadicionarPosto.res=" + res);
+//                System.out.println("Posto adicionada com sucesso!" +
+//                        "\nadicionarPosto.res=" + res);
+                System.out.println("Posto adicionada com sucesso!");
             }
             return posto;
         } catch (SQLException e) {
@@ -81,8 +81,9 @@ public class PostoRepository implements Repositorio<Integer, Posto> {
             if (res == 0) {
                 throw new BancoDeDadosException("Erro ao remover posto");
             } else {
-                System.out.println("Relacionamento de rota com posto removida com sucesso!" +
-                        "\nremoverRotaPorId.res=" + res);
+//                System.out.println("Relacionamento de rota com posto removida com sucesso!" +
+//                        "\nremoverRotaPorId.res=" + res);
+                System.out.println("Relacionamento de rota com posto removida com sucesso!");
                 return res > 0;
             }
         } catch (SQLException e) {

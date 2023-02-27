@@ -25,10 +25,9 @@ public class Main {
         System.out.println("=== Bem vindo " + usuarioLogado.getNome() + " ===");
 
         if (usuarioLogado.getPerfil().getPerfil().equals(1)) {
-            System.out.println("Acesso ao menu de Colaborador");
             while (opcao != 0) {
                 System.out.println("""
-                        =========MENU PRINCIPAL=========
+                        =========MENU PRINCIPAL - COLABORADOR=========
                         Usuarios:        [1]
                         Caminhões:       [2]
                         Postos:          [3]
@@ -60,10 +59,9 @@ public class Main {
                 }
             }
         } else {
-            System.out.println("Acesso ao menu de Motorista");
             while (opcao != 0) {
                 System.out.println("""
-                        =========MENU PRINCIPAL=========
+                        =========MENU PRINCIPAL - MOTORISTA=========
                         Viagens:                [1]
                         Abastecimento:          [2]
                         Caminhoes disponiveis:  [3]

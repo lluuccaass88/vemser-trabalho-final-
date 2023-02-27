@@ -38,7 +38,7 @@ public class CaminhaoMenu {
                     caminhao.setGasolina(sc.nextInt());
                     sc.nextLine();
 
-                    System.out.println("Informe aqui 1 se o caminhão está em viagem ou 2 se está estacionado no pátio:");
+                    System.out.println("Informe aqui 1 se está estacionado no pátio o ou 2 se caminhão está em viagem:");
                     caminhao.setEmViagem(EmViagem.getOpcaoEmViagem(sc.nextInt()));
                     sc.nextLine();
 
@@ -61,9 +61,8 @@ public class CaminhaoMenu {
                     System.out.println("Informe de 0 a 100 a quantidade de gasolina do caminhão:"); // cabe aqui uma RegraDeNegocioExceptions
                     caminhao.setGasolina(sc.nextInt());
                     sc.nextLine();
-                    System.out.println("Informe aqui 1 se o caminhão está em viagem ou 2 se está estacionado no pátio:");
-                    caminhao.setEmViagem(EmViagem.getOpcaoEmViagem(sc.nextInt()));
-                    sc.nextLine();
+                    caminhao.setEmViagem(EmViagem.getOpcaoEmViagem(2));
+
                     caminhaoService.editarCaminhao(id, caminhao);
                 }
                 case 4 -> {

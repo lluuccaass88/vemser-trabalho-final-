@@ -25,7 +25,9 @@ public class UsuarioService {
                 throw new RegraDeNegocioException("CNH inválida, deve conter 11 digitos");
             }
             Usuario usuarioAdicionado = usuarioRepository.adicionar(usuario);
-            System.out.println("Usuário adicionado com sucesso: " + usuarioAdicionado);
+//              System.out.println("Usuário adicionado com sucesso: " + usuarioAdicionado);
+                System.out.println("Dados do usuario adicionado: " + usuarioAdicionado);
+
         } catch (BancoDeDadosException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -54,7 +56,7 @@ public class UsuarioService {
         } catch (BancoDeDadosException e) {
             e.printStackTrace();
         } catch (Exception e) {
-            System.out.println("ERRO SQL-> " + e.getMessage());
+            System.out.println("ERRO LOGIN -> " + e.getMessage());
         }
         return usuarioLogado;
     }
@@ -63,7 +65,7 @@ public class UsuarioService {
         try {
             boolean conseguiuEditar = usuarioRepository.editar(id, usuario);
             if (conseguiuEditar) {
-                System.out.println("Usuário " + conseguiuEditar + "| com id= "
+                System.out.println("Edição de usuario: " + conseguiuEditar + "| Usuario com o id "
                         + id + " editado com sucesso");
             } else {
                 System.out.println("Não foi possível editar o " + id + " do usuário");
@@ -77,7 +79,7 @@ public class UsuarioService {
         try {
             boolean conseguiuRemover = usuarioRepository.remover(id);
             if (conseguiuRemover) {
-                System.out.println("Usuário " + conseguiuRemover + "| com id= "
+                System.out.println("Usuário removido: " + conseguiuRemover + "| Usuario com id= "
                         + id + " removido com sucesso");
             } else {
                 System.out.println("Não foi possível remover o " + id + " do usuário");

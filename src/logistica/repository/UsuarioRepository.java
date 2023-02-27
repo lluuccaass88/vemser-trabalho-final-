@@ -53,8 +53,9 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
             if (res == 0) {
                 throw new BancoDeDadosException("Erro ao adicionar usuario");
             } else {
-                System.out.println("Usuario cadastrado com sucesso!" +
-                        "\nadicionarUsuario.res=" + res);
+//                System.out.println("Usuario cadastrado com sucesso!" +
+//                        "\nadicionarUsuario.res=" + res);
+                System.out.println("Usuario cadastrado com sucesso!" );
             }
             return usuario;
         } catch (SQLException e) {
@@ -84,8 +85,9 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
             if (res == 0) {
                 throw new BancoDeDadosException("Erro ao remover usuário");
             } else {
-                System.out.println("Usuário removido com sucesso!" +
-                        "\nremoverUsuário.res=" + res);
+//                System.out.println("Usuário removido com sucesso!" +
+//                        "\nremoverUsuário.res=" + res);
+                System.out.println("Usuário removido com sucesso!");
                 return res > 0;
             }
         } catch (SQLException e) {
@@ -128,7 +130,7 @@ public class UsuarioRepository implements Repositorio<Integer, Usuario> {
             stmt.setInt(7, id);
 
             int res = stmt.executeUpdate();
-            System.out.println("editarUsuario.res=" + res);
+//            System.out.println("editarUsuario.res=" + res);
 
             return res > 0;
         } catch (SQLException e) {

@@ -16,7 +16,7 @@ public class PostoService {
     public void adicionaPosto(Posto posto) {
         try {
             Posto postoAdicionado = postoRepository.adicionar(posto);
-            System.out.println("Posto adicionado com sucesso: " + postoAdicionado);
+            System.out.println("Dados do posto adicionado: \n " + postoAdicionado);
         } catch (BancoDeDadosException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -29,10 +29,10 @@ public class PostoService {
             boolean conseguiuRemoverRelacionamento = postoRepository.removerPostoXRota(id);
             boolean conseguiuRemover = postoRepository.remover(id);
             if (conseguiuRemover && conseguiuRemoverRelacionamento) {
-                System.out.println("Posto " + conseguiuRemover + "| com id= "
+                System.out.println("Posto romovido: " + conseguiuRemover + "| Posto com o id= "
                         + id + " removido com sucesso");
             } else {
-                System.out.println("Não foi possível remover o " + id + " do posto");
+                System.out.println("Não foi possível remover o posto com o id " + id + ".");
             }
         } catch (BancoDeDadosException e) {
             e.printStackTrace();
@@ -44,10 +44,12 @@ public class PostoService {
         try {
             boolean conseguiuEditar = postoRepository.editar(id, posto);
             if (conseguiuEditar) {
-                System.out.println("Posto " + conseguiuEditar + "| com id= "
+//                System.out.println("Posto " + conseguiuEditar + "| com id= "
+//                        + id + " editado com sucesso");
+                System.out.println("Posto com o id "
                         + id + " editado com sucesso");
             } else {
-                System.out.println("Não foi possível editar o " + id + " do posto");
+                System.out.println("Não foi possível editar o posto com o id " + id + ".");
             }
         } catch (BancoDeDadosException e) {
             e.printStackTrace();

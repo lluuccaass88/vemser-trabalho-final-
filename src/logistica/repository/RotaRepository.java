@@ -53,10 +53,10 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
             if (res == 0) {
                 throw new BancoDeDadosException("Erro ao adicionar rota");
             } else {
-                System.out.println("Rota adicionada com sucesso!" +
-                        "\nadicionarRota.res=" + res);
+//                System.out.println("Rota adicionada com sucesso!" +
+//                        "\nadicionarRota.res=" + res);
+                System.out.println("Rota adicionada com sucesso!");
             }
-
             return rota;
         } catch (SQLException e) {
             throw new BancoDeDadosException("Erro ao adicionar rota" + e);
@@ -92,8 +92,9 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
             if (res == 0) {
                 throw new BancoDeDadosException("Erro ao adicionar POSTO_X_ROTA");
             } else {
-                System.out.println("POSTO_X_ROTA adicionada com sucesso!" +
-                        "\nadicionarPOSTO_X_ROTA.res=" + res);
+//                System.out.println("POSTO_X_ROTA adicionada com sucesso!" +
+//                        "\nadicionarPOSTO_X_ROTA.res=" + res);
+                System.out.println("POSTO_X_ROTA adicionada com sucesso!");
             }
 
             return rota;
@@ -126,8 +127,9 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
             if (res == 0) {
                 throw new BancoDeDadosException("Erro ao remover rota");
             } else {
-                System.out.println("Relacionamento de rota com posto removida com sucesso!" +
-                        "\nremoverRotaPorId.res=" + res);
+//                System.out.println("Relacionamento de rota com posto removida com sucesso!" +
+//                        "\nremoverRotaPorId.res=" + res);
+                System.out.println("Relacionamento de rota com posto removida com sucesso!");
                 return res > 0;
             }
         } catch (SQLException e) {
@@ -202,8 +204,9 @@ public class RotaRepository implements Repositorio<Integer, Rota> {
             if (res == 0) {
                 throw new BancoDeDadosException("Erro ao editar rota.");
             } else {
-                System.out.println("Rota editada com sucesso!" +
-                        "\neditarRotaPorId.res=" + res);
+//                System.out.println("Rota editada com sucesso!" +
+//                        "\neditarRotaPorId.res=" + res);
+                System.out.println("Rota editada com sucesso!");
                 return res > 0;
             }
         } catch (SQLException e) {
