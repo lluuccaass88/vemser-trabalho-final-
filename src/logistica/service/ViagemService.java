@@ -23,7 +23,9 @@ public class ViagemService {
             Viagem viagemAdicionada = viagemRepository.adicionar(viagem);
 
             viagem.getCaminhao().setEmViagem(EmViagem.getOpcaoEmViagem(2)); //Mudando o status do caminhão de estacionado para em viagem
-            caminhaoRepository.editar(viagem.getCaminhao().getIdCaminhao(), viagem.getCaminhao());
+//            caminhaoRepository.editar(viagem.getCaminhao().getIdCaminhao(), viagem.getCaminhao());
+
+            boolean conseguiuMudarEmViagem = caminhaoRepository.viajar(viagem.getCaminhao().getIdCaminhao());
 
             System.out.println("Viagem adicionada com sucesso: " + viagemAdicionada);
         } catch (BancoDeDadosException e) {

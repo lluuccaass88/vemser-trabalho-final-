@@ -69,6 +69,7 @@ public class RotaMenu {
                 case 3: { // editando
                     System.out.println("Digite o id da rota para editar: ");
                     int id = sc.nextInt();
+                    sc.nextLine();
 
                     System.out.println("Editar descrição:  ");
                     rota.setDescricao(sc.nextLine());
@@ -80,9 +81,7 @@ public class RotaMenu {
                     rota.setLocalDestino(sc.nextLine());
 
                     rotaService.editarRota(id, rota);
-
-                    System.out.println("Rota editada com sucesso!");
-
+                    break;
                 }
                 case 4: { // excluindo
                     System.out.println("Digite o id da rota que deseja excluir: ");
