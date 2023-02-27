@@ -1,6 +1,5 @@
 package src.logistica.view;
 
-import src.logistica.model.Caminhao;
 import src.logistica.model.Usuario;
 import src.logistica.service.CaminhaoService;
 

@@ -186,8 +186,10 @@ public class CaminhaoRepository implements Repositorio<Integer, Caminhao> {
         try {
             con = ConexaoBancoDeDados.getConnection();
 
-            String sql = "SELECT * FROM LOGISTICA.CAMINHAO c \n" +
-                    "\tWHERE ID_CAMINHAO = ?";
+//            String sql = "SELECT * FROM LOGISTICA.CAMINHAO c \n" +
+//                    "\tWHERE ID_CAMINHAO = ?";
+            String sql = "SELECT * FROM LOGISTICA.CAMINHAO \n" +
+                    "WHERE ID_CAMINHAO = ?";
 
             PreparedStatement stmt = con.prepareStatement(sql);
 
